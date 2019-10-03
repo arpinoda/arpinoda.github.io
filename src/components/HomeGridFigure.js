@@ -47,7 +47,7 @@ class HomeGridFigure extends React.Component {
     if (imageSrc === LOADING_IMAGE) {
       const thumbnail = project.images.thumbnail.replace(
         'eeeeee',
-        this.randomColor
+        this.randomColor,
       );
 
       this.setState({

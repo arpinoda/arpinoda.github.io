@@ -114,7 +114,7 @@ const withScrollSpy = OriginalComponent => {
         item.removeEventListener(
           'click',
           this.onNavItemClick.bind(this),
-          false
+          false,
         );
       });
     };
@@ -134,7 +134,7 @@ const withScrollSpy = OriginalComponent => {
 
     getSectionPositions = () => {
       this.positions = this.items.map(
-        item => this.getTargetOffset(item) - this.options.activeOffset
+        item => this.getTargetOffset(item) - this.options.activeOffset,
       );
     };
 
@@ -146,7 +146,7 @@ const withScrollSpy = OriginalComponent => {
         this.changeActiveNavItem(this.items[this.items.length - 1]);
       } else {
         const filtered = this.items.filter(
-          (item, index) => this.positions[index] <= this.getScrollOffset()
+          (item, index) => this.positions[index] <= this.getScrollOffset(),
         );
 
         if (filtered.length > 0) {

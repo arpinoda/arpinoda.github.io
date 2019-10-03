@@ -105,7 +105,7 @@ Category.prototype = {
     }
 
     const query = this.children.filter(
-      child => child.children.length === 0 && !child.isDeepestParent
+      child => child.children.length === 0 && !child.isDeepestParent,
     );
 
     result = query.length > 0;

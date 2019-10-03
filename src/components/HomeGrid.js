@@ -40,7 +40,7 @@ HomeGrid.propTypes = {
       urlPath: PropTypes.string,
       children: PropTypes.array,
       projects: PropTypes.array,
-    })
+    }),
   ),
 };
 

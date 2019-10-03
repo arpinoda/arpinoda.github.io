@@ -88,7 +88,7 @@ class App extends React.Component {
 
   throwResponseError = res => {
     throw new Error(
-      `Something went wrong. HTTP: ${res.status}, ${res.statusText}`
+      `Something went wrong. HTTP: ${res.status}, ${res.statusText}`,
     );
   };
 
