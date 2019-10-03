@@ -1,8 +1,9 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
+  "private": true,
   "main": "index.js",
-  "license": "Unlicensed",
+  "license": "UNLICENSED",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
     "build": "./node_modules/.bin/webpack --config webpack.prod.js",

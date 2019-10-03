@@ -94,10 +94,10 @@ app.get('/robots.txt', getRobotsFile);
 app.get('/favicon.ico', getFavicon);
 app.get('/', getIndexFile);
 app.get('/login', getIndexFile);
+app.get('/project*', getIndexFile);
 
 // authenticated access
 app.use(jwtMW);
-app.get('/project*', getIndexFile);
 app.get('/data.json/project', getProjectData);
 app.get('/data.json/category', getCategoryData);
 
