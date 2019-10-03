@@ -15,10 +15,20 @@ const withAuth = AuthComponent => {
     important tasks in order to verify the current user's
     authentication status prior to granting them enterance into the app. */
     componentDidMount() {
-      const { history } = this.props;
+      const { history, location } = this.props;
 
       if (!Auth.loggedIn()) {
-        history.replace('/login');
+        const { pathname } = location;
+
+        let forwardToPath = '';
+
+        if (pathname && pathname !== '/login') {
+          if (!(pathname === '/' && location.hash === '')) {
+            forwardToPath += `?next=${pathname}${location.hash}`;
+          }
+        }
+
+        history.replace(`/login${forwardToPath}`);
       } else {
         /* Try to get confirmation message from the Auth helper. */
         try {
@@ -39,13 +49,17 @@ const withAuth = AuthComponent => {
 
     render() {
       const { loaded, confirm } = this.state;
-      const { history } = this.props;
+      const { history, location } = this.props;
 
       if (loaded === true) {
         if (confirm) {
           return (
             /* component that is currently being wrapper(App.js) */
-            <AuthComponent history={history} confirm={confirm} />
+            <AuthComponent
+              history={history}
+              location={location}
+              confirm={confirm}
+            />
           );
         }
         return null;
@@ -57,6 +71,7 @@ const withAuth = AuthComponent => {
 
   AuthWrapped.propTypes = {
     history: PropTypes.object,
+    location: PropTypes.object,
   };
 
   return AuthWrapped;

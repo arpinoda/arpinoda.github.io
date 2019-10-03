@@ -97,7 +97,6 @@ app.get('/login', getIndexFile);
 
 // authenticated access
 app.use(jwtMW);
-app.get('/project', getIndexFile);
 app.get('/project*', getIndexFile);
 app.get('/data.json/project', getProjectData);
 app.get('/data.json/category', getCategoryData);

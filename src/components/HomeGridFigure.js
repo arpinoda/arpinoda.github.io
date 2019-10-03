@@ -61,7 +61,7 @@ class HomeGridFigure extends React.Component {
     const { isHovering, imageSrc } = this.state;
 
     const gifStyle = {
-      '-webkit-animation': isHovering
+      WebkitAnimation: isHovering
         ? 'sk-rotateplane 1.2s infinite ease-in-out'
         : 'none',
       animation: isHovering
