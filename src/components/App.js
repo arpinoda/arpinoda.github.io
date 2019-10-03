@@ -31,25 +31,11 @@ class App extends React.Component {
       return;
     }
     this.getProjects()
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return this.throwResponseError(res);
-      })
-      .then(json => {
-        this.fetchSuccess = this.fetchSuccess(json);
+      .then(projects => {
+        this.fetchSuccess = this.fetchSuccess(projects);
       })
       .then(this.getCategories)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return this.throwResponseError(res);
-      })
-      .then(json => {
-        this.fetchSuccess(json);
-      })
+      .then(categories => this.fetchSuccess(categories))
       .catch(error => {
         console.log(error);
         // TODO: Logging

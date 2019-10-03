@@ -16,11 +16,11 @@ export default class AUTH {
       body: JSON.stringify({
         passcode,
       }),
-    }).then(res => {
-      if (res.token !== null) {
-        this.setToken(res.token);
+    }).then(loginResult => {
+      if (loginResult.token !== null) {
+        this.setToken(loginResult.token);
       }
-      return res;
+      return loginResult;
     });
 
   loggedIn = () => {
