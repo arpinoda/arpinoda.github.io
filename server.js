@@ -94,6 +94,7 @@ app.get('/robots.txt', getRobotsFile);
 app.get('/favicon.ico', getFavicon);
 app.get('/', getIndexFile);
 app.get('/login', getIndexFile);
+
 // authenticated access
 app.use(jwtMW);
 app.get('/project', getIndexFile);
