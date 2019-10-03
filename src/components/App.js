@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 
@@ -16,8 +16,13 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" render={props => <Home location={props.location} />} />
-        <Route path="/login" render={props => <Login {...props} />} />
+        <Switch>
+          <Route exact path="/login" render={props => <Login {...props} />} />
+          <Route
+            path="/"
+            render={props => <Home location={props.location} />}
+          />
+        </Switch>
       </BrowserRouter>
     );
   }
