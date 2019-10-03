@@ -1,4 +1,8 @@
+import AUTH from './AUTH';
+
 class API {
+  Auth = new AUTH();
+
   constructor({ url }) {
     this.url = url;
     this.endpoints = {};
@@ -17,8 +21,9 @@ class API {
     const resourceURL = `${this.url}/${name}`;
 
     endpoints.getAll = ({ query } = {}) =>
-      fetch(resourceURL, { params: { query } });
-    endpoints.getOne = ({ id }) => fetch(`${resourceURL}/${id}`);
+      this.Auth.fetch(resourceURL, { params: { query } });
+
+    endpoints.getOne = ({ id }) => this.Auth.fetch(`${resourceURL}/${id}`);
 
     return endpoints;
   }

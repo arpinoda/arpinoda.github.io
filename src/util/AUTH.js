@@ -5,7 +5,8 @@ import decode from 'jwt-decode';
 
 export default class AUTH {
   constructor() {
-    this.domain = ''; // domain || 'http://localhost:5000';
+    this.domain =
+      process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : '';
     this.storageKey = 'id_token';
   }
 

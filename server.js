@@ -40,7 +40,7 @@ const getCategoryData = (req, res) =>
 const login = (req, res) => {
   const { passcode } = req.body;
   if (passcode === process.env.PASSCODE) {
-    const token = jwt.sign({}, process.env.JWT_SECRET, { expiresIn: 60 });
+    const token = jwt.sign({}, process.env.JWT_SECRET, { expiresIn: 60 * 10 });
     res.status(200).json({
       success: true,
       err: null,
@@ -63,14 +63,14 @@ const cors = (req, res, next) => {
   if (req.headers['access-control-request-method']) {
     res.header(
       'Access-Control-Allow-Methods',
-      req.headers['access-control-request-method']
+      req.headers['access-control-request-method'],
     );
     oneof = true;
   }
   if (req.headers['access-control-request-headers']) {
     res.header(
       'Access-Control-Allow-Headers',
-      req.headers['access-control-request-headers']
+      req.headers['access-control-request-headers'],
     );
     oneof = true;
   }
