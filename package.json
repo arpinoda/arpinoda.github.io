@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "Unlicensed",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
     "build": "./node_modules/.bin/webpack --config webpack.prod.js",

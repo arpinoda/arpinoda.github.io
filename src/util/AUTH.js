@@ -4,8 +4,8 @@ import decode from 'jwt-decode';
 // https://medium.com/@romanchvalbo/how-i-set-up-react-and-node-with-json-web-token-for-authentication-259ec1a90352
 
 export default class AUTH {
-  constructor(domain) {
-    this.domain = domain || 'http://localhost:5000';
+  constructor() {
+    this.domain = ''; // domain || 'http://localhost:5000';
     this.storageKey = 'id_token';
   }
 
