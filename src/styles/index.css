@@ -1,0 +1,164 @@
+@import "basscss";
+@import "basscss-colors";
+@import "basscss-background-colors";
+@import "./whitespace.css";
+@import "./media-queries.css";
+@import "./fonts.css";
+@import "./loading.css";
+
+:root {
+  --container-width:1500px;
+  --black:#565656;
+  --blue:#2B78F6;
+  --border-color: rgba(0,0,0,0.05);
+  --h1:26px;
+  --h3:16px;
+}
+
+* {
+  margin: 0px;
+  color: var(--black);
+  font: 300 14px 'Raleway', sans-serif;
+  overflow: auto;
+}
+
+html, body { 
+  width:100%;
+}
+
+main {
+  height: calc(100% - 100px);
+}
+.border-top {
+  border-color: var(--border-color);
+}
+ul, li {
+  list-style:none;
+}
+li {
+  line-height: 37px;
+}
+li > a {
+  transition: 200ms all cubic-bezier(0.4, 0, 1, 1);
+  transition-delay: 100ms;
+}
+.h1 { font-size: var(--h1) }
+.h3 { font-size: var(--h3) }
+a {
+  text-decoration: none;
+}
+
+nav a:hover:not(.active) {
+  text-decoration: underline;
+}
+nav .has-active a{
+  opacity: 1!important;
+}
+
+nav{
+  min-width:250px;
+}
+nav a:not(.active) {
+  opacity: 0.3;
+}
+nav ul:hover a{
+  opacity: 1;
+}
+ul li ul {
+  padding-left: 25px;
+}
+
+nav > ul {
+  overflow-y:hidden;
+  overflow-x:hidden;
+  /* scroll-behavior: smooth; */
+}
+
+nav:hover > ul {
+  overflow-y: auto;
+}
+
+nav ul:nth-child(1) > li:not(.featured) > a {
+  font-weight:bold;
+}
+
+nav li a.active {
+  color: #2B78F6;
+  font-weight: bold;
+  border-left: 3px solid;
+  padding-left: 10px;
+}
+
+nav ul:nth-child(1) > li:not(:first-child) {
+  margin-top:25px;
+}
+
+article > a {
+  flex-basis:100%;
+}
+
+a.featured {
+  display: none;
+}
+
+figure > div {
+  background-color: transparent;
+  height: auto;
+  perspective: 1000px;
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;  
+}
+figure > div > div {
+  position: relative;
+  height: calc(100% - 20px);
+  transition: opacity 0.3s, transform 0.3s;
+  transform-style: preserve-3d;
+  transform-origin: bottom;
+  transform: rotateX(30deg);
+  opacity:0;
+  background: 
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.5)
+    );
+}
+figure > div > div p {
+  color:#ffffff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+  font-family:'system-ui';
+  letter-spacing: 0.3px;
+}
+figure.active > div > div {
+  transform: rotateX(0deg);
+  opacity:1;
+}
+figure div > p:nth-child(1) {
+  margin: 7px 0 6px 0;
+}
+.container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featured {
+  line-height: initial;
+}
+.featured a {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+figure > img {
+  width:100%;
+}
+.fadeIn {
+  transition: opacity 1.25s;
+  opacity:1!important;
+}
+/* section#case-studies article > figure {
+  width: calc(100% - 30px)!important;
+} */

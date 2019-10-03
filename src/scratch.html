@@ -1,0 +1,160 @@
+<html>
+<link rel="stylesheet" type="text/css" href="./VideoPlayer.css"/>
+<script type="text/javascript" src="./VideoPlayer.js"></script>
+<script type="text/javascript">
+  window.foo = (function() {
+    for (var t = document.querySelectorAll("[videoplayer]"), e = 0; e < t.length; e++) {
+      let a = [];
+      console.log('here')
+      a.push(new VideoPlayer(t[e]))
+    }
+  });
+</script>
+  <style>
+    html,body{
+      margin: 0;
+      width:100%;
+    }
+    video, img{
+      width: 100%    !important;
+      height: auto   !important;
+    }
+    div.wrapper {
+      max-width:700px;
+      margin:0 auto;
+    }
+    section {
+      position: relative;
+    }
+  </style>
+  <body onload="return window.foo();">
+    <div class="wrapper">
+      <section>
+        <img src="./static/images/02/00.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/01.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/02.jpg" />
+      </section>
+
+      <section>
+        <img src="./static/images/02/03.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/04.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/05.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/06.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/07.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/08.png" />
+        <div class="player" videoplayer></div>
+        <video playsline type="video/mp4" loop controlsList="nodownload">
+          <source src="./static/images/02/08.mp4#t=0.1" type="video/mp4" />
+        </video>
+      </section>
+      
+      <section>
+        <img src="./static/images/02/09.png" />
+        <div class="player" videoplayer></div>
+        <video playsline type="video/mp4" loop controlsList="nodownload">
+          <source src="./static/images/02/09.mp4#t=0.1" type="video/mp4" />
+        </video>
+      </section>
+
+      <section>
+        <img src="./static/images/02/10.png" />
+          <div class="player" videoplayer></div>
+          <video playsline type="video/mp4" loop controlsList="nodownload">
+            <source src="./static/images/02/10.mp4#t=0.1" type="video/mp4" />
+          </video>
+      </section>
+
+      <section>
+        <img src="./static/images/02/11.jpg" />
+      </section>
+      
+      <section>
+        <img src="./static/images/02/12.jpg" />
+      </section>
+
+      <section>
+        <img src="./static/images/02/13.png" />
+        <div class="player" videoplayer></div>
+        <video playsline type="video/mp4" loop controlsList="nodownload">
+          <source src="./static/images/02/13.mp4#t=0.1" type="video/mp4" />
+        </video>
+      </section>
+
+      <section>
+          <img src="./static/images/02/14.jpg" />
+      </section>
+
+      <section>
+        <img src="./static/images/02/15.png" />
+          <div class="player" videoplayer></div>
+          <video playsline type="video/mp4" loop controlsList="nodownload">
+            <source src="./static/images/02/15.mp4#t=0.1" type="video/mp4" />
+          </video>
+      </section>
+
+      <section>
+        <img src="./static/images/02/16.png" />
+        <div class="player" videoplayer></div>
+        <video playsline type="video/mp4" loop controlsList="nodownload">
+          <source src="./static/images/02/16.mp4#t=0.1" type="video/mp4" />
+        </video>
+      </section>
+
+      <script type="text/javascript">
+        var videoStyles = [
+          'position:absolute; top: 16.2%; width: 45% !important; left: 45.9%;',
+          'position:absolute; top: 29.5%; width: 54.8% !important; left: 22.7%;',
+          'position:absolute; top: 27.6%; width: 61% !important;left: 19.6%;',
+          'position:absolute; top: -0.3%; width: 51% !important;left: 5.3%;',
+          'position:absolute; top: 38.7%; width: 51.4% !important; left: 42.6%;',
+          'position:absolute; top:2.1%; width:50.5% !important; left:5.9%;',
+        ];
+        var players = document.querySelectorAll('[videoplayer]');
+
+        for (var x = 0; x < players.length; x++) {
+          var player = players[x];
+          var video = player.parentElement.querySelector('video');
+          
+          var style = videoStyles[x];
+
+          if (style != undefined) {
+            video.setAttribute('style', style + ' z-index:-1;');
+          }
+
+          var that = this;
+
+          var callback = function(video, player, style) {
+            var height = video.offsetHeight + 'px';
+            if (style != undefined) {
+              player.setAttribute('style', style + ' height: '+ height +'');
+            }
+          }
+
+          video.onloadeddata = callback.bind(this, video,player,style);
+        }
+      </script>
+      
+    </div>
+  </body>
+</html>

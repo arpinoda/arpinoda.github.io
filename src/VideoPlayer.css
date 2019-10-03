@@ -1,0 +1,166 @@
+.player {
+  max-width:750px;
+  position: relative;
+  overflow: hidden;
+}
+
+.player__video {
+  width: 100%;
+}
+
+
+
+.player__slider {
+  width:10px;
+  height:30px;
+}
+
+.player__controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(100%) translateY(-2px);
+  transition: all .3s;
+  background: rgba(0,0,0,0.1);
+}
+
+.player:hover .player__controls {
+  transform: translateY(0);
+}
+
+.player:hover .progress {
+  height:5px;
+}
+
+
+
+.progress {
+  position: relative;
+  height:2px;
+  transition:height 0.3s;
+  background:rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+.fullscreen__button {
+  float:right!important;
+}
+.fullscreen__button svg {
+  fill: white;
+  width: auto;
+}
+.progress__filled {
+  width:0;
+  background:#FF0000;
+  height: 100%;
+}
+.player__buttons{
+  height: 30px;
+  width: 100%;
+}
+.play__button,
+.fullscreen__button,
+.mute__button,
+.player__slider{
+  display: block;
+  float: left;
+}
+.mute__button, .play__button, .fullscreen__button {
+  background:none;
+  border:0;
+  line-height:1;
+  color:white;
+  text-align: center;
+  outline:0;
+  cursor:pointer;
+  max-width:50px;
+  padding: 0 10px;
+  height: 30px;
+  margin-top: 5px;
+}
+.mute__button svg, .play__button svg, .fullscreen__button svg{
+  height: 50%;
+  margin-top: 25%;
+}
+
+.big__play {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.43);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.big__play svg{
+  height: 40%;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.player__buttons input[type="range"] {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  width: 60px;
+  height: 2px;
+  margin: 12px 0;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.4196078431372549);
+  outline: none; /* no focus outline */
+}
+
+.player__buttons input[type="range"]::-moz-range-track {
+  border: inherit;
+  background: transparent;
+}
+
+.player__buttons input[type="range"]::-ms-track {
+  border: inherit;
+  color: transparent; /* don't drawn vertical reference line */
+  background: transparent;
+}
+
+.player__buttons input[type="range"]::-ms-fill-lower,
+.player__buttons input[type="range"]::-ms-fill-upper {
+  background: transparent;
+}
+
+.player__buttons input[type="range"]::-ms-tooltip {
+  display: none;
+}
+
+/* thumb */
+
+.player__buttons input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 6px;
+  border: none;
+  border-radius: 12px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1f1f1), color-stop(100%, #b1b1b1)); /* android <= 2.2 */
+  background-image: -webkit-linear-gradient(top , #f1f1f1 0, #b1b1b1 100%); /* older mobile safari and android > 2.2 */;
+  background-image: linear-gradient(to bottom, #f1f1f1 0, #b1b1b1 100%); /* W3C */
+}
+.player__buttons input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 6px;
+  border: none;
+  border-radius: 12px;
+  background-image: linear-gradient(to bottom, #f1f1f1 0, #b1b1b1 100%); /* W3C */
+}
+
+.player__buttons input[type="range"]::-ms-thumb {
+  width:12px;
+  height: 6px;
+  border-radius: 12px;
+  border: 0;
+  background-image: linear-gradient(to bottom, #f1f1f1 0, #b1b1b1 100%); /* W3C */
+}

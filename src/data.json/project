@@ -1,0 +1,201 @@
+[
+  {
+    "projectID": 3,
+    "name": "Retail Security Platform",
+    "images": {
+      "thumbnail": "../static/images/01.jpg",
+      "animated": "",
+      "detail": []
+    },
+    "index": 2,
+    "categoryIDs": [1],
+    "description": "Real-time asset tracking for high-end jewelry & timepieces."
+  },
+  {
+    "projectID": 4,
+    "name": "LockedOut iOS",
+    "images": {
+      "thumbnail": "../static/images/03.png",
+      "detail": []
+    },
+    "index": 3,
+    "categoryIDs": [1],
+    "description": "On-demand mobile platform for locksmith emergency services."
+  },
+  {
+    "projectID": 2,
+    "name": "Zegna Clienteling",
+    "images": {
+      "thumbnail": "../static/images/04.jpg",
+      "detail": []
+    },
+    "index": 1,
+    "categoryIDs": [1],
+    "description": "Target marketing performed by sales associates on the sales floor"
+  },
+  {
+    "projectID": 1,
+    "name": "Cartier Mansion Iconography",
+    "images": {
+      "thumbnail": "../static/images/02.png",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [1],
+    "description": "iBeacon-enabled museum app for new staff onboarding."
+  },
+  {
+    "projectID": 5,
+    "name": "Enterprise Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [3],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 6,
+    "name": "Enterprise Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 1,
+    "categoryIDs": [3],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 7,
+    "name": "Enterprise Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 2,
+    "categoryIDs": [3],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 8,
+    "name": "Enterprise Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 3,
+    "categoryIDs": [3],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 9,
+    "name": "Consumer Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [4],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 10,
+    "name": "Consumer Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 1,
+    "categoryIDs": [4],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 11,
+    "name": "Consumer Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 2,
+    "categoryIDs": [4],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 12,
+    "name": "Consumer Retail project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 3,
+    "categoryIDs": [4],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 13,
+    "name": "EdTech project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [5],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 14,
+    "name": "University project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [6],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 15,
+    "name": "ARKit Project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [9],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 19,
+    "name": "ARKit Project 2",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [9],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 17,
+    "name": "iBeacon Project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [11],
+    "description": "Project description one liner"
+  },
+  {
+    "projectID": 18,
+    "name": "Firebase Project",
+    "images": {
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [15],
+    "description": "Project description one liner"
+  }
+]
