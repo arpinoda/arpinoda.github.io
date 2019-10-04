@@ -73,7 +73,7 @@ module.exports = app => {
   app.get(['/static/image*', '/project*'], (req, res) =>
     res.sendFile(path.join(__dirname, 'dist/', req.path)),
   );
-  app.get(['/data.json/project', '/data.json/project'], (req, res) =>
+  app.get(['/data.json/project', '/data.json/category'], (req, res) =>
     res.sendFile(path.join(__dirname, 'src', req.path)),
   );
 };
