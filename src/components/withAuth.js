@@ -18,17 +18,8 @@ const withAuth = AuthComponent => {
       const { history, location } = this.props;
 
       if (!Auth.loggedIn()) {
-        const { pathname } = location;
-
-        let forwardToPath = '';
-
-        if (pathname && pathname !== '/login') {
-          if (!(pathname === '/' && location.hash === '')) {
-            forwardToPath += `?next=${pathname}${location.hash}`;
-          }
-        }
-
-        history.replace(`/login${forwardToPath}`);
+        const nextURL = this.getNextURL(location);
+        history.replace(`/login${nextURL}`);
       } else {
         /* Try to get confirmation message from the Auth helper. */
         try {
@@ -47,14 +38,27 @@ const withAuth = AuthComponent => {
       }
     }
 
+    getNextURL = location => {
+      let result = '';
+      const { pathname } = location;
+
+      if (pathname && pathname !== '/login') {
+        if (!(pathname === '/' && location.hash === '')) {
+          result += `?next=${pathname}${location.hash}`;
+        }
+      }
+
+      return result;
+    };
+
     render() {
       const { loaded, confirm } = this.state;
-      const { history, location } = this.props;
 
       if (loaded === true) {
         if (confirm) {
+          const { history, location } = this.props;
+
           return (
-            /* component that is currently being wrapper(App.js) */
             <AuthComponent
               history={history}
               location={location}

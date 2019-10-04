@@ -35,10 +35,17 @@ class Login extends React.Component {
     this.Auth.login(passcode)
       .then(res => {
         if (!res.success) {
-          return alert("Sorry those credentials don't exist!");
+          return alert("Whoops, that's incorrect");
         }
 
-        return history.replace('/');
+        const { href } = window.location;
+        let redirectTo = '/';
+
+        if (href.indexOf('next=') > 0) {
+          redirectTo = href.substring(href.indexOf('next=') + 5);
+        }
+
+        return history.replace(redirectTo);
       })
       .catch(err => {
         alert(err);
