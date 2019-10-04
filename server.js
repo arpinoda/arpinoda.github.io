@@ -29,14 +29,14 @@ const jwtMW = exjwt({
 // Routes
 const getFavicon = (req, res) =>
   res.sendFile(path.join(__dirname, 'dist/static/favicon', 'favicon.ico'));
-// const getIndexFile = (req, res) =>
-//   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+const getIndexFile = (req, res) =>
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 const getRobotsFile = (req, res) =>
   res.sendFile(path.join(__dirname, 'robots.txt'));
-// const getProjectData = (req, res) =>
-//   res.sendFile(path.join(__dirname, 'src/data.json', 'project'));
-// const getCategoryData = (req, res) =>
-//   res.sendFile(path.join(__dirname, 'src/data.json', 'category'));
+const getProjectData = (req, res) =>
+  res.sendFile(path.join(__dirname, 'src/data.json', 'project'));
+const getCategoryData = (req, res) =>
+  res.sendFile(path.join(__dirname, 'src/data.json', 'category'));
 const login = (req, res) => {
   const { passcode } = req.body;
   if (passcode === process.env.PASSCODE) {
@@ -91,17 +91,15 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(cors);
 }
 app.post('/login', login);
-app.use(jwtMW);
-// app.use(express.static(path.join(__dirname, 'dist')));
+app.get('/login', getIndexFile);
+app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/robots.txt', getRobotsFile);
 app.get('/favicon.ico', getFavicon);
-// app.get('/', getIndexFile);
-// app.get('/login', jwtMW, getIndexFile);
-// app.get('/project*', getIndexFile);
 
-// // authenticated access
-// app.get('/data.json/project', getProjectData);
-// app.get('/data.json/category', getCategoryData);
+app.use(jwtMW);
+app.get('/project*', getIndexFile);
+app.get('/data.json/project', getProjectData);
+app.get('/data.json/category', getCategoryData);
 
 app.listen(PORT);
 console.log('Listening on port:', PORT);
