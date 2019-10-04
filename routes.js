@@ -70,7 +70,7 @@ module.exports = app => {
   app.get('/login', (req, res) => res.redirect('/'));
 
   app.use(jwtMW);
-  app.get(['/static/image*', '/project*'], (req, res) =>
+  app.get(['/static/image', '/project*'], (req, res) =>
     res.sendFile(path.join(__dirname, 'dist/', req.path)),
   );
   app.get(['/data.json/project', '/data.json/category'], (req, res) =>
