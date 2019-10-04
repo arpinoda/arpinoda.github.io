@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
+  "engines": {
+    "yarn": "1.17.3",
+    "node": "12.6.0"
+  },
   "license": "UNLICENSED",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
