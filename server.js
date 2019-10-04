@@ -88,7 +88,9 @@ const cors = (req, res, next) => {
 
 // un-authenticated access
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use(cors);
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors);
+}
 app.post('/login', login);
 app.get('/robots.txt', getRobotsFile);
 app.get('/favicon.ico', getFavicon);
