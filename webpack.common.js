@@ -1,6 +1,14 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   entry: ['whatwg-fetch', './index.js'],
@@ -11,6 +19,7 @@ module.exports = {
       template: 'index.html',
       inject: 'body',
     }),
+    new webpack.DefinePlugin(envKeys),
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
