@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 5000;
 // Let server know to expect content-type "Authorization" within header
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
-  console.log(req.path);
   next();
 });
 

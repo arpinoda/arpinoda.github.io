@@ -59,7 +59,6 @@ module.exports = app => {
         token,
       });
     } else {
-      console.log('Invalid code for IP:', IP);
       res.status(401).json({
         success: false,
         token: null,
