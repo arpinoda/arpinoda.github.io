@@ -1,11 +1,10 @@
 import AUTH from './AUTH';
 
 class API {
-  Auth = new AUTH();
-
   constructor({ url }) {
     this.url = url;
     this.endpoints = {};
+    this.auth = new AUTH(url);
   }
 
   createEntity(entity) {
@@ -21,9 +20,9 @@ class API {
     const resourceURL = `${this.url}/${name}`;
 
     endpoints.getAll = ({ query } = {}) =>
-      this.Auth.fetch(resourceURL, { params: { query } });
+      this.auth.fetch(resourceURL, { params: { query } });
 
-    endpoints.getOne = ({ id }) => this.Auth.fetch(`${resourceURL}/${id}`);
+    endpoints.getOne = ({ id }) => this.auth.fetch(`${resourceURL}/${id}`);
 
     return endpoints;
   }

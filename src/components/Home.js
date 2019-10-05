@@ -19,7 +19,7 @@ class Home extends React.Component {
     };
 
     this.api = new API({
-      url: API_URL,
+      url: process.env.API_PATH,
     });
 
     this.api.createEntities([{ name: 'project' }, { name: 'category' }]);

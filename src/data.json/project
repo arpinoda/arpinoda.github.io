@@ -3,7 +3,7 @@
     "projectID": 3,
     "name": "Retail Security Platform",
     "images": {
-      "thumbnail": "../static/images/01.jpg",
+      "thumbnail": "01.jpg",
       "animated": "",
       "detail": []
     },
@@ -15,7 +15,7 @@
     "projectID": 4,
     "name": "LockedOut iOS",
     "images": {
-      "thumbnail": "../static/images/03.png",
+      "thumbnail": "03.png",
       "detail": []
     },
     "index": 3,
@@ -26,7 +26,7 @@
     "projectID": 2,
     "name": "Zegna Clienteling",
     "images": {
-      "thumbnail": "../static/images/04.jpg",
+      "thumbnail": "04.jpg",
       "detail": []
     },
     "index": 1,
@@ -37,7 +37,7 @@
     "projectID": 1,
     "name": "Cartier Mansion Iconography",
     "images": {
-      "thumbnail": "../static/images/02.png",
+      "thumbnail": "02.png",
       "detail": []
     },
     "index": 0,

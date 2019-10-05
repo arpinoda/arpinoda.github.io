@@ -10,8 +10,7 @@
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly",
-        "API_URL": true
+        "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
         "ecmaFeatures": {

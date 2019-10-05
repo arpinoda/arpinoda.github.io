@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { LOADING_IMAGE } from '../util/UI';
+import AUTH from '../util/AUTH';
 
 class HomeGridFigure extends React.Component {
+  Auth = new AUTH();
+
   constructor(props) {
     super(props);
 
@@ -50,10 +53,25 @@ class HomeGridFigure extends React.Component {
         this.randomColor,
       );
 
+      // Use auth fetch to obtain image, then base64 encode
       this.setState({
-        imageSrc: thumbnail,
+        imageSrc: thumbnail, // this.toDataURL(thumbnail),
       });
     }
+  };
+
+  toDataURL = url => {
+    this.Auth.fetch(url)
+      .then(response => response.blob())
+      .then(
+        blob =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          }),
+      );
   };
 
   render = () => {

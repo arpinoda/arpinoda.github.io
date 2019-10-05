@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
 
 class Login extends React.Component {
-  Auth = new AUTH();
-
   constructor(props) {
     super(props);
 
     this.state = {
       passcode: '',
     };
+
+    this.auth = new AUTH();
   }
 
   componentWillMount() {
-    if (this.Auth.loggedIn()) {
+    if (this.auth.loggedIn()) {
       const { history } = this.props;
       history.replace('/');
     }
@@ -32,7 +32,8 @@ class Login extends React.Component {
     const { passcode } = this.state;
     const { history } = this.props;
 
-    this.Auth.login(passcode)
+    this.auth
+      .login(passcode)
       .then(res => {
         if (!res.success) {
           return alert("Whoops, that's incorrect");

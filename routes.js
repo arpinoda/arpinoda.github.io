@@ -39,6 +39,10 @@ const cors = (req, res, next) => {
 };
 
 module.exports = app => {
+  app.all('*', (req, res, next) => {
+    console.log('Requesting:', req.path);
+    next();
+  });
   if (process.env.NODE_ENV !== 'production') {
     app.use(cors);
   }
@@ -67,13 +71,23 @@ module.exports = app => {
   app.get(['/static/favicon*', '/bundle.js', '/'], (req, res) =>
     res.sendFile(path.join(__dirname, 'dist/', req.path)),
   );
-  app.get('/login', (req, res) => res.redirect('/'));
+  app.get(['/login'], (req, res) => res.redirect('/'));
+  app.get(['/project*'], (req, res) =>
+    res.sendFile(path.join(__dirname, 'dist/', 'index.html')),
+  );
 
   app.use(jwtMW);
-  app.get(['/static/image', '/project*'], (req, res) =>
+  const { API_PATH } = process.env;
+
+  app.get([`${API_PATH}/static/image/`], (req, res) =>
     res.sendFile(path.join(__dirname, 'dist/', req.path)),
   );
-  app.get(['/data.json/project', '/data.json/category'], (req, res) =>
-    res.sendFile(path.join(__dirname, 'src', req.path)),
-  );
+
+  app.get(`${API_PATH}/project`, (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/data.json', 'project'));
+  });
+
+  app.get(`${API_PATH}/category`, (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/data.json', 'category'));
+  });
 };
