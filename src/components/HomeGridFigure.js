@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { LOADING_IMAGE } from '../util/UI';
-import AUTH from '../util/AUTH';
+import API from '../util/API';
 
 class HomeGridFigure extends React.Component {
-  Auth = new AUTH();
-
   constructor(props) {
     super(props);
 
@@ -16,6 +14,11 @@ class HomeGridFigure extends React.Component {
     };
 
     this.randomColor = this.getRandomColor();
+
+    this.api = new API({
+      url: process.env.API_PATH,
+    });
+    this.api.createEntities([{ name: 'image' }]);
   }
 
   getRandomColor = () => {
@@ -48,17 +51,27 @@ class HomeGridFigure extends React.Component {
     const { project } = this.props;
 
     if (imageSrc === LOADING_IMAGE) {
-      const thumbnail = project.images.thumbnail.replace(
-        'eeeeee',
-        this.randomColor,
-      );
+      // Request image from API, replace default loading image
+      const imagePath = project.images.thumbnail;
 
-      // Use auth fetch to obtain image, then base64 encode
-      this.setState({
-        imageSrc: thumbnail, // this.toDataURL(thumbnail),
-      });
+      if (imagePath.includes('eeeeee')) {
+        const thumbnail = project.images.thumbnail.replace(
+          'eeeeee',
+          this.randomColor,
+        );
+
+        this.setState({
+          imageSrc: thumbnail,
+        });
+      } else {
+        this.getThumbnail(imagePath).then(image => {
+          console.log(image);
+        });
+      }
     }
   };
+
+  getThumbnail = id => this.api.endpoints.image.getOne(id);
 
   toDataURL = url => {
     this.Auth.fetch(url)

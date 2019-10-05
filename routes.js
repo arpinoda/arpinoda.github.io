@@ -75,12 +75,11 @@ module.exports = app => {
     res.sendFile(path.join(__dirname, 'dist/', 'index.html')),
   );
 
+  /*
+    Protected Routes
+  */
   app.use(jwtMW);
   const { API_PATH } = process.env;
-
-  app.get([`${API_PATH}/static/image/`], (req, res) =>
-    res.sendFile(path.join(__dirname, 'dist/', req.path)),
-  );
 
   app.get(`${API_PATH}/project`, (req, res) => {
     res.sendFile(path.join(__dirname, 'src/data.json', 'project'));
@@ -89,4 +88,11 @@ module.exports = app => {
   app.get(`${API_PATH}/category`, (req, res) => {
     res.sendFile(path.join(__dirname, 'src/data.json', 'category'));
   });
+
+  app.get(`${API_PATH}/image/:id`, (req, res) => {
+    const { id } = req.params;
+    res.sendFile(path.join(__dirname, 'src/static/images/protected', id));
+  });
+
+  // --- End protected routes
 };

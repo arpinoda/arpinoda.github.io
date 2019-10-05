@@ -20,18 +20,23 @@ class API {
     const resourceURL = `${this.url}/${name}`;
 
     endpoints.getAll = ({ query } = {}) =>
-      this.auth.fetch(resourceURL, { params: { query } }).then(res => {
-        if (res.status === 401) {
-          this.auth.logout();
-          window.location.reload();
-        }
-        return res.json();
-      });
+      this.authenticatedFetch(resourceURL, { params: { query } }).then(res =>
+        res.json(),
+      );
 
-    endpoints.getOne = ({ id }) => this.auth.fetch(`${resourceURL}/${id}`);
+    endpoints.getOne = id => this.authenticatedFetch(`${resourceURL}/${id}`);
 
     return endpoints;
   }
+
+  authenticatedFetch = (url, options) =>
+    this.auth.fetch(url, options).then(res => {
+      if (res.status === 401) {
+        this.auth.logout();
+        window.location.reload();
+      }
+      return res;
+    });
 }
 
 export default API;
