@@ -51,8 +51,10 @@ module.exports = app => {
   );
   app.post('/login', (req, res) => {
     const { passcode } = req.body;
+    const IP = req.connection.remoteAddress;
+
     if (passcode === process.env.PASSCODE) {
-      const token = jwt.sign({}, process.env.JWT_SECRET, {
+      const token = jwt.sign({ IP }, process.env.JWT_SECRET, {
         expiresIn: 60 * 10,
       });
       res.status(200).json({
@@ -61,6 +63,7 @@ module.exports = app => {
         token,
       });
     } else {
+      console.log('Invalid code for IP:', IP);
       res.status(401).json({
         success: false,
         token: null,

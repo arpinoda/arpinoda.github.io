@@ -61,6 +61,14 @@ export default class AUTH {
     return fetch(url, {
       headers,
       ...options,
-    }).then(response => response.json());
+    })
+      .then(res => {
+        if (res.status === 401) {
+          this.logout();
+          window.history = '/login';
+        }
+        return res;
+      })
+      .then(res => res.json());
   };
 }
