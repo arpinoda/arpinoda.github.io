@@ -18,7 +18,7 @@ class HomeGridFigure extends React.Component {
     this.api = new API({
       url: process.env.API_PATH,
     });
-    this.api.createEntities([{ name: 'image' }]);
+    this.api.createEntities([{ name: 'media' }]);
   }
 
   getRandomColor = () => {
@@ -64,28 +64,14 @@ class HomeGridFigure extends React.Component {
           imageSrc: thumbnail,
         });
       } else {
-        this.getThumbnail(imagePath).then(image => {
-          console.log('Image retrieved:', image);
-        });
+        this.getThumbnail(imagePath)
+          .then(res => res.json())
+          .then(json => this.setState({ imageSrc: json }));
       }
     }
   };
 
-  getThumbnail = id => this.api.endpoints.image.getOne(id);
-
-  toDataURL = url => {
-    this.Auth.fetch(url)
-      .then(response => response.blob())
-      .then(
-        blob =>
-          new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-          }),
-      );
-  };
+  getThumbnail = id => this.api.endpoints.media.getOne(id);
 
   render = () => {
     const { project } = this.props;
