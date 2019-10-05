@@ -61,4 +61,5 @@ typings/
 .next
 
 # VS Code
+.vscode
 launch.json

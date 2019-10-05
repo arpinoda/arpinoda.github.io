@@ -15,12 +15,14 @@ export default class AUTH {
       body: JSON.stringify({
         passcode,
       }),
-    }).then(loginResult => {
-      if (loginResult.token !== null) {
-        this.setToken(loginResult.token);
-      }
-      return loginResult;
-    });
+    })
+      .then(res => res.json())
+      .then(loginResult => {
+        if (loginResult.token !== null) {
+          this.setToken(loginResult.token);
+        }
+        return loginResult;
+      });
 
   loggedIn = () => {
     // Checks if there is a saved token and it's still valid
@@ -61,14 +63,6 @@ export default class AUTH {
     return fetch(url, {
       headers,
       ...options,
-    })
-      .then(res => {
-        if (res.status === 401) {
-          this.logout();
-          window.history = '/login';
-        }
-        return res;
-      })
-      .then(res => res.json());
+    }).then(res => res);
   };
 }

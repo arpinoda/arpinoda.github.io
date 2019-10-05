@@ -39,10 +39,6 @@ const cors = (req, res, next) => {
 };
 
 module.exports = app => {
-  app.all('*', (req, res, next) => {
-    console.log('Requesting:', req.path);
-    next();
-  });
   if (process.env.NODE_ENV !== 'production') {
     app.use(cors);
   }
