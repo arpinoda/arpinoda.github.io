@@ -65,7 +65,7 @@ class HomeGridFigure extends React.Component {
         });
       } else {
         this.getThumbnail(imagePath).then(image => {
-          console.log(image);
+          console.log('Image retrieved:', image);
         });
       }
     }
