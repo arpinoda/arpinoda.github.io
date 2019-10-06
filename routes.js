@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const path = require('path');
-const fs = require('fs');
 
 const jwtMW = exjwt({
   secret: process.env.JWT_SECRET,
@@ -37,18 +36,6 @@ const cors = (req, res, next) => {
   } else {
     next();
   }
-};
-
-const mime = {
-  html: 'text/html',
-  txt: 'text/plain',
-  css: 'text/css',
-  gif: 'image/gif',
-  jpg: 'image/jpeg',
-  png: 'image/png',
-  svg: 'image/svg+xml',
-  mp4: 'video/mp4',
-  js: 'application/javascript',
 };
 
 module.exports = app => {
@@ -106,19 +93,7 @@ module.exports = app => {
     const id = req.path.replace(base, '');
 
     const diskPath = path.join(__dirname, 'src/static/images/protected', id);
-    const type = mime[path.extname(id).slice(1)] || 'text/plain';
-
-    // Read file and encode to base64
-    fs.readFile(diskPath, 'base64', (err, image) => {
-      if (err) {
-        console.log(err);
-        return res.sendStatus(500);
-      }
-
-      const body = `data:${type};base64,${image}`;
-      return res.json(body);
-    });
+    res.sendFile(diskPath);
   });
-
   // --- End protected routes
 };

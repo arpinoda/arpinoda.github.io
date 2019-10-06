@@ -66,4 +66,33 @@ export const unlockScroll = () => {
   document.scrollingElement.scrollTop = -1 * top;
 };
 
+export const readResponseImage = res => {
+  const reader = res.body.getReader();
+  return new Promise(resolve => {
+    const stream = new ReadableStream({
+      start(controller) {
+        function pump() {
+          return reader.read().then(({ done, value }) => {
+            // When no more data needs to be consumed, close the stream
+            if (done) {
+              controller.close();
+              return;
+            }
+            // Enqueue the next data chunk into our target stream
+            controller.enqueue(value);
+            pump();
+          });
+        }
+        return pump();
+      },
+    });
+    resolve(stream);
+  })
+    .then(stream => new Response(stream))
+    .then(response => response.blob())
+    .then(blob => URL.createObjectURL(blob))
+    .then(url => url)
+    .catch(err => console.error(err));
+};
+
 export default scrollToWithRetry;

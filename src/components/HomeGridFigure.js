@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { LOADING_IMAGE } from '../util/UI';
+import { LOADING_IMAGE, readResponseImage } from '../util/UI';
 import API from '../util/API';
 
 class HomeGridFigure extends React.Component {
@@ -64,14 +64,14 @@ class HomeGridFigure extends React.Component {
           imageSrc: thumbnail,
         });
       } else {
-        this.getThumbnail(imagePath)
-          .then(res => res.json())
-          .then(json => this.setState({ imageSrc: json }));
+        this.fetchImage(imagePath)
+          .then(res => readResponseImage(res))
+          .then(url => this.setState({ imageSrc: url }));
       }
     }
   };
 
-  getThumbnail = id => this.api.endpoints.media.getOne(id);
+  fetchImage = id => this.api.endpoints.media.getOne(id);
 
   render = () => {
     const { project } = this.props;
