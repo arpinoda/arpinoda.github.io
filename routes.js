@@ -81,7 +81,7 @@ module.exports = (app, express) => {
   );
 
   app.use(
-    '/project',
+    '/project*',
     express.static(path.join(__dirname, 'dist', 'index.html')),
   ); // --- end production routes
 
