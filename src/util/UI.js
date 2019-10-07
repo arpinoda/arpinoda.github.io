@@ -66,7 +66,7 @@ export const unlockScroll = () => {
   document.scrollingElement.scrollTop = -1 * top;
 };
 
-export const readResponseImage = res => {
+export const createBlobURL = res => {
   const reader = res.body.getReader();
   return new Promise(resolve => {
     const stream = new ReadableStream({

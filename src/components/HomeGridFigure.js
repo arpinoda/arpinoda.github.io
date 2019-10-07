@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { LOADING_IMAGE, readResponseImage } from '../util/UI';
+import { LOADING_IMAGE, createBlobURL } from '../util/UI';
 import API from '../util/API';
 
 class HomeGridFigure extends React.Component {
@@ -11,6 +11,7 @@ class HomeGridFigure extends React.Component {
     this.state = {
       isHovering: false,
       imageSrc: LOADING_IMAGE,
+      videoSrc: '',
     };
 
     this.randomColor = this.getRandomColor();
@@ -18,7 +19,7 @@ class HomeGridFigure extends React.Component {
     this.api = new API({
       url: process.env.API_PATH,
     });
-    this.api.createEntities([{ name: 'image' }]);
+    this.api.createEntities([{ name: 'image' }, { name: 'video' }]);
   }
 
   getRandomColor = () => {
@@ -64,18 +65,24 @@ class HomeGridFigure extends React.Component {
           imageSrc: thumbnail,
         });
       } else {
-        this.fetchMedia(imagePath)
-          .then(res => readResponseImage(res))
+        this.fetchImage(imagePath)
+          .then(res => createBlobURL(res))
           .then(url => this.setState({ imageSrc: url }));
+
+        this.fetchVideo('01.mp4')
+          .then(res => createBlobURL(res))
+          .then(url => this.setState({ videoSrc: url }));
       }
     }
   };
 
-  fetchMedia = id => this.api.endpoints.image.getOne(id);
+  fetchImage = id => this.api.endpoints.image.getOne(id);
+
+  fetchVideo = id => this.api.endpoints.video.getOne(id);
 
   render = () => {
     const { project } = this.props;
-    const { isHovering, imageSrc } = this.state;
+    const { isHovering, imageSrc, videoSrc } = this.state;
 
     const gifStyle = {
       WebkitAnimation: isHovering
@@ -99,6 +106,10 @@ class HomeGridFigure extends React.Component {
           this.handleMouseHover(false);
         }}
       >
+        <video className="fit" src={videoSrc}>
+          Browser does not support video
+          <track kind="captions" />
+        </video>
         <img
           className="block"
           src={imageSrc}
