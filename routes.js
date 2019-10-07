@@ -2,17 +2,11 @@ const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const path = require('path');
 
+const { API_PATH } = process.env;
+
 const jwtMW = exjwt({
   secret: process.env.JWT_SECRET,
 });
-
-const diskPathFromRequest = (req, endpoint, diskDirectory) => {
-  endpoint = endpoint[0] === '/' ? endpoint : `/${endpoint}`;
-  const base = `${process.env.API_PATH}${endpoint}`;
-  const id = req.path.replace(base, '');
-  const result = path.join(__dirname, diskDirectory, id);
-  return result;
-};
 
 const cors = (req, res, next) => {
   let oneof = false;
@@ -46,13 +40,16 @@ const cors = (req, res, next) => {
   }
 };
 
-module.exports = app => {
+module.exports = (app, express) => {
   if (process.env.NODE_ENV !== 'production') {
     app.use(cors);
   }
+
+  // These unauthenticated routes are hit in BOTH dev and production
   app.get('/robots.txt', (req, res) =>
     res.sendFile(path.join(__dirname, 'robots.txt')),
   );
+
   app.post('/login', (req, res) => {
     const { passcode } = req.body;
     const IP = req.connection.remoteAddress;
@@ -74,44 +71,43 @@ module.exports = app => {
       });
     }
   });
+
+  app.get(['/login'], (req, res) => res.redirect('/'));
+  // --- end development AND production routes
+
+  // These unauthenticated routes are hit in production ONLY
   app.get(['/static/favicon*', '/bundle.js', '/'], (req, res) =>
     res.sendFile(path.join(__dirname, 'dist/', req.path)),
   );
-  app.get(['/login'], (req, res) => res.redirect('/'));
-  app.get(['/project*'], (req, res) =>
-    res.sendFile(path.join(__dirname, 'dist/', 'index.html')),
-  );
+
+  app.use(
+    '/project',
+    express.static(path.join(__dirname, 'dist', 'index.html')),
+  ); // --- end production routes
 
   /*
-    Protected Routes
+    Protected Routes, used in DEV and PROD
   */
   app.use(jwtMW);
-  const { API_PATH } = process.env;
 
-  app.get(`${API_PATH}/project`, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/data.json', 'project'));
-  });
+  app.use(
+    `${API_PATH}/project`,
+    express.static(path.join(__dirname, 'src/data', 'project.json')),
+  );
 
-  app.get(`${API_PATH}/category`, (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/data.json', 'category'));
-  });
+  app.use(
+    `${API_PATH}/category`,
+    express.static(path.join(__dirname, 'src/data', 'category.json')),
+  );
 
-  app.get(`${API_PATH}/image*`, (req, res) => {
-    const diskPath = diskPathFromRequest(
-      req,
-      '/image',
-      'src/static/images/protected',
-    );
-    res.sendFile(diskPath);
-  });
+  app.use(
+    `${API_PATH}/image`,
+    express.static(path.join(__dirname, 'src/static/images/protected')),
+  );
 
-  app.get(`${API_PATH}/video*`, (req, res) => {
-    const diskPath = diskPathFromRequest(
-      req,
-      '/video',
-      'src/static/videos/protected',
-    );
-    res.sendFile(diskPath);
-  });
+  app.use(
+    `${API_PATH}/video`,
+    express.static(path.join(__dirname, 'src/static/videos/protected')),
+  );
   // --- End protected routes
 };
