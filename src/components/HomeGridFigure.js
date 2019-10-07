@@ -18,7 +18,7 @@ class HomeGridFigure extends React.Component {
     this.api = new API({
       url: process.env.API_PATH,
     });
-    this.api.createEntities([{ name: 'media' }]);
+    this.api.createEntities([{ name: 'image' }]);
   }
 
   getRandomColor = () => {
@@ -64,14 +64,14 @@ class HomeGridFigure extends React.Component {
           imageSrc: thumbnail,
         });
       } else {
-        this.fetchImage(imagePath)
+        this.fetchMedia(imagePath)
           .then(res => readResponseImage(res))
           .then(url => this.setState({ imageSrc: url }));
       }
     }
   };
 
-  fetchImage = id => this.api.endpoints.media.getOne(id);
+  fetchMedia = id => this.api.endpoints.image.getOne(id);
 
   render = () => {
     const { project } = this.props;

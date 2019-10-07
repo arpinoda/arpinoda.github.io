@@ -6,6 +6,14 @@ const jwtMW = exjwt({
   secret: process.env.JWT_SECRET,
 });
 
+const diskPathFromRequest = (req, endpoint, diskDirectory) => {
+  endpoint = endpoint[0] === '/' ? endpoint : `/${endpoint}`;
+  const base = `${process.env.API_PATH}${endpoint}`;
+  const id = req.path.replace(base, '');
+  const result = path.join(__dirname, diskDirectory, id);
+  return result;
+};
+
 const cors = (req, res, next) => {
   let oneof = false;
   if (req.headers.origin) {
@@ -88,11 +96,21 @@ module.exports = app => {
     res.sendFile(path.join(__dirname, 'src/data.json', 'category'));
   });
 
-  app.get(`${API_PATH}/media*`, (req, res) => {
-    const base = `${process.env.API_PATH}/media`;
-    const id = req.path.replace(base, '');
+  app.get(`${API_PATH}/image*`, (req, res) => {
+    const diskPath = diskPathFromRequest(
+      req,
+      '/image',
+      'src/static/images/protected',
+    );
+    res.sendFile(diskPath);
+  });
 
-    const diskPath = path.join(__dirname, 'src/static/images/protected', id);
+  app.get(`${API_PATH}/video*`, (req, res) => {
+    const diskPath = diskPathFromRequest(
+      req,
+      '/video',
+      'src/static/videos/protected',
+    );
     res.sendFile(diskPath);
   });
   // --- End protected routes
