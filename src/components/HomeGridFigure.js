@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { LOADING_IMAGE, createBlobURL } from '../util/UI';
-import API from '../util/API';
+import HomeGridImage from './HomeGridImage';
 
 class HomeGridFigure extends React.Component {
   constructor(props) {
@@ -10,79 +9,17 @@ class HomeGridFigure extends React.Component {
 
     this.state = {
       isHovering: false,
-      imageSrc: LOADING_IMAGE,
-      videoSrc: '',
     };
-
-    this.randomColor = this.getRandomColor();
-
-    this.api = new API({
-      url: process.env.API_PATH,
-    });
-    this.api.createEntities([{ name: 'image' }, { name: 'video' }]);
   }
-
-  getRandomColor = () => {
-    const colors = [
-      'fafafa',
-      '592607',
-      '17b9b3',
-      'ea943d',
-      '334677',
-      '3a8635',
-      'b2a73c',
-      'f5c4f8',
-      'ceabee',
-      '81ac47',
-      'c5294c',
-      '9d440e',
-      'ca39ac',
-      '5627ed',
-      '5600d9',
-    ];
-    return colors[Math.floor(Math.random() * 15)];
-  };
 
   handleMouseHover = val => {
     this.setState({ isHovering: val });
   };
 
-  handleImageLoaded = () => {
-    const { imageSrc } = this.state;
-    const { project } = this.props;
-
-    if (imageSrc === LOADING_IMAGE) {
-      // Request image from API, replace default loading image
-      const imagePath = project.images.thumbnail;
-
-      if (imagePath.includes('eeeeee')) {
-        const thumbnail = project.images.thumbnail.replace(
-          'eeeeee',
-          this.randomColor,
-        );
-
-        this.setState({
-          imageSrc: thumbnail,
-        });
-      } else {
-        this.fetchImage(imagePath)
-          .then(res => createBlobURL(res))
-          .then(url => this.setState({ imageSrc: url }));
-
-        this.fetchVideo('01.mp4')
-          .then(res => createBlobURL(res))
-          .then(url => this.setState({ videoSrc: url }));
-      }
-    }
-  };
-
-  fetchImage = id => this.api.endpoints.image.getOne(id);
-
-  fetchVideo = id => this.api.endpoints.video.getOne(id);
-
   render = () => {
     const { project } = this.props;
-    const { isHovering, imageSrc, videoSrc } = this.state;
+    const { isHovering } = this.state;
+    const hasVideo = project.images.video !== undefined;
 
     const gifStyle = {
       WebkitAnimation: isHovering
@@ -91,8 +28,8 @@ class HomeGridFigure extends React.Component {
       animation: isHovering
         ? 'sk-rotateplane 1.2s infinite ease-in-out'
         : 'none',
-      content: isHovering ? '' : 'GIF',
       color: !isHovering ? 'inherit' : 'rgba(0,0,0,0)',
+      display: hasVideo ? 'block' : 'none',
     };
 
     return (
@@ -106,16 +43,7 @@ class HomeGridFigure extends React.Component {
           this.handleMouseHover(false);
         }}
       >
-        <video className="fit" src={videoSrc}>
-          Browser does not support video
-          <track kind="captions" />
-        </video>
-        <img
-          className="block"
-          src={imageSrc}
-          alt={project.name}
-          onLoad={this.handleImageLoaded}
-        />
+        <HomeGridImage project={project} />
         <div>
           <div className="p1">
             <p className="bold">{project.name}</p>

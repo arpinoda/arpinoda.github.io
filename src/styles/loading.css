@@ -14,7 +14,7 @@
   overflow: hidden;
 }
 .spinner:after {
-  content: 'GIF';
+  content: 'MOV';
 }
 
 @-webkit-keyframes sk-rotateplane {
