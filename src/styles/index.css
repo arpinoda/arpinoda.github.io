@@ -155,6 +155,14 @@ figure div > p:nth-child(1) {
 figure > img {
   width:100%;
 }
+
+figure > img:not(.loading), figure > video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
 .fadeIn {
   transition: opacity 1.25s;
   opacity:1!important;

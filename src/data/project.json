@@ -16,6 +16,7 @@
     "name": "LockedOut iOS",
     "images": {
       "thumbnail": "03.png",
+      "video": "03.mp4",
       "detail": []
     },
     "index": 3,
@@ -27,6 +28,7 @@
     "name": "Zegna Clienteling",
     "images": {
       "thumbnail": "04.jpg",
+      "video": "04.mp4",
       "detail": []
     },
     "index": 1,
@@ -38,6 +40,7 @@
     "name": "Cartier Mansion Iconography",
     "images": {
       "thumbnail": "02.png",
+      "video": "02.mp4",
       "detail": []
     },
     "index": 0,

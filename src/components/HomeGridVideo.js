@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import API from '../util/API';
+import { fetchImage } from '../util/UI';
 
 class HomeGridVideo extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class HomeGridVideo extends React.Component {
     const { video } = project.images;
 
     this.state = {
-      videoSrc: video ? `${process.env.API_PATH}/video/${video}` : '',
+      videoSrc: `${process.env.API_PATH}/video/${video}`,
+      posterSrc: '',
     };
 
     this.api = new API({
@@ -21,17 +23,19 @@ class HomeGridVideo extends React.Component {
     this.videoPlayer = React.createRef();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { isHovering } = this.props;
+  componentDidMount() {
+    const { project } = this.props;
+    const { thumbnail } = project.images;
 
-    if (nextProps.isHovering && !isHovering) {
-      // play video
+    fetchImage(thumbnail).then(url => this.setState({ posterSrc: url }));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isHovering) {
       this.videoPlayer.current.play();
-      console.log('playing');
     } else {
-      // pause video
       this.videoPlayer.current.pause();
-      console.log('paused');
+      this.videoPlayer.current.currentTime = 0;
     }
   }
 
@@ -41,20 +45,18 @@ class HomeGridVideo extends React.Component {
   };
 
   render = () => {
-    const { className } = this.props;
-    const { videoSrc } = this.state;
+    const { videoSrc, posterSrc } = this.state;
 
     return (
       <video
-        // onProgress={this.downloadProgress}
         onLoadedData={this.onLoaded}
         ref={this.videoPlayer}
+        poster={posterSrc}
         loop
         preload="none"
         muted
         playsInline
         src={videoSrc}
-        className={`${className} fit`}
       >
         <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.
@@ -66,7 +68,6 @@ class HomeGridVideo extends React.Component {
 
 HomeGridVideo.propTypes = {
   project: PropTypes.object,
-  className: PropTypes.string,
   downloadComplete: PropTypes.func,
   isHovering: PropTypes.bool,
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import HomeGridImage from './HomeGridImage';
 import HomeGridVideo from './HomeGridVideo';
+import { LOADING_IMAGE } from '../util/UI';
 
 class HomeGridFigure extends React.Component {
   constructor(props) {
@@ -50,26 +51,17 @@ class HomeGridFigure extends React.Component {
         onMouseLeave={() => {
           this.handleMouseHover(false);
         }}
+        onFocus={() => null}
       >
-        <HomeGridImage
-          className={`
-            ${isVideoDownloaded && isHovering ? 'hide' : 'block'}
-          `}
-          project={project}
-        />
-
+        <img src={LOADING_IMAGE} alt="loading" className="loading" />
         {hasVideo ? (
           <HomeGridVideo
-            className={`
-                  
-                  ${isVideoDownloaded && isHovering ? 'block' : 'hide'}
-                `}
             project={project}
             isHovering={isHovering}
             downloadComplete={this.videoDownloadCallback}
           />
         ) : (
-          false
+          <HomeGridImage project={project} />
         )}
 
         <div>
@@ -82,7 +74,13 @@ class HomeGridFigure extends React.Component {
           to={`/project/${project.projectID}`}
           className="absolute top-0 left-0 bottom-0 right-0"
         />
-        <div className="spinner" style={gifStyle} />
+        <div
+          style={gifStyle}
+          className={`
+            spinner
+            ${isHovering && isVideoDownloaded ? 'hide' : 'block'}
+          `}
+        />
       </figure>
     );
   };

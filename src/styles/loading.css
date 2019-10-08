@@ -1,7 +1,7 @@
 .spinner {
   width: 40px;
   height: 20px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.7);
   top: 10px;
   left: calc(100% - 50px);
   border-radius: 3px;
@@ -12,6 +12,7 @@
   letter-spacing: 1.2px;
   line-height: 21px;
   overflow: hidden;
+  color:#000!important;
 }
 .spinner:after {
   content: 'MOV';
