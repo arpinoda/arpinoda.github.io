@@ -35,14 +35,14 @@ class HomeGridThumbnail extends React.Component {
 
   render = () => {
     const { imageSrc } = this.state;
-    const { project } = this.props;
+    const { project, className } = this.props;
 
     return (
       <img
-        className="block"
         src={imageSrc}
         alt={project.name}
         onLoad={this.handleImageLoaded}
+        className={className}
       />
     );
   };
@@ -50,17 +50,7 @@ class HomeGridThumbnail extends React.Component {
 
 HomeGridThumbnail.propTypes = {
   project: PropTypes.object.isRequired,
+  className: PropTypes.string,
 };
 
 export default HomeGridThumbnail;
-
-/*
-
-
-fetchVideo = id => this.api.endpoints.video.getOne(id);
-
-this.fetchVideo('01.mp4')
-  .then(res => createBlobURL(res))
-  .then(url => this.setState({ videoSrc: url }));
-
-*/

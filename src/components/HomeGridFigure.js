@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import HomeGridImage from './HomeGridImage';
+import HomeGridVideo from './HomeGridVideo';
 
 class HomeGridFigure extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class HomeGridFigure extends React.Component {
 
     this.state = {
       isHovering: false,
+      isVideoDownloaded: false,
     };
   }
 
@@ -16,9 +18,15 @@ class HomeGridFigure extends React.Component {
     this.setState({ isHovering: val });
   };
 
+  videoDownloadCallback = () => {
+    this.setState({
+      isVideoDownloaded: true,
+    });
+  };
+
   render = () => {
     const { project } = this.props;
-    const { isHovering } = this.state;
+    const { isHovering, isVideoDownloaded } = this.state;
     const hasVideo = project.images.video !== undefined;
 
     const gifStyle = {
@@ -34,7 +42,7 @@ class HomeGridFigure extends React.Component {
 
     return (
       <figure
-        className={`mr3 mb3 relative 
+        className={`mr3 mb3 relative overflow-hidden
           ${isHovering ? 'active' : ''}`}
         onMouseEnter={() => {
           this.handleMouseHover(true);
@@ -43,7 +51,27 @@ class HomeGridFigure extends React.Component {
           this.handleMouseHover(false);
         }}
       >
-        <HomeGridImage project={project} />
+        <HomeGridImage
+          className={`
+            ${isVideoDownloaded && isHovering ? 'hide' : 'block'}
+          `}
+          project={project}
+        />
+
+        {hasVideo ? (
+          <HomeGridVideo
+            className={`
+                  
+                  ${isVideoDownloaded && isHovering ? 'block' : 'hide'}
+                `}
+            project={project}
+            isHovering={isHovering}
+            downloadComplete={this.videoDownloadCallback}
+          />
+        ) : (
+          false
+        )}
+
         <div>
           <div className="p1">
             <p className="bold">{project.name}</p>

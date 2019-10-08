@@ -85,6 +85,11 @@ module.exports = (app, express) => {
     express.static(path.join(__dirname, 'dist', 'index.html')),
   ); // --- end production routes
 
+  app.use(
+    `${API_PATH}/video`,
+    express.static(path.join(__dirname, 'src/static/videos/protected')),
+  );
+
   /*
     Protected Routes, used in DEV and PROD
   */
@@ -103,11 +108,6 @@ module.exports = (app, express) => {
   app.use(
     `${API_PATH}/image`,
     express.static(path.join(__dirname, 'src/static/images/protected')),
-  );
-
-  app.use(
-    `${API_PATH}/video`,
-    express.static(path.join(__dirname, 'src/static/videos/protected')),
   );
   // --- End protected routes
 };
