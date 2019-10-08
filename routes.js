@@ -87,7 +87,7 @@ module.exports = (app, express) => {
 
   app.use(
     `${API_PATH}/video`,
-    express.static(path.join(__dirname, 'src/static/videos/protected')),
+    express.static(path.join(__dirname, 'src/static/videos')),
   );
 
   /*
