@@ -14,18 +14,21 @@ class HomeGridFigure extends React.Component {
       isVideoDownloaded: false,
       isDetailMinimized: false,
     };
-
-    this.MAX_DETAIL_VISIBLE_SECONDS = 4;
-    this.timer = null;
   }
+
+  onMouseLeave = () => {
+    this.handleMouseHover(false);
+    setTimeout(() => {
+      this.setState({ isDetailMinimized: false });
+    }, 500);
+  };
+
+  onMouseEnter = () => {
+    this.handleMouseHover(true);
+  };
 
   handleMouseHover = val => {
     this.setState({ isHovering: val });
-    if (val) {
-      this.startTimer();
-    } else {
-      this.stopTimer();
-    }
   };
 
   videoDownloadCallback = () => {
@@ -34,23 +37,10 @@ class HomeGridFigure extends React.Component {
     });
   };
 
-  startTimer = () => {
-    this.detailVisibleSeconds = 0;
-    this.timer = setInterval(this.onTick, 1000);
-  };
-
-  stopTimer = () => {
-    clearInterval(this.timer);
-    this.setState({ isDetailMinimized: false });
-  };
-
-  onTick = () => {
-    this.detailVisibleSeconds += 1;
-
-    if (this.detailVisibleSeconds === this.MAX_DETAIL_VISIBLE_SECONDS) {
-      this.setState({ isDetailMinimized: true });
-      this.detailVisibleSeconds = 0;
-    }
+  minimizeDetailCallback = val => {
+    this.setState({
+      isDetailMinimized: val,
+    });
   };
 
   render = () => {
@@ -76,10 +66,10 @@ class HomeGridFigure extends React.Component {
         className={`mr3 mb3 relative overflow-hidden
           ${isHovering ? 'active' : ''}`}
         onMouseEnter={() => {
-          this.handleMouseHover(true);
+          this.onMouseEnter();
         }}
         onMouseLeave={() => {
-          this.handleMouseHover(false);
+          this.onMouseLeave();
         }}
         onFocus={() => null}
       >
@@ -88,6 +78,7 @@ class HomeGridFigure extends React.Component {
           <HomeGridVideo
             project={project}
             isHovering={isHovering}
+            minimizeDetailCallback={this.minimizeDetailCallback}
             downloadComplete={this.videoDownloadCallback}
           />
         ) : (

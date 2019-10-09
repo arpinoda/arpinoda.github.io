@@ -21,6 +21,8 @@ class HomeGridVideo extends React.Component {
     this.api.createEntities([{ name: 'video' }]);
 
     this.videoPlayer = React.createRef();
+    this.MAX_DETAIL_VISIBLE_SECONDS = 4;
+    this.timer = null;
   }
 
   componentDidMount() {
@@ -39,9 +41,40 @@ class HomeGridVideo extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { isHovering } = this.props;
+
+    if (isHovering !== prevProps.isHovering) {
+      if (isHovering) {
+        this.startTimer();
+      } else {
+        this.stopTimer();
+      }
+    }
+  }
+
   onLoaded = () => {
     const { downloadComplete } = this.props;
     downloadComplete();
+  };
+
+  startTimer = () => {
+    this.detailVisibleSeconds = 0;
+    this.timer = setInterval(this.onTick, 1000);
+  };
+
+  stopTimer = () => {
+    clearInterval(this.timer);
+  };
+
+  onTick = () => {
+    this.detailVisibleSeconds += 1;
+
+    if (this.detailVisibleSeconds === this.MAX_DETAIL_VISIBLE_SECONDS) {
+      const { minimizeDetailCallback } = this.props;
+      minimizeDetailCallback(true);
+      this.detailVisibleSeconds = 0;
+    }
   };
 
   render = () => {
@@ -69,6 +102,7 @@ class HomeGridVideo extends React.Component {
 HomeGridVideo.propTypes = {
   project: PropTypes.object,
   downloadComplete: PropTypes.func,
+  minimizeDetailCallback: PropTypes.func,
   isHovering: PropTypes.bool,
 };
 
