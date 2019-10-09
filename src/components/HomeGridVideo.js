@@ -98,7 +98,7 @@ class HomeGridVideo extends React.Component {
         ref={this.videoPlayer}
         poster={posterSrc}
         loop
-        preload="none"
+        preload="metadata"
         muted
         playsInline
         src={videoSrc}

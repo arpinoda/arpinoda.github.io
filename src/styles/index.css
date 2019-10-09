@@ -165,13 +165,16 @@ figure > img:not(.loading), figure > video {
 
 .fadeIn {
   transition: opacity 1.25s;
+  -moz-transition: opacity 1.25s;
   opacity:1!important;
 }
 .fadeOut{
   opacity:0;
   transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  -moz-transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 }
 .fadeIn{
   opacity:1;
   transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  -moz-transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
 }
