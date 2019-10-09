@@ -79,13 +79,13 @@ class HomeGridFigure extends React.Component {
             project={project}
             isHovering={isHovering}
             minimizeDetailCallback={this.minimizeDetailCallback}
-            downloadComplete={this.videoDownloadCallback}
+            downloadCompleteCallback={this.videoDownloadCallback}
           />
         ) : (
           <HomeGridImage project={project} />
         )}
 
-        <div className={isDetailMinimized ? 'hide' : 'block'}>
+        <div className={isDetailMinimized ? 'fadeOut' : 'fadeIn'}>
           <div className="p1">
             <p className="bold">{project.name}</p>
             <p className="line-height-4">{project.description}</p>

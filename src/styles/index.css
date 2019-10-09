@@ -167,6 +167,11 @@ figure > img:not(.loading), figure > video {
   transition: opacity 1.25s;
   opacity:1!important;
 }
-/* section#case-studies article > figure {
-  width: calc(100% - 30px)!important;
-} */
+.fadeOut{
+  opacity:0;
+  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+}
+.fadeIn{
+  opacity:1;
+  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+}

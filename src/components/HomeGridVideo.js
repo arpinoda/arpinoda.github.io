@@ -12,6 +12,7 @@ class HomeGridVideo extends React.Component {
     this.state = {
       videoSrc: `${process.env.API_PATH}/video/${video}`,
       posterSrc: '',
+      initalLoadComplete: false,
     };
 
     this.api = new API({
@@ -54,8 +55,8 @@ class HomeGridVideo extends React.Component {
   }
 
   onLoaded = () => {
-    const { downloadComplete } = this.props;
-    downloadComplete();
+    const { downloadCompleteCallback } = this.props;
+    downloadCompleteCallback();
   };
 
   startTimer = () => {
@@ -78,10 +79,13 @@ class HomeGridVideo extends React.Component {
   };
 
   render = () => {
-    const { videoSrc, posterSrc } = this.state;
+    const { videoSrc, posterSrc, initalLoadComplete } = this.state;
 
     return (
       <video
+        onLoadStart={() => {
+          this.setState({ initalLoadComplete: true });
+        }}
         onLoadedData={this.onLoaded}
         ref={this.videoPlayer}
         poster={posterSrc}
@@ -90,6 +94,7 @@ class HomeGridVideo extends React.Component {
         muted
         playsInline
         src={videoSrc}
+        className={initalLoadComplete ? 'fadeIn' : 'fadeOut'}
       >
         <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.
@@ -101,7 +106,7 @@ class HomeGridVideo extends React.Component {
 
 HomeGridVideo.propTypes = {
   project: PropTypes.object,
-  downloadComplete: PropTypes.func,
+  downloadCompleteCallback: PropTypes.func,
   minimizeDetailCallback: PropTypes.func,
   isHovering: PropTypes.bool,
 };
