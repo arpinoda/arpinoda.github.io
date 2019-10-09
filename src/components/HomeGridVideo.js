@@ -35,10 +35,18 @@ class HomeGridVideo extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isHovering) {
-      this.videoPlayer.current.play();
+      this.videoPlayer.current.play().catch(error => {
+        console.log(this.videoPlayer.current.readyState);
+        console.log(error);
+      });
     } else {
-      this.videoPlayer.current.pause();
-      this.videoPlayer.current.currentTime = 0;
+      const player = this.videoPlayer.current;
+      const { readyState } = player;
+
+      if (readyState > 1) {
+        this.videoPlayer.current.pause();
+        this.videoPlayer.current.currentTime = 0;
+      }
     }
   }
 
