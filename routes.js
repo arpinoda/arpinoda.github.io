@@ -47,6 +47,12 @@ const cors = (req, res, next) => {
 module.exports = (app, express) => {
   if (process.env.NODE_ENV !== 'production') {
     app.use(cors);
+
+    // TODO: Remove me ---
+    app.get('/project*', (req, res) => {
+      res.redirect('/');
+    });
+    // -----
   }
 
   // These unauthenticated routes are hit in BOTH dev and production

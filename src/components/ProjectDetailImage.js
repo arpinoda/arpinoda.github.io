@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fetchImage } from '../util/UI';
+import { fetchImage, LOADING_IMAGE } from '../util/UI';
 
 class ProjectDetailImage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      blobURL: '',
+      blobURL: LOADING_IMAGE,
     };
   }
 
@@ -22,7 +22,7 @@ class ProjectDetailImage extends React.Component {
 
     return (
       <section>
-        <img src={blobURL} alt={media.alt} className="fit left" />
+        <img src={blobURL} alt={media.alt} className="left" />
       </section>
     );
   }

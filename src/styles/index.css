@@ -163,6 +163,10 @@ figure > img:not(.loading), figure > video {
   height: 100%;
 }
 
+.modal img {
+  width:100%;
+}
+
 .fadeIn {
   transition: opacity 1.25s;
   -moz-transition: opacity 1.25s;
