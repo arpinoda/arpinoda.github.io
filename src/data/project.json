@@ -2,7 +2,7 @@
   {
     "projectID": 1,
     "name": "Retail Security Platform",
-    "images": {
+    "media": {
       "thumbnail": "01.jpg",
       "video": "01.mp4",
       "detail": []
@@ -14,7 +14,7 @@
   {
     "projectID": 3,
     "name": "LockedOut iOS",
-    "images": {
+    "media": {
       "thumbnail": "03.png",
       "video": "03.mp4",
       "detail": []
@@ -26,7 +26,7 @@
   {
     "projectID": 4,
     "name": "Zegna Clienteling",
-    "images": {
+    "media": {
       "thumbnail": "04.jpg",
       "video": "04.mp4",
       "detail": []
@@ -38,7 +38,7 @@
   {
     "projectID": 2,
     "name": "Cartier Mansion Iconography",
-    "images": {
+    "media": {
       "thumbnail": "02.png",
       "video": "02.mp4",
       "detail": []
@@ -50,7 +50,7 @@
   {
     "projectID": 5,
     "name": "Enterprise Retail projectt",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -61,7 +61,7 @@
   {
     "projectID": 6,
     "name": "Enterprise Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -72,7 +72,7 @@
   {
     "projectID": 7,
     "name": "Enterprise Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -83,7 +83,7 @@
   {
     "projectID": 8,
     "name": "Enterprise Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -94,7 +94,7 @@
   {
     "projectID": 9,
     "name": "Consumer Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -105,7 +105,7 @@
   {
     "projectID": 10,
     "name": "Consumer Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -116,7 +116,7 @@
   {
     "projectID": 11,
     "name": "Consumer Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -127,7 +127,7 @@
   {
     "projectID": 12,
     "name": "Consumer Retail project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -138,7 +138,7 @@
   {
     "projectID": 13,
     "name": "EdTech project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -149,7 +149,7 @@
   {
     "projectID": 14,
     "name": "University project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -160,7 +160,7 @@
   {
     "projectID": 15,
     "name": "ARKit Project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -171,7 +171,7 @@
   {
     "projectID": 19,
     "name": "ARKit Project 2",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -182,7 +182,7 @@
   {
     "projectID": 17,
     "name": "iBeacon Project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
@@ -193,7 +193,7 @@
   {
     "projectID": 18,
     "name": "Firebase Project",
-    "images": {
+    "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },

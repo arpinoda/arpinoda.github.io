@@ -46,7 +46,7 @@ class HomeGridFigure extends React.Component {
   render = () => {
     const { project } = this.props;
     const { isHovering, isVideoDownloaded, isDetailMinimized } = this.state;
-    const hasVideo = project.images.video !== undefined;
+    const hasVideo = project.media.video !== undefined;
 
     const gifStyle = {
       WebkitAnimation:

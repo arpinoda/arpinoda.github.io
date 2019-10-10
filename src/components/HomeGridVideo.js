@@ -7,7 +7,7 @@ class HomeGridVideo extends React.Component {
   constructor(props) {
     super(props);
     const { project } = props;
-    const { video } = project.images;
+    const { video } = project.media;
 
     this.state = {
       videoSrc: `${process.env.API_PATH}/video/${video}`,
@@ -28,7 +28,7 @@ class HomeGridVideo extends React.Component {
 
   componentDidMount() {
     const { project } = this.props;
-    const { thumbnail } = project.images;
+    const { thumbnail } = project.media;
 
     fetchImage(thumbnail).then(url => this.setState({ posterSrc: url }));
   }

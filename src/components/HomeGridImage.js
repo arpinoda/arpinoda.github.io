@@ -13,7 +13,7 @@ class HomeGridThumbnail extends React.Component {
 
   componentDidMount() {
     const { project } = this.props;
-    const { thumbnail } = project.images;
+    const { thumbnail } = project.media;
 
     // LoadingImage has just displayed,
     fetchImage(thumbnail).then(url => this.setState({ imageSrc: url }));
