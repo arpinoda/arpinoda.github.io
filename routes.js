@@ -104,7 +104,7 @@ module.exports = (app, express) => {
     express.static(path.join(__dirname, 'src/data', 'project.json')),
   );
 
-  app.post(`${API_PATH}/project/:id`, (req, res) => {
+  app.get(`${API_PATH}/project/:id`, (req, res) => {
     const { id } = req.params;
     const projectID = parseInt(id, 10);
 
