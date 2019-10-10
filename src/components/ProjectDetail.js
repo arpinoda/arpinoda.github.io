@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history, { previousFragment } from './History';
-import { lockScroll, unlockScroll, getFileExtension } from '../util/UI';
+import { lockScroll, unlockScroll } from '../util/UI';
 import API from '../util/API';
-import ProjectDetailImage from './ProjectDetailImage';
+import ProjectDetailSection from './ProjectDetailSection';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -55,8 +55,6 @@ class ProjectDetail extends React.Component {
         console.log('getDetails error', err);
       });
   };
-
-  isVideo = filename => getFileExtension(filename) === 'mp4';
 
   back = e => {
     e.stopPropagation();
@@ -115,12 +113,7 @@ class ProjectDetail extends React.Component {
           }}
         >
           {media &&
-            media.map(m => {
-              if (this.isVideo(m.item)) {
-                return 'its a video';
-              }
-              return <ProjectDetailImage key={m.item} media={m} />;
-            })}
+            media.map(m => <ProjectDetailSection key={m.item} media={m} />)}
         </div>
       </div>
     );

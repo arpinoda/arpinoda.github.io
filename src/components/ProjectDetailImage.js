@@ -20,11 +20,14 @@ class ProjectDetailImage extends React.Component {
     const { media } = this.props;
     const { blobURL } = this.state;
 
-    return (
-      <section>
-        <img src={blobURL} alt={media.alt} className="left" />
-      </section>
-    );
+    // Load video only if desired image has loaded
+    if (blobURL !== LOADING_IMAGE) {
+      if (media.video) {
+        console.log('Has video', media.item);
+      }
+    }
+
+    return <img src={blobURL} alt={media.alt} className="left" />;
   }
 }
 

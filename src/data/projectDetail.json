@@ -36,15 +36,27 @@
       },
       {
         "item": "02-08.png",
-        "alt": "Loading & Permissions"
+        "alt": "Loading & Permissions",
+        "video": {
+          "item": "02-08.mp4",
+          "css": "top: 16.2%; width: 45% !important; left: 45.9%;"
+        }
       },
       {
         "item": "02-09.png",
-        "alt": "Magazine Screen"
+        "alt": "Magazine Screen",
+        "video": {
+          "item": "02-09.mp4",
+          "css": "top: 29.5%; width: 54.8% !important; left: 22.7%;"
+        }
       },
       {
         "item": "02-10.png",
-        "alt": "Home screen"
+        "alt": "Home screen",
+        "video": {
+          "item": "02-10.mp4",
+          "css": "top: 27.6%; width: 61% !important;left: 19.6%;"
+        }
       },
       {
         "item": "02-11.jpg",
@@ -56,7 +68,11 @@
       },
       {
         "item": "02-13.png",
-        "alt": "Map screens"
+        "alt": "Map screens",
+        "video": {
+          "item": "02-13.mp4",
+          "css": "top: -0.3%; width: 51% !important;left: 5.3%;"
+        }
       },
       {
         "item": "02-14.jpg",
@@ -64,39 +80,23 @@
       },
       {
         "item": "02-15.png",
-        "alt": "iBeacon Map enabled"
+        "alt": "iBeacon Map enabled",
+        "video": {
+          "item": "02-15.mp4",
+          "css": "top: 38.7%; width: 51.4% !important; left: 42.6%;"
+        }
       },
       {
         "item": "02-16.png",
-        "alt": "Directory screen"
+        "alt": "Directory screen",
+        "video": {
+          "item": "02-16.mp4",
+          "css": "top:2.1%; width:50.5% !important; left:5.9%;"
+        }
       },
       {
         "item": "02-17.jpg",
         "alt": "Credits"
-      },
-      {
-        "item": "02-08.mp4",
-        "css": "top: 16.2%; width: 45% !important; left: 45.9%;"
-      },
-      {
-        "item": "02-09.mp4",
-        "css": "top: 29.5%; width: 54.8% !important; left: 22.7%;"
-      },
-      {
-        "item": "02-10.mp4",
-        "css": "top: 27.6%; width: 61% !important;left: 19.6%;"
-      },
-      {
-        "item": "02-13.mp4",
-        "css": "top: -0.3%; width: 51% !important;left: 5.3%;"
-      },
-      {
-        "item": "02-15.mp4",
-        "css": "top: 38.7%; width: 51.4% !important; left: 42.6%;"
-      },
-      {
-        "item": "02-16.mp4",
-        "css": "top:2.1%; width:50.5% !important; left:5.9%;"
       }
     ]
   }
