@@ -1,0 +1,103 @@
+[
+  {
+    "projectID": 2,
+    "media":[
+      {
+        "item": "02-00.jpg",
+        "alt": "A location-aware, staff education tool at Cartier Mansion NYC"
+      },
+      {
+        "item": "02-01.jpg",
+        "alt": "Cartier sought to productize training material & bridge it with the physical environment"
+      },
+      {
+        "item": "02-02.jpg",
+        "alt": "Woman viewing Iconographies within the Mansion"
+      },
+      {
+        "item": "02-03.jpg",
+        "alt": "Past stories & history integrated with contemporary social media"
+      },
+      {
+        "item": "02-04.jpg",
+        "alt": "Exterior of Cartier Mansion NYC"
+      },
+      {
+        "item": "02-05.jpg",
+        "alt": "iBeacon technology to create Musuem experience"
+      },
+      {
+        "item": "02-06.jpg",
+        "alt": "User flows"
+      },
+      {
+        "item": "02-07.jpg",
+        "alt": "Flow charts"
+      },
+      {
+        "item": "02-08.png",
+        "alt": "Loading & Permissions"
+      },
+      {
+        "item": "02-09.png",
+        "alt": "Magazine Screen"
+      },
+      {
+        "item": "02-10.png",
+        "alt": "Home screen"
+      },
+      {
+        "item": "02-11.jpg",
+        "alt": "Detail screen"
+      },
+      {
+        "item": "02-12.jpg",
+        "alt": "Map beacon image"
+      },
+      {
+        "item": "02-13.png",
+        "alt": "Map screens"
+      },
+      {
+        "item": "02-14.jpg",
+        "alt": "Map beacon image"
+      },
+      {
+        "item": "02-15.png",
+        "alt": "iBeacon Map enabled"
+      },
+      {
+        "item": "02-16.png",
+        "alt": "Directory screen"
+      },
+      {
+        "item": "02-17.jpg",
+        "alt": "Credits"
+      },
+      {
+        "item": "02-08.mp4",
+        "css": "top: 16.2%; width: 45% !important; left: 45.9%;"
+      },
+      {
+        "item": "02-09.mp4",
+        "css": "top: 29.5%; width: 54.8% !important; left: 22.7%;"
+      },
+      {
+        "item": "02-10.mp4",
+        "css": "top: 27.6%; width: 61% !important;left: 19.6%;"
+      },
+      {
+        "item": "02-13.mp4",
+        "css": "top: -0.3%; width: 51% !important;left: 5.3%;"
+      },
+      {
+        "item": "02-15.mp4",
+        "css": "top: 38.7%; width: 51.4% !important; left: 42.6%;"
+      },
+      {
+        "item": "02-16.mp4",
+        "css": "top:2.1%; width:50.5% !important; left:5.9%;"
+      }
+    ]
+  }
+]

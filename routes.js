@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const path = require('path');
+const fs = require('fs');
+
+const detailsRaw = fs.readFileSync('./src/data/projectDetail.json');
+const projectDetails = JSON.parse(detailsRaw);
 
 const { API_PATH } = process.env;
 
@@ -99,6 +103,20 @@ module.exports = (app, express) => {
     `${API_PATH}/project`,
     express.static(path.join(__dirname, 'src/data', 'project.json')),
   );
+
+  app.post(`${API_PATH}/project/:id`, (req, res) => {
+    const { id } = req.params;
+    const projectID = parseInt(id, 10);
+
+    if (Number.isNaN(projectID)) {
+      return res.json();
+    }
+
+    const project = projectDetails.find(x => x.projectID === projectID);
+    const { media } = project || {};
+
+    return res.json(media);
+  });
 
   app.use(
     `${API_PATH}/category`,
