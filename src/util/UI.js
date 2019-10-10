@@ -112,4 +112,6 @@ export const fetchImage = imageURL => {
   return result;
 };
 
+export const getFileExtension = filename => filename.split('.').pop();
+
 export default scrollToWithRetry;

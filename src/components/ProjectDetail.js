@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history, { previousFragment } from './History';
-import { lockScroll, unlockScroll } from '../util/UI';
+import { lockScroll, unlockScroll, getFileExtension } from '../util/UI';
 import API from '../util/API';
+import ProjectDetailImage from './ProjectDetailImage';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class ProjectDetail extends React.Component {
     this.state = {
       projectID: match.params.id,
       isLoading: true,
+      media: null,
     };
 
     this.scrollY = null;
@@ -41,17 +43,20 @@ class ProjectDetail extends React.Component {
       .getOne(projectID)
       .then(res => {
         if (!res.ok) {
+          this.setState({ isLoading: false });
           throw Error(res.statusText);
         }
         return res.json();
       })
       .then(json => {
-        console.log(json);
+        this.setState({ media: json, isLoading: false });
       })
       .catch(err => {
         console.log('getDetails error', err);
       });
   };
+
+  isVideo = filename => getFileExtension(filename) === 'mp4';
 
   back = e => {
     e.stopPropagation();
@@ -75,7 +80,7 @@ class ProjectDetail extends React.Component {
   render = () => {
     this.scrollY = lockScroll(this.scrollY);
 
-    const { isLoading } = this.state;
+    const { isLoading, media } = this.state;
 
     return (
       <div
@@ -100,21 +105,22 @@ class ProjectDetail extends React.Component {
             position: 'absolute',
             background: '#fff',
             top: 25,
-            left: '10%',
-            right: '10%',
-            bottom: '-10px',
-            padding: 15,
+            maxWidth: 800,
             zIndex: 2,
             border: '2px solid #444',
+            left: 0,
+            right: 0,
+            width: '100%',
+            margin: '0 auto',
           }}
         >
-          <h1>
-            Project
-            {this.projectID}
-          </h1>
-          <button type="button" onClick={this.back}>
-            Close
-          </button>
+          {media &&
+            media.map(m => {
+              if (this.isVideo(m.item)) {
+                return 'its a video';
+              }
+              return <ProjectDetailImage key={m.item} media={m} />;
+            })}
         </div>
       </div>
     );

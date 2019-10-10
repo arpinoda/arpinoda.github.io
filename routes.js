@@ -109,13 +109,13 @@ module.exports = (app, express) => {
     const projectID = parseInt(id, 10);
 
     if (Number.isNaN(projectID)) {
-      return res.sendStatus(404);
+      return res.sendStatus(400);
     }
 
     const project = projectDetails.find(x => x.projectID === projectID);
 
     if (!project) {
-      return res.sendStatus(400);
+      return res.sendStatus(404);
     }
 
     const { media } = project;
