@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history, { previousFragment } from './History';
 import { lockScroll, unlockScroll } from '../util/UI';
+import API from '../util/API';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -15,23 +16,42 @@ class ProjectDetail extends React.Component {
     };
 
     this.scrollY = null;
+
+    this.api = new API({
+      url: process.env.API_PATH,
+    });
+
+    this.api.createEntities([{ name: 'project' }]);
   }
 
   componentDidMount() {
-    const { projectID } = this.state;
-
-    console.log(`Fetching project: ${projectID}`);
-
     this.setState({
       isLoading: true,
     });
 
     lockScroll(this.scrollY);
 
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 1000);
+    this.getDetails();
   }
+
+  getDetails = () => {
+    const { projectID } = this.state;
+
+    this.api.endpoints.project
+      .getOne(projectID)
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then(json => {
+        console.log(json);
+      })
+      .catch(err => {
+        console.log('getDetails error', err);
+      });
+  };
 
   back = e => {
     e.stopPropagation();
