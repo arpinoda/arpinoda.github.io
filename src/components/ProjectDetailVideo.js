@@ -13,7 +13,9 @@ class ProjectDetailVideo extends React.Component {
       },
     };
 
-    this.playerRef = React.createRef();
+    if (props.isWithinImage) {
+      this.playerRef = React.createRef();
+    }
     this.videoRef = React.createRef();
   }
 
@@ -37,37 +39,45 @@ class ProjectDetailVideo extends React.Component {
   };
 
   render = () => {
-    const { video } = this.props;
+    const { video, isWithinImage } = this.props;
     const videoSrc = `${process.env.API_PATH}/video/${video.item}`;
 
-    const videoStyle = styleToObject(
-      `zIndex: -1;position: absolute; ${video.css}`,
-    );
+    const videoStyleString = isWithinImage
+      ? `zIndex: -1;position: absolute; ${video.css}`
+      : video.css;
+    const videoStyle = styleToObject(videoStyleString);
 
     const { playerStyle } = this.state;
+    const playerMarkup = isWithinImage ? (
+      <div
+        style={playerStyle}
+        ref={this.playerRef}
+        className="player videoplayer"
+      />
+    ) : (
+      ''
+    );
 
+    const videoMarkup = (
+      <video
+        ref={this.videoRef}
+        style={videoStyle}
+        onLoadedData={isWithinImage ? this.onLoadedData : null}
+        playsInline
+        controls={!isWithinImage}
+        type="video/mp4"
+        loop
+        controlsList="nodownload"
+      >
+        <source src={videoSrc} type="video/mp4" />
+        Your browser does not support the video tag.
+        <track kind="captions" />
+      </video>
+    );
     return (
       <>
-        <div
-          style={playerStyle}
-          ref={this.playerRef}
-          className="player videoplayer"
-        >
-          {' '}
-        </div>
-        <video
-          ref={this.videoRef}
-          style={videoStyle}
-          onLoadedData={this.onLoadedData}
-          playsInline
-          type="video/mp4"
-          loop
-          controlsList="nodownload"
-        >
-          <source src={videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
-          <track kind="captions" />
-        </video>
+        {playerMarkup}
+        {videoMarkup}
       </>
     );
   };
@@ -75,6 +85,7 @@ class ProjectDetailVideo extends React.Component {
 
 ProjectDetailVideo.propTypes = {
   video: PropTypes.object,
+  isWithinImage: PropTypes.bool,
 };
 
 export default ProjectDetailVideo;

@@ -30,7 +30,9 @@ class ProjectDetailImage extends React.Component {
     if (blobURL !== LOADING_IMAGE) {
       if (image.video) {
         const { video } = image;
-        videoMarkup = <ProductDetailVideo key={video.item} video={video} />;
+        videoMarkup = (
+          <ProductDetailVideo key={video.item} isWithinImage video={video} />
+        );
       }
     }
 
