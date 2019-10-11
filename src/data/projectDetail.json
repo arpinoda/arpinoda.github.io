@@ -99,5 +99,50 @@
         "alt": "Credits"
       }
     ]
+  },
+  {
+    "projectID": 3,
+    "media":[
+      {
+        "item": "03-01.jpg",
+        "alt": "LockedOut, An On-demand mobile platform connecting consumers with locksmiths"
+      },
+      {
+        "item": "03-02.jpg",
+        "alt": "Uber for locksmiths"
+      },
+      {
+        "item": "03-03.jpg",
+        "alt": "How it worked - Consumer app"
+      },
+      {
+        "item": "03-04.jpg",
+        "alt": "How it worked - Provider app"
+      },
+      {
+        "item": "03-05.jpg",
+        "alt": "Video demo"
+      },
+      {
+        "item": "03-05.mp4",
+        "css": "width:100%;"
+      },
+      {
+        "item": "03-06.jpg",
+        "alt": "Dual-sided marketplace"
+      },
+      {
+        "item": "03-07.jpg",
+        "alt": "Search Ads"
+      },
+      {
+        "item": "03-08.jpg",
+        "alt": "Press"
+      },
+      {
+        "item": "03-09.jpg",
+        "alt": "Credits"
+      }
+    ]
   }
 ]
