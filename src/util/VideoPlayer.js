@@ -1,6 +1,6 @@
 /* eslint-disable */
 // adapted from https://codepen.io/Shihab993/pen/YjqZMg
-var VideoPlayer = function(t) {
+export default VideoPlayer = function(t) {
   function setAttributes(el, options) {
     Object.keys(options).forEach(function(attr) {
       el.setAttribute(attr, options[attr]);
@@ -59,7 +59,7 @@ var VideoPlayer = function(t) {
     this.holder.appendChild(this.progress),
     this.progress.appendChild(this.progressBar),
     this.holder.appendChild(this.playerButtons),
-    this.playerButtons.appendChild(this.playBtn),
+    // this.playerButtons.appendChild(this.playBtn),
     this.playerButtons.appendChild(this.fullscreen),
     // this.playerButtons.appendChild(this.muteBtn),
     // this.playerButtons.appendChild(this.range),
@@ -77,7 +77,8 @@ var p = VideoPlayer.prototype;
   this.video.addEventListener('timeupdate', this.handleProgress.bind(this)),
     this.container.addEventListener('click', this.togglePlay.bind(this)),
     this.video.addEventListener('ended', this.handleEnd.bind(this)),
-    this.playBtn.addEventListener('click', this.togglePlay.bind(this));
+    this.playBtn.addEventListener('click', this.togglePlay.bind(this)),
+    this.bigPlay.addEventListener('click', this.togglePlay.bind(this));
   this.fullscreen.addEventListener('click', this.toggleFullscreen.bind(this));
   this.muteBtn.addEventListener('click', this.handleMute.bind(this));
   this.progress.addEventListener('click', this.scrub.bind(this));
@@ -93,7 +94,6 @@ var p = VideoPlayer.prototype;
       : (this.mousedown.grab = true);
   }),
   (p.togglePlay = function() {
-    console.log(this.video.paused);
     this.video.paused
       ? (this.video.play(),
         (this.playBtn.innerHTML = this.s.pause),
