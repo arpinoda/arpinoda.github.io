@@ -1,6 +1,6 @@
 /* eslint-disable */
 // adapted from https://codepen.io/Shihab993/pen/YjqZMg
-export default VideoPlayer = function(t) {
+const VideoPlayer = function(t) {
   function setAttributes(el, options) {
     Object.keys(options).forEach(function(attr) {
       el.setAttribute(attr, options[attr]);
@@ -149,3 +149,5 @@ p.handleEnd = function() {
   (this.bigPlay.style.display = 'block'),
     (this.bigPlay.innerHTML = this.s.replay);
 };
+
+export default VideoPlayer;
