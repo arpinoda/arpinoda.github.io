@@ -8,13 +8,13 @@ const ProjectDetailSection = props => {
   const { media } = props;
   const isVideo = getFileExtension(media.item) === 'mp4';
 
-  const body = !isVideo ? (
-    <ProjectDetailImage media={media} />
+  const body = isVideo ? (
+    <ProjectDetailVideo video={media} />
   ) : (
-    <ProjectDetailVideo media={media} />
+    <ProjectDetailImage image={media} />
   );
 
-  return <section>{body}</section>;
+  return <section className="relative">{body}</section>;
 };
 
 ProjectDetailSection.propTypes = {

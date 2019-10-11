@@ -5,6 +5,7 @@
 @import "./media-queries.css";
 @import "./fonts.css";
 @import "./loading.css";
+@import "./video-player.css";
 
 :root {
   --container-width:1500px;

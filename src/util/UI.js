@@ -114,4 +114,19 @@ export const fetchImage = imageURL => {
 
 export const getFileExtension = filename => filename.split('.').pop();
 
+export const camelize = string =>
+  string.replace(/-([a-z])/gi, (s, group) => group.toUpperCase());
+
+export const styleToObject = style =>
+  style
+    .split(';')
+    .filter(s => s.length)
+    .reduce((a, b) => {
+      const keyValue = b.split(':');
+      const cleansedKey = keyValue[0].trim();
+      const cleansedValue = keyValue[1].trim();
+      a[camelize(cleansedKey)] = cleansedValue; // eslint-disable-line
+      return a;
+    }, {});
+
 export default scrollToWithRetry;

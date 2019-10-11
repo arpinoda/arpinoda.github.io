@@ -39,7 +39,7 @@
         "alt": "Loading & Permissions",
         "video": {
           "item": "02-08.mp4",
-          "css": "top: 16.2%; width: 45% !important; left: 45.9%;"
+          "css": "top: 16.2%; width: 45%; left: 45.9%;"
         }
       },
       {
@@ -47,7 +47,7 @@
         "alt": "Magazine Screen",
         "video": {
           "item": "02-09.mp4",
-          "css": "top: 29.5%; width: 54.8% !important; left: 22.7%;"
+          "css": "top: 29.5%; width: 54.8%; left: 22.7%;"
         }
       },
       {
@@ -55,7 +55,7 @@
         "alt": "Home screen",
         "video": {
           "item": "02-10.mp4",
-          "css": "top: 27.6%; width: 61% !important;left: 19.6%;"
+          "css": "top: 27.6%; width: 61%;left: 19.6%;"
         }
       },
       {
@@ -71,7 +71,7 @@
         "alt": "Map screens",
         "video": {
           "item": "02-13.mp4",
-          "css": "top: -0.3%; width: 51% !important;left: 5.3%;"
+          "css": "top: -0.3%; width: 51%;left: 5.3%;"
         }
       },
       {
@@ -83,7 +83,7 @@
         "alt": "iBeacon Map enabled",
         "video": {
           "item": "02-15.mp4",
-          "css": "top: 38.7%; width: 51.4% !important; left: 42.6%;"
+          "css": "top: 38.7%; width: 51.4%; left: 42.6%;"
         }
       },
       {
@@ -91,7 +91,7 @@
         "alt": "Directory screen",
         "video": {
           "item": "02-16.mp4",
-          "css": "top:2.1%; width:50.5% !important; left:5.9%;"
+          "css": "top:2.1%; width:50.5%; left:5.9%;"
         }
       },
       {
