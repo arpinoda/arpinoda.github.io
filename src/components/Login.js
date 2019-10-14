@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
+import { LOADING_IMAGE } from '../util/UI';
+import arrowRight from '../static/images/right-arrow.svg';
 
 class Login extends React.Component {
   constructor(props) {
@@ -30,6 +32,11 @@ class Login extends React.Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const { passcode } = this.state;
+
+    if (!passcode) {
+      return;
+    }
+
     const { history } = this.props;
 
     this.auth
@@ -53,18 +60,57 @@ class Login extends React.Component {
       });
   };
 
+  onChange = e => {
+    const { value } = e.target;
+    const passcode = value.trim();
+
+    this.setState({ passcode });
+  };
+
   render() {
+    const { passcode } = this.state;
+
     return (
       <div>
-        <input
-          placeholder="Enter your passcode"
-          name="passcode"
-          type="text"
-          onChange={this.onInputChange}
+        <div className="login-container">
+          <div className="embed-submit-field">
+            <input
+              tabIndex="0"
+              onChange={this.onChange}
+              type="text"
+              placeholder="Enter a passcode"
+            />
+            <div
+              type="button"
+              className={
+                passcode.length !== 0 ? 'fadeIn button' : 'fadeOut button'
+              }
+              onClick={this.handleFormSubmit}
+              role="button"
+              tabIndex="0"
+              onKeyDown={() => {}}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+            >
+              <img
+                src={arrowRight}
+                className="svg"
+                alt="login"
+                style={{
+                  height: '40%',
+                  marginTop: '60%',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        <img
+          className="display-none"
+          src={LOADING_IMAGE}
+          alt="preloading asset"
         />
-        <button type="button" onClick={this.handleFormSubmit}>
-          Login
-        </button>
       </div>
     );
   }

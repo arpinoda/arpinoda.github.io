@@ -38,7 +38,7 @@ module.exports = {
         loader: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
-        test: /\.(png|jpeg|jpg|gif|mp4|ico|webmanifest)$/,
+        test: /\.(png|jpeg|jpg|gif|mp4|ico|svg|webmanifest)$/,
         loader: 'file-loader',
         options: {
           name: '[path][name].[ext]',
