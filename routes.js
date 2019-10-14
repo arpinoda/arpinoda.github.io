@@ -91,6 +91,11 @@ module.exports = (app, express) => {
   );
 
   app.use(
+    'static/images/public',
+    express.static(path.join(__dirname, 'src/static/images/public')),
+  );
+
+  app.use(
     '/project*',
     express.static(path.join(__dirname, 'dist', 'index.html')),
   ); // --- end production routes

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
 import { LOADING_IMAGE } from '../util/UI';
-import arrowRight from '../static/images/right-arrow.svg';
+import arrowRight from '../static/images/public/right-arrow.svg';
 
 class Login extends React.Component {
   constructor(props) {
