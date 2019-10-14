@@ -91,7 +91,7 @@ module.exports = (app, express) => {
   );
 
   app.use(
-    'static/images/public',
+    'static/images/public*',
     express.static(path.join(__dirname, 'src/static/images/public')),
   );
 
