@@ -86,13 +86,9 @@ module.exports = (app, express) => {
   // --- end development AND production routes
 
   // These unauthenticated routes are hit in production ONLY
-  app.get(['/static/favicon*', '/bundle.js', '/'], (req, res) =>
-    res.sendFile(path.join(__dirname, 'dist/', req.path)),
-  );
-
-  app.use(
-    'static/images/public*',
-    express.static(path.join(__dirname, 'src/static/images/public')),
+  app.get(
+    ['/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
+    (req, res) => res.sendFile(path.join(__dirname, 'dist/', req.path)),
   );
 
   app.use(
