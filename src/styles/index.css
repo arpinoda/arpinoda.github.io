@@ -83,6 +83,10 @@ nav ul:nth-child(1) > li:not(.featured) > a {
   font-weight:bold;
 }
 
+nav li {
+  max-width: 220px;
+}
+
 nav li a.active {
   color: #2B78F6;
   font-weight: bold;
@@ -138,6 +142,9 @@ figure.active > div > div {
 }
 figure div > p:nth-child(1) {
   margin: 7px 0 6px 0;
+}
+figure img {
+  color: #ffffff;
 }
 .container {
   max-width: var(--container-width);

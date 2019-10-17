@@ -6,7 +6,7 @@ import withScrollSpy from './withScrollSpy';
 
 const HomeNav = ({ categories }) => (
   <nav className="relative">
-    <ul className="list-reset pl3 pt4 pr3 pb4 fixed top-0 bottom-0">
+    <ul className="list-reset pl3 pt4 pb4 fixed top-0 bottom-0">
       {categories &&
         categories.map(category => (
           <TreeItem

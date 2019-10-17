@@ -1,8 +1,8 @@
 [  
   {  
     "categoryID":1,
-    "name":"Case Studies",
-    "urlFragment":"case-studies",
+    "name":"Featured Projects",
+    "urlFragment":"featured",
     "className":"featured",
     "parentIDs":null,
     "index":0
@@ -69,7 +69,7 @@
     "urlFragment":"arkit-coreml",
     "className":"",
     "parentIDs":[8],
-    "index":8
+    "index":9
   },
   {  
     "categoryID":11,
@@ -120,36 +120,12 @@
     "index":15
   },
   {  
-    "categoryID":17,
-    "name":"ASP.NET Web API",
-    "urlFragment":"aspnet-web-api",
-    "className":"",
-    "parentIDs": [16],
-    "index":16
-  },
-  {  
     "categoryID":18,
-    "name":"SQL Server",
-    "urlFragment":"sql-server",
+    "name":"ASP.NET Web API, SQL Server, C#, Entity Framework",
+    "urlFragment":"sql-server&c#&entity-framework&web-api",
     "className":"",
     "parentIDs":[16],
     "index":17
-  },
-  {  
-    "categoryID":19,
-    "name":"C#",
-    "urlFragment":"c-sharp",
-    "className":"",
-    "parentIDs":[16],
-    "index":18
-  },
-  {  
-    "categoryID":20,
-    "name":"Entity Framework",
-    "urlFragment":"entity-framework",
-    "className":"",
-    "parentIDs":[16],
-    "index":19
   },
   {  
     "categoryID":21,
@@ -270,5 +246,13 @@
     "className":"",
     "parentIDs":[31],
     "index":34
+  },
+  {  
+    "categoryID":36,
+    "name":"Swift",
+    "urlFragment":"swift",
+    "className":"",
+    "parentIDs":[8],
+    "index":8
   }
 ]

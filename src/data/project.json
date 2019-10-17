@@ -20,7 +20,7 @@
       "detail": []
     },
     "index": 3,
-    "categoryIDs": [1],
+    "categoryIDs": [1,36,12,15],
     "description": "On-demand mobile platform for locksmith emergency services."
   },
   {
@@ -43,63 +43,51 @@
       "video": "02.mp4"
     },
     "index": 0,
-    "categoryIDs": [1],
+    "categoryIDs": [1,11,36],
     "description": "iBeacon-enabled museum app for new staff onboarding."
   },
   {
     "projectID": 5,
-    "name": "Enterprise Retail projectt",
+    "name": "Proximity Insight Clienteling",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
+      "thumbnail": "05.jpg"
     },
-    "index": 0,
-    "categoryIDs": [3],
-    "description": "Project description one liner"
+    "index": 1,
+    "categoryIDs": [3,24],
+    "description": "Creator of a Salesforce-powered clienteling platform"
   },
   {
     "projectID": 6,
-    "name": "Enterprise Retail project",
+    "name": "Alluring Logic",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "thumbnail": "06.jpg",
       "detail": []
     },
     "index": 1,
-    "categoryIDs": [3],
-    "description": "Project description one liner"
+    "categoryIDs": [3,18,22],
+    "description": "Co-founder of a tech company helping retailers drive more sales in-store and online. Acquired by Proximity Insight."
   },
   {
     "projectID": 7,
-    "name": "Enterprise Retail project",
+    "name": "GPS Tow Truck Alarm",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "thumbnail": "07.jpg",
       "detail": []
     },
     "index": 2,
-    "categoryIDs": [3],
-    "description": "Project description one liner"
-  },
-  {
-    "projectID": 8,
-    "name": "Enterprise Retail project",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 3,
-    "categoryIDs": [3],
-    "description": "Project description one liner"
+    "categoryIDs": [6, 27],
+    "description": "Portable device that notifies when vehicle is about to be towed"
   },
   {
     "projectID": 9,
-    "name": "Consumer Retail project",
+    "name": "Cartier Image Library",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "thumbnail": "09.jpg",
       "detail": []
     },
     "index": 0,
-    "categoryIDs": [4],
-    "description": "Project description one liner"
+    "categoryIDs": [3],
+    "description": "Image sharing app launched globally for Cartier's salespeople"
   },
   {
     "projectID": 10,
@@ -146,17 +134,6 @@
     "description": "Project description one liner"
   },
   {
-    "projectID": 14,
-    "name": "University project",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 0,
-    "categoryIDs": [6],
-    "description": "Project description one liner"
-  },
-  {
     "projectID": 15,
     "name": "ARKit Project",
     "media": {
@@ -180,14 +157,13 @@
   },
   {
     "projectID": 17,
-    "name": "iBeacon Project",
+    "name": "Salesforce Dreamforce IoT App",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
+      "thumbnail": "17.jpg"
     },
     "index": 0,
-    "categoryIDs": [11],
-    "description": "Project description one liner"
+    "categoryIDs": [4,11,36],
+    "description": "iBeacon-enabled map for consumers walking through Dreamforce IoT Cabin. Apple Watch add-on."
   },
   {
     "projectID": 18,
@@ -199,5 +175,27 @@
     "index": 0,
     "categoryIDs": [15],
     "description": "Project description one liner"
+  },
+  {
+    "projectID": 8,
+    "name": "RFID Enabled Fitting Rooms",
+    "media": {
+      "thumbnail": "08.jpg",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [6,26],
+    "description": "Theft detection and upselling opportunities for retailers"
+  },
+  {
+    "projectID": 21,
+    "name": "NASA National Science Foundation, Engineering",
+    "media": {
+      "thumbnail": "21.jpg",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [6,26],
+    "description": "Non-destructive composite testing for NASA space panels"
   }
 ]

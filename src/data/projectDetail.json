@@ -234,5 +234,216 @@
         "alt": "Credits"
       }
     ]
+  },
+  {
+    "projectID": 5,
+    "media":[
+      {
+        "item": "05-03.mp4",
+        "css": "width:100%;"
+      },
+      {
+        "item": "05-01.jpg",
+        "alt": "Proximity Insight"
+      }
+    ]
+  },
+  {
+    "projectID": 17,
+    "media":[
+      {
+        "item": "17-01.jpg",
+        "alt": "Dreamforce IoT Cabin iPhone App;"
+      },
+      {
+        "item": "17-02.jpg",
+        "alt": "iBeacon iOS App"
+      },
+      {
+        "item": "17-03.jpg",
+        "alt": "App Screens"
+      },
+      {
+        "item": "17-04.jpg",
+        "alt": "App Screens"
+      },
+      {
+        "item": "17-05.jpg",
+        "alt": "Demo"
+      },
+      {
+        "item": "17-05.mp4",
+        "css": "margin: 0 auto; display:block;"
+      },
+      {
+        "item": "17-06.jpg",
+        "alt": "Apple Watch"
+      },
+      {
+        "item": "17-07.jpg",
+        "alt": "Credits"
+      }
+    ]
+  },
+  {
+    "projectID": 6,
+    "media":[
+      {
+        "item": "06-01.jpg",
+        "alt": "Clienteling in action"
+      },
+      {
+        "item": "06-02.jpg",
+        "alt": "Clienteling notes"
+      },
+      {
+        "item": "06-03.jpg",
+        "alt": "MVP Overview"
+      },
+      {
+        "item": "06-04.mp4",
+        "css": "margin: 0 auto; display:block; width:100%;"
+      },
+      {
+        "item": "06-04.jpg",
+        "alt": "Technology notes"
+      },
+      {
+        "item": "06-05.jpg",
+        "alt": "Select Clientele"
+      },
+      {
+        "item": "06-06.jpg",
+        "alt": "Acquisition"
+      },
+      {
+        "item": "06-07.jpg",
+        "alt": "Website"
+      },
+      {
+        "item": "06-08.jpg",
+        "alt": "Product evolution"
+      }
+    ]
+  },
+  {
+    "projectID": 7,
+    "media":[
+      {
+        "item": "07-01.jpg",
+        "alt": "GPS Map"
+      },
+      {
+        "item": "07-02.jpg",
+        "alt": "Background"
+      },
+      {
+        "item": "07-03.jpg",
+        "alt": "How it works"
+      },
+      {
+        "item": "07-04.jpg",
+        "alt": "How Description"
+      },
+      {
+        "item": "07-05.jpg",
+        "alt": "Building it"
+      },
+      {
+        "item": "07-06.jpg",
+        "alt": "Constructing"
+      },
+      {
+        "item": "07-07.jpg",
+        "alt": "Tuning it"
+      },
+      {
+        "item": "07-08.jpg",
+        "alt": "Preventing over-messaging"
+      }
+    ]
+  },
+  {
+    "projectID": 20,
+    "media":[
+      {
+        "item": "08-01.jpg",
+        "alt": "RFID in Fashion 2009"
+      },
+      {
+        "item": "08-02.jpg",
+        "alt": "Background"
+      },
+      {
+        "item": "08-03.jpg",
+        "alt": "Execution"
+      },
+      {
+        "item": "08-05.mp4",
+        "css": "margin: 0 auto; display:block; width:100%;"
+      },
+      {
+        "item": "08-04.jpg",
+        "alt": "Traction"
+      }
+    ]
+  },
+  {
+    "projectID": 21,
+    "media":[
+      {
+        "item": "21-01.jpg",
+        "alt": "Bench top labeled"
+      },
+      {
+        "item": "21-02.jpg",
+        "alt": "Background"
+      },
+      {
+        "item": "21-03.jpg",
+        "alt": "Rendering of one camera and two mirrors"
+      },
+      {
+        "item": "21-04.jpg",
+        "alt": "Validated approach"
+      },
+      {
+        "item": "21-05.jpg",
+        "alt": "Two rails for mounting appratus"
+      },
+      {
+        "item": "21-06.jpg",
+        "alt": "REU"
+      }
+    ]
+  },
+  {
+    "projectID": 9,
+    "media":[
+      {
+        "item": "09-01.jpg",
+        "alt": "Cartier Image Library"
+      },
+      {
+        "item": "09-02.jpg",
+        "alt": "Choosing image"
+      },
+      {
+        "item": "09-03.jpg",
+        "alt": "Sharing image"
+      },
+      {
+        "item": "09-04.png",
+        "alt": "Holding iphone",
+        "video": {
+          "item": "09-04.mp4",
+          "css": "top: 16.3%;width: 21.1%;left: 41%;"
+        }
+      },
+      {
+        "item": "09-05.jpg",
+        "alt": "UI Designs"
+      }
+    ]
   }
 ]
