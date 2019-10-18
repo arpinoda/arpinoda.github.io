@@ -52,7 +52,7 @@
     "media": {
       "thumbnail": "05.jpg"
     },
-    "index": 1,
+    "index": 3,
     "categoryIDs": [3,24],
     "description": "Creator of a Salesforce-powered clienteling platform"
   },
@@ -60,12 +60,21 @@
     "projectID": 6,
     "name": "Alluring Logic",
     "media": {
-      "thumbnail": "06.jpg",
-      "detail": []
+      "thumbnail": "06.jpg"
     },
-    "index": 1,
+    "index": 2,
     "categoryIDs": [3,18,22],
     "description": "Co-founder of a tech company helping retailers drive more sales in-store and online. Acquired by Proximity Insight."
+  },
+  {
+    "projectID": 10,
+    "name": "Richemont Logistics",
+    "media": {
+      "thumbnail": "10.jpg"
+    },
+    "index": 1,
+    "categoryIDs": [3],
+    "description": "Visitor management software for the brands of Compagnie Financière Richemont SA"
   },
   {
     "projectID": 7,
@@ -88,28 +97,6 @@
     "index": 0,
     "categoryIDs": [3],
     "description": "Image sharing app launched globally for Cartier's salespeople"
-  },
-  {
-    "projectID": 10,
-    "name": "Consumer Retail project",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 1,
-    "categoryIDs": [4],
-    "description": "Project description one liner"
-  },
-  {
-    "projectID": 11,
-    "name": "Consumer Retail project",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 2,
-    "categoryIDs": [4],
-    "description": "Project description one liner"
   },
   {
     "projectID": 12,
