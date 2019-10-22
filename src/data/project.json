@@ -52,7 +52,7 @@
     "media": {
       "thumbnail": "05.jpg"
     },
-    "index": 3,
+    "index": 4,
     "categoryIDs": [3,24],
     "description": "Creator of a Salesforce-powered clienteling platform"
   },
@@ -62,7 +62,7 @@
     "media": {
       "thumbnail": "06.jpg"
     },
-    "index": 2,
+    "index": 3,
     "categoryIDs": [3,18,22],
     "description": "Co-founder of a tech company helping retailers drive more sales in-store and online. Acquired by Proximity Insight."
   },
@@ -97,6 +97,17 @@
     "index": 0,
     "categoryIDs": [3],
     "description": "Image sharing app launched globally for Cartier's salespeople"
+  },
+  {
+    "projectID": 11,
+    "name": "Tailor Made London",
+    "media": {
+      "thumbnail": "11.jpg",
+      "detail": []
+    },
+    "index": 2,
+    "categoryIDs": [3],
+    "description": "Redesigned UI workflows of tablet web app"
   },
   {
     "projectID": 12,
