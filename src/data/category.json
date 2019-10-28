@@ -69,7 +69,7 @@
     "urlFragment":"arkit-coreml",
     "className":"",
     "parentIDs":[8],
-    "index":9
+    "index":8
   },
   {  
     "categoryID":11,
@@ -253,6 +253,6 @@
     "urlFragment":"swift",
     "className":"",
     "parentIDs":[8],
-    "index":8
+    "index":9
   }
 ]

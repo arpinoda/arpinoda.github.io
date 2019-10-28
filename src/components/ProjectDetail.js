@@ -104,7 +104,7 @@ class ProjectDetail extends React.Component {
             position: 'absolute',
             background: '#fff',
             top: 25,
-            maxWidth: 850,
+            maxWidth: 750,
             zIndex: 2,
             border: '2px solid #444',
             left: 0,

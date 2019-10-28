@@ -107,18 +107,7 @@
     },
     "index": 3,
     "categoryIDs": [1],
-    "description": "Conceptualizing a tool for managing clientele measurements and creating a UI workflow for style selection."
-  },
-  {
-    "projectID": 12,
-    "name": "Consumer Retail project",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 3,
-    "categoryIDs": [4],
-    "description": "Project description one liner"
+    "description": "A tool to aid stylists in creating bespoke custom suits"
   },
   {
     "projectID": 13,
@@ -133,25 +122,14 @@
   },
   {
     "projectID": 15,
-    "name": "ARKit Project",
+    "name": "Foot detection & tracking",
     "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
       "detail": []
     },
     "index": 0,
     "categoryIDs": [9],
-    "description": "Project description one liner"
-  },
-  {
-    "projectID": 19,
-    "name": "ARKit Project 2",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 0,
-    "categoryIDs": [9],
-    "description": "Project description one liner"
+    "description": "Training a CoreML model for semantic segmentation of feet using a custom synthetic dataset"
   },
   {
     "projectID": 17,
@@ -162,17 +140,6 @@
     "index": 0,
     "categoryIDs": [4,11,36],
     "description": "iBeacon-enabled map for consumers walking through Dreamforce IoT Cabin. Apple Watch add-on."
-  },
-  {
-    "projectID": 18,
-    "name": "Firebase Project",
-    "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
-    },
-    "index": 0,
-    "categoryIDs": [15],
-    "description": "Project description one liner"
   },
   {
     "projectID": 8,
