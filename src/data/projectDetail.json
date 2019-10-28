@@ -389,6 +389,51 @@
     ]
   },
   {
+    "projectID": 11,
+    "media":[
+      {
+        "item": "11-01.png",
+        "alt": "Pixel-Perfect Hero"
+      },
+      {
+        "item": "11-02.jpg",
+        "alt": "Background"
+      },
+      {
+        "item": "11-03.jpg",
+        "alt": "Style Cards"
+      },
+      {
+        "item": "11-04.jpg",
+        "alt": "Information Architecture Lite"
+      },
+      {
+        "item": "11-05.jpg",
+        "alt": "Sample Wireframes"
+      },
+      {
+        "item": "11-06.jpg",
+        "alt": "Customer Search"
+      },
+      {
+        "item": "11-07.jpg",
+        "alt": "Customer Profile"
+      },
+      {
+        "item": "11-08.jpg",
+        "alt": "Order details"
+      },
+      {
+        "item": "11-09.jpg",
+        "alt": "Creating an order"
+      },
+      {
+        "item": "11-10.jpg",
+        "alt": "Credits"
+      }
+    ]
+  },
+  {
     "projectID": 21,
     "media":[
       {

@@ -20,7 +20,7 @@
       "detail": []
     },
     "index": 3,
-    "categoryIDs": [1,36,12,15],
+    "categoryIDs": [4,36,12,15],
     "description": "On-demand mobile platform for locksmith emergency services."
   },
   {
@@ -105,9 +105,9 @@
       "thumbnail": "11.jpg",
       "detail": []
     },
-    "index": 2,
-    "categoryIDs": [3],
-    "description": "Redesigned UI workflows of tablet web app"
+    "index": 3,
+    "categoryIDs": [1],
+    "description": "Conceptualizing a tool for managing clientele measurements and creating a UI workflow for style selection."
   },
   {
     "projectID": 12,
