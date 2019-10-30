@@ -434,6 +434,27 @@
     ]
   },
   {
+    "projectID": 12,
+    "media":[
+      {
+        "item": "12-01.jpg",
+        "alt": "Pixel-Perfect Hero"
+      },
+      {
+        "item": "12-02.jpg",
+        "alt": "About"
+      },
+      {
+        "item": "12-03.png",
+        "alt": "Mobile-first design, UI/UX/IA",
+        "video": {
+          "item": "12-04.mp4",
+          "css": "top: 13.7%; width: 29.7%; left: 35.3%;"
+        }
+      }
+    ]
+  },
+  {
     "projectID": 21,
     "media":[
       {

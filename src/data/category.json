@@ -25,8 +25,8 @@
   },
   {  
     "categoryID":4,
-    "name":"Consumer Focused",
-    "urlFragment":"consumer-focused",
+    "name":"Consumer Retail",
+    "urlFragment":"consumer-retail",
     "className":"",
     "parentIDs":[2],
     "index":3
@@ -95,7 +95,7 @@
     "parentIDs":[8],
     "index":12
   },
-  {  
+  {
     "categoryID":14,
     "name":"Google",
     "urlFragment":"google",

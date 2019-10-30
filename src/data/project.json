@@ -19,7 +19,7 @@
       "video": "03.mp4",
       "detail": []
     },
-    "index": 3,
+    "index": 0,
     "categoryIDs": [4,36,12,15],
     "description": "On-demand mobile platform for locksmith emergency services."
   },
@@ -107,7 +107,18 @@
     },
     "index": 3,
     "categoryIDs": [1],
-    "description": "A tool to aid stylists in creating bespoke custom suits"
+    "description": "Designing a tool to help streamline styling and measurement processes for a bespoke suit tailor."
+  },
+  {
+    "projectID": 12,
+    "name": "Concept AR Sock App",
+    "media": {
+      "thumbnail": "12.jpg",
+      "detail": []
+    },
+    "index": 3,
+    "categoryIDs": [4],
+    "description": "A shopping platform for socks, leveraging machine learning and augmented reality"
   },
   {
     "projectID": 13,
@@ -137,7 +148,7 @@
     "media": {
       "thumbnail": "17.jpg"
     },
-    "index": 0,
+    "index": 1,
     "categoryIDs": [4,11,36],
     "description": "iBeacon-enabled map for consumers walking through Dreamforce IoT Cabin. Apple Watch add-on."
   },
