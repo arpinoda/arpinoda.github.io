@@ -121,7 +121,7 @@
     "description": "A shopping platform for socks, leveraging machine learning and augmented reality"
   },
   {
-    "projectID": 13,
+    "projectID": 14,
     "name": "EdTech project",
     "media": {
       "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
@@ -139,7 +139,7 @@
       "detail": []
     },
     "index": 0,
-    "categoryIDs": [9],
+    "categoryIDs": [9,29],
     "description": "Training a CoreML model for semantic segmentation of feet using a custom synthetic dataset"
   },
   {
@@ -171,7 +171,7 @@
       "detail": []
     },
     "index": 0,
-    "categoryIDs": [6,26],
+    "categoryIDs": [6],
     "description": "Non-destructive composite testing for NASA space panels"
   }
 ]

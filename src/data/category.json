@@ -177,19 +177,11 @@
   },
   {  
     "categoryID":27,
-    "name":"Raspberry Pi",
-    "urlFragment":"raspberry-pi",
+    "name":"Raspberry Pi & Arduino",
+    "urlFragment":"raspberry-pi-and-arduino",
     "className":"",
     "parentIDs":[25],
     "index":26
-  },
-  {  
-    "categoryID":28,
-    "name":"Arduino",
-    "urlFragment":"arduino",
-    "className":"",
-    "parentIDs":[25],
-    "index":27
   },
   {  
     "categoryID":29,
@@ -198,54 +190,6 @@
     "className":"",
     "parentIDs":[25],
     "index":28
-  },
-  {  
-    "categoryID":30,
-    "name":"PostgreSQL",
-    "urlFragment":"postgresql",
-    "className":"",
-    "parentIDs":[25],
-    "index":29
-  },
-  {  
-    "categoryID":31,
-    "name":"Services",
-    "urlFragment":"services",
-    "className":"",
-    "parentIDs":null,
-    "index":30
-  },
-  {  
-    "categoryID":32,
-    "name":"Software Engineering",
-    "urlFragment":"software-engineering",
-    "className":"",
-    "parentIDs":[31],
-    "index":31
-  },
-  {  
-    "categoryID":33,
-    "name":"Machine Learning",
-    "urlFragment":"machine-learning",
-    "className":"",
-    "parentIDs":[31],
-    "index":32
-  },
-  {  
-    "categoryID":34,
-    "name":"UI/UX Design",
-    "urlFragment":"ui-ux-design",
-    "className":"",
-    "parentIDs":[31],
-    "index":33
-  },
-  {  
-    "categoryID":35,
-    "name":"M.E./E.E",
-    "urlFragment":"mechanical-electrical",
-    "className":"",
-    "parentIDs":[31],
-    "index":34
   },
   {  
     "categoryID":36,
