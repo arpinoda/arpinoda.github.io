@@ -9,7 +9,7 @@
     },
     "index": 2,
     "categoryIDs": [1],
-    "description": "Real-time asset tracking for high-end jewelry & timepieces."
+    "description": "Real-time asset tracking for high-end jewelry & timepieces"
   },
   {
     "projectID": 3,
@@ -21,7 +21,7 @@
     },
     "index": 0,
     "categoryIDs": [4,36,12,15],
-    "description": "On-demand mobile platform for locksmith emergency services."
+    "description": "On-demand mobile platform for locksmith emergency services"
   },
   {
     "projectID": 4,
@@ -44,7 +44,7 @@
     },
     "index": 0,
     "categoryIDs": [1,11,36],
-    "description": "iBeacon-enabled museum app for new staff onboarding."
+    "description": "iBeacon-enabled museum app for new staff onboarding"
   },
   {
     "projectID": 5,
@@ -107,7 +107,7 @@
     },
     "index": 3,
     "categoryIDs": [1],
-    "description": "Designing a tool to help streamline styling and measurement processes for a bespoke suit tailor."
+    "description": "Designing a tool to help streamline styling and measurement processes for a bespoke suit tailor"
   },
   {
     "projectID": 12,
@@ -132,10 +132,10 @@
     "description": "Project description one liner"
   },
   {
-    "projectID": 15,
+    "projectID": 13,
     "name": "Foot detection & tracking",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
+      "thumbnail": "13.jpg",
       "detail": []
     },
     "index": 0,

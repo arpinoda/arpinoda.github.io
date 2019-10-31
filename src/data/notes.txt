@@ -1,5 +1,0 @@
-An app was designed for shoppers to try-on socks using their phone or tablet.
-By pointing the camera at one's feet, machine learning and augmented reality
-fit and position the socks on each foot. Additionally, the app can measure
-one's foot down to a millimeter of accuracy.
-Cataloging, filter + search, and discovery of products are also designed into the concept.
