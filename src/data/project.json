@@ -136,11 +136,24 @@
     "name": "Foot detection & tracking",
     "media": {
       "thumbnail": "13.jpg",
+      "video": "13.mp4",
       "detail": []
     },
     "index": 0,
     "categoryIDs": [9,29],
     "description": "Training a CoreML model for semantic segmentation of feet using a custom synthetic dataset"
+  },
+  {
+    "projectID": 14,
+    "name": "Rotary Phone",
+    "media": {
+      "thumbnail": "14.jpg",
+      "video": "14.mp4",
+      "detail": []
+    },
+    "index": 0,
+    "categoryIDs": [27],
+    "description": "Creating an embedded system POC capable of reading various states of a rotary phone"
   },
   {
     "projectID": 17,

@@ -181,7 +181,7 @@
     "urlFragment":"raspberry-pi-and-arduino",
     "className":"",
     "parentIDs":[25],
-    "index":26
+    "index":28
   },
   {  
     "categoryID":29,
@@ -189,7 +189,7 @@
     "urlFragment":"tensorflow",
     "className":"",
     "parentIDs":[25],
-    "index":28
+    "index":27
   },
   {  
     "categoryID":36,
