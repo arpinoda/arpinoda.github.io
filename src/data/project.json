@@ -16,8 +16,7 @@
     "name": "LockedOut iOS",
     "media": {
       "thumbnail": "03.png",
-      "video": "03.mp4",
-      "detail": []
+      "video": "03.mp4"
     },
     "index": 0,
     "categoryIDs": [4,36,12,15],
@@ -28,8 +27,7 @@
     "name": "Zegna Clienteling",
     "media": {
       "thumbnail": "04.jpg",
-      "video": "04.mp4",
-      "detail": []
+      "video": "04.mp4"
     },
     "index": 1,
     "categoryIDs": [1],
@@ -80,8 +78,7 @@
     "projectID": 7,
     "name": "GPS Tow Truck Alarm",
     "media": {
-      "thumbnail": "07.jpg",
-      "detail": []
+      "thumbnail": "07.jpg"
     },
     "index": 2,
     "categoryIDs": [6, 27],
@@ -91,8 +88,7 @@
     "projectID": 9,
     "name": "Cartier Image Library",
     "media": {
-      "thumbnail": "09.jpg",
-      "detail": []
+      "thumbnail": "09.jpg"
     },
     "index": 0,
     "categoryIDs": [3],
@@ -102,8 +98,7 @@
     "projectID": 11,
     "name": "Tailor Made London",
     "media": {
-      "thumbnail": "11.jpg",
-      "detail": []
+      "thumbnail": "11.jpg"
     },
     "index": 3,
     "categoryIDs": [1],
@@ -113,8 +108,7 @@
     "projectID": 12,
     "name": "Concept AR Sock App",
     "media": {
-      "thumbnail": "12.jpg",
-      "detail": []
+      "thumbnail": "12.jpg"
     },
     "index": 3,
     "categoryIDs": [4],
@@ -124,8 +118,7 @@
     "projectID": 14,
     "name": "EdTech project",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+",
-      "detail": []
+      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+"
     },
     "index": 0,
     "categoryIDs": [5],
@@ -136,8 +129,7 @@
     "name": "Foot detection & tracking",
     "media": {
       "thumbnail": "13.jpg",
-      "video": "13.mp4",
-      "detail": []
+      "video": "13.mp4"
     },
     "index": 0,
     "categoryIDs": [9,29],
@@ -148,12 +140,21 @@
     "name": "Rotary Phone",
     "media": {
       "thumbnail": "14.jpg",
-      "video": "14.mp4",
-      "detail": []
+      "video": "14.mp4"
     },
     "index": 0,
     "categoryIDs": [27],
     "description": "Creating an embedded system POC capable of reading various states of a rotary phone"
+  },
+  {
+    "projectID": 15,
+    "name": "Portfolio website",
+    "media": {
+      "thumbnail": "15.jpg"
+    },
+    "index": 0,
+    "categoryIDs": [23],
+    "description": "Portfolio website built upon React.js"
   },
   {
     "projectID": 17,

@@ -21,6 +21,9 @@
   article > figure {
     width: calc(100% / 2 - 30px);
   }
+  #technologies article > figure {
+    width: calc(100% / 4 - 30px);
+  }
   
 }
 
@@ -33,6 +36,10 @@
   
   article > figure {
     width: 100%;
+  }
+
+  #technologies article > figure {
+    width: calc(100% / 3 - 30px);
   }
   
 }
