@@ -72,7 +72,7 @@ ul li ul {
 nav > ul {
   overflow-y:hidden;
   overflow-x:hidden;
-  /* scroll-behavior: smooth; */
+  scroll-behavior: smooth;
 }
 
 nav:hover > ul {

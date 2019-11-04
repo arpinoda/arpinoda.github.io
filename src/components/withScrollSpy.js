@@ -69,7 +69,7 @@ const withScrollSpy = OriginalComponent => {
     };
 
     initNavItems = selectors => {
-      this.$nav = document.querySelector('nav ul');
+      this.$nav = document.querySelector('nav');
       this.items = [];
 
       if (Array.isArray(selectors) === false) {
@@ -123,6 +123,28 @@ const withScrollSpy = OriginalComponent => {
 
     updateLocationHash = href => {
       History.replace(href);
+      this.setNavScrollPosition(href);
+    };
+
+    setNavScrollPosition = href => {
+      const $list = this.$nav.querySelector('ul');
+      const itemDepth = href.split('/').length - 1;
+
+      switch (itemDepth) {
+        case 1:
+          // do nothing
+          break;
+        case 2:
+          href = href.substring(0, href.lastIndexOf('/'));
+          break;
+        case 3:
+          href = href.substring(0, href.lastIndexOf('/'));
+          break;
+        default:
+      }
+
+      const $target = document.querySelector(`a[href='${href}']`);
+      $list.scrollTo(0, $target.offsetTop - 50);
     };
 
     onWindowUpdate = () => {
@@ -158,40 +180,6 @@ const withScrollSpy = OriginalComponent => {
           this.resetParentActiveNavItem();
         }
       }
-      // experimental
-      // let percentage = 0;
-      // if (this.getScrollOffset() !== 0) {
-      //   percentage = scrolledDistance / this.container.clientHeight;
-      // } else {
-      //   percentage = this.getScrollOffset() / this.container.clientHeight;
-      // }
-      // percentage = this.getScrollOffset() / this.container.clientHeight;
-
-      // this.$nav.scrollTop =
-      //   percentage * (this.$nav.clientHeight - SCROLL_OFFSET * 3);
-
-      // const activeNavSection = this.$nav.querySelector('.has-active');
-      // if (!activeNavSection) return;
-
-      // const navDistanceFromTop = activeNavSection.getBoundingClientRect().top;
-
-      // const activeNavSectionAnchor = activeNavSection.querySelector('a');
-      // if (!activeNavSectionAnchor) return;
-
-      // const activeMainSectionID = activeNavSectionAnchor.getAttribute('href').replace('/#', '');
-      // console.log(activeMainSectionID);
-
-      // const activeMainSection = document.getElementById(activeMainSectionID);
-
-      // const mainDistanceFromTop = activeMainSection.getBoundingClientRect().top;
-
-      // if (mainDistanceFromTop <= navDistanceFromTop) {
-      //   this.$nav.scrollTop = Math.abs(mainDistanceFromTop);
-      // }
-
-      // if .active resides in lower half of screen
-      // scroll $nav so parent li of .active is 65px from top
-      // ----
     };
 
     getScrollOffset = () => document.body.scrollTop || window.pageYOffset;
