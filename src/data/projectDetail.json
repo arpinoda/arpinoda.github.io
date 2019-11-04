@@ -618,5 +618,23 @@
         "alt": "Back-end"
       }
     ]
+  },
+  {
+    "projectID": 15,
+    "media":[
+      {
+        "item": "15-01.jpg",
+        "alt": "React.js Portfolio Site"
+      }
+    ]
+  },
+  {
+    "projectID": 16,
+    "media":[
+      {
+        "item": "16-01.jpg",
+        "alt": "Wizardly educational platform"
+      }
+    ]
   }
 ]

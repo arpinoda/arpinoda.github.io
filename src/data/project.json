@@ -18,7 +18,7 @@
       "thumbnail": "03.png",
       "video": "03.mp4"
     },
-    "index": 0,
+    "index": 1,
     "categoryIDs": [4,36,12,15],
     "description": "On-demand mobile platform for locksmith emergency services"
   },
@@ -71,7 +71,7 @@
       "thumbnail": "10.jpg"
     },
     "index": 1,
-    "categoryIDs": [3],
+    "categoryIDs": [3, 36],
     "description": "Visitor management software for the brands of Compagnie Financière Richemont SA"
   },
   {
@@ -91,7 +91,7 @@
       "thumbnail": "09.jpg"
     },
     "index": 0,
-    "categoryIDs": [3],
+    "categoryIDs": [3, 36],
     "description": "Image sharing app launched globally for Cartier's salespeople"
   },
   {
@@ -115,14 +115,14 @@
     "description": "A shopping platform for socks, leveraging machine learning and augmented reality"
   },
   {
-    "projectID": 14,
-    "name": "EdTech project",
+    "projectID": 16,
+    "name": "Startup in Stealth Mode: Wizardly",
     "media": {
-      "thumbnail": "https://dummyimage.com/300x200/eeeeee/ffffff&text=+"
+      "thumbnail": "16.jpg"
     },
     "index": 0,
-    "categoryIDs": [5],
-    "description": "Project description one liner"
+    "categoryIDs": [5,36],
+    "description": "iOS and Web Project for EdTech startup in 'stealth mode'"
   },
   {
     "projectID": 13,
@@ -132,7 +132,7 @@
       "video": "13.mp4"
     },
     "index": 0,
-    "categoryIDs": [9,29],
+    "categoryIDs": [9,29, 36],
     "description": "Training a CoreML model for semantic segmentation of feet using a custom synthetic dataset"
   },
   {
@@ -154,7 +154,7 @@
     },
     "index": 0,
     "categoryIDs": [23],
-    "description": "Portfolio website built upon React.js"
+    "description": "This portfolio website was built using React.js"
   },
   {
     "projectID": 17,

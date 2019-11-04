@@ -77,7 +77,7 @@
     "urlFragment":"ibeacon",
     "className":"",
     "parentIDs":[8],
-    "index":10
+    "index":11
   },
   {  
     "categoryID":12,
@@ -85,7 +85,7 @@
     "urlFragment":"mapkit",
     "className":"",
     "parentIDs":[8],
-    "index":11
+    "index":10
   },
   {  
     "categoryID":13,
