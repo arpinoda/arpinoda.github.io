@@ -167,6 +167,28 @@
     "description": "iBeacon-enabled map for consumers walking through Dreamforce IoT Cabin. Apple Watch add-on."
   },
   {
+    "projectID": 18,
+    "name": "Specular Shading",
+    "media": {
+      "thumbnail": "18.jpg",
+      "video": "18.mp4"
+    },
+    "index": 1,
+    "categoryIDs": [13,36],
+    "description": "Expanding knowledge of MetalKit Framework. High performance graphics rendering."
+  },
+  {
+    "projectID": 19,
+    "name": "Optical Character Recognition",
+    "media": {
+      "thumbnail": "19.jpg",
+      "video": "19.mp4"
+    },
+    "index": 1,
+    "categoryIDs": [9,36],
+    "description": "Recognizing text using an iPhone camera, OCR library, and machine learning"
+  },
+  {
     "projectID": 8,
     "name": "RFID Enabled Fitting Rooms",
     "media": {
