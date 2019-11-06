@@ -15,9 +15,9 @@ class App extends React.Component {
   importAll = r => r.keys().map(r);
 
   render() {
-    const { setEventError } = this.props;
+    const { errorLogger } = this.props;
     const customProps = {
-      setEventError,
+      errorLogger,
     };
 
     return (
@@ -39,7 +39,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  setEventError: PropTypes.func,
+  errorLogger: PropTypes.func,
 };
 
 export default App;
