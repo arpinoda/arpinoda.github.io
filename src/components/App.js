@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ErrorHandler } from 'universal-react-logger';
 import Home from './Home';
 import Login from './Login';
 
@@ -43,4 +42,4 @@ App.propTypes = {
   setEventError: PropTypes.func,
 };
 
-export default ErrorHandler(App, false);
+export default App;

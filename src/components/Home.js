@@ -26,8 +26,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { setEventError } = this.props;
-
     this.getProjects()
       .then(projects => {
         this.fetchSuccess = this.fetchSuccess(projects);
@@ -37,7 +35,6 @@ class Home extends React.Component {
       .catch(error => {
         console.log(error);
         // TODO: Logging
-        setEventError(error);
       });
   }
 
