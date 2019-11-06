@@ -28,14 +28,10 @@ const withScrollSpy = OriginalComponent => {
       if (!hasInitialized) {
         const { selectors } = this.props;
         if (selectors !== undefined) {
-          try {
-            this.setState({
-              hasInitialized: true,
-            });
-            this.domLoaded();
-          } catch (err) {
-            withScrollSpy.hasInitialized = false;
-          }
+          this.domLoaded();
+          this.setState({
+            hasInitialized: true,
+          });
         }
       }
     };

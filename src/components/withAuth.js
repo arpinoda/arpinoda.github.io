@@ -29,7 +29,7 @@ const withAuth = AuthComponent => {
             loaded: true,
           });
         } catch (err) {
-          /* There's an error so we'll print it out and log the
+          /* There's an error from Server. Confirm it's a 4XX & log the
           user out for security reasons. */
           console.log(err);
           Auth.logout();
