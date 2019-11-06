@@ -33,30 +33,26 @@ class HomeGridVideo extends React.Component {
     fetchImage(thumbnail).then(url => this.setState({ posterSrc: url }));
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isHovering) {
-      this.videoPlayer.current.play().catch(error => {
-        console.log(this.videoPlayer.current.readyState);
-        console.log(error);
-      });
-    } else {
-      const player = this.videoPlayer.current;
-      const { readyState } = player;
-
-      if (readyState > 1) {
-        this.videoPlayer.current.pause();
-        this.videoPlayer.current.currentTime = 0;
-      }
-    }
-  }
-
   componentDidUpdate(prevProps) {
     const { isHovering } = this.props;
 
     if (isHovering !== prevProps.isHovering) {
       if (isHovering) {
+        this.videoPlayer.current.play().catch(error => {
+          console.log(this.videoPlayer.current.readyState);
+          console.log(error);
+        });
+
         this.startTimer();
       } else {
+        const player = this.videoPlayer.current;
+        const { readyState } = player;
+
+        if (readyState > 1) {
+          this.videoPlayer.current.pause();
+          this.videoPlayer.current.currentTime = 0;
+        }
+
         this.stopTimer();
       }
     }
