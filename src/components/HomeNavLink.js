@@ -5,21 +5,19 @@ import { HASH_PREFIX } from '../util/UI';
 
 const HomeNavLink = ({ children, ...props }) => {
   const { category, className } = props;
-  const formatHash = hash => `/${HASH_PREFIX}${hash}`;
+  const formatHash = value => `${HASH_PREFIX}${value}`;
+
+  const toHREF = `/${formatHash(category.urlPath)}`;
 
   const checkActive = (match, location) => {
     if (!location) return false;
     const { hash } = location;
+
     return hash === formatHash(category.urlPath);
   };
 
   return (
-    <NavLink
-      isActive={checkActive}
-      replace
-      to={formatHash(category.urlPath)}
-      className={className}
-    >
+    <NavLink isActive={checkActive} replace to={toHREF} className={className}>
       {children}
     </NavLink>
   );

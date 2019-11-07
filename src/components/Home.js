@@ -46,9 +46,7 @@ class Home extends React.Component {
   render = () => {
     const { scrollIDs, categories } = this.state;
 
-    return scrollIDs === null ? (
-      <></>
-    ) : (
+    return (
       <>
         <section className="flex container">
           <HomeNav selectors={scrollIDs} categories={categories} />
