@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import withErrorHandler from './withErrorHandler';
 import Home from './Home';
 import Login from './Login';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     // Force WebPack to include all imagery within 'static' directory
     this.importAll(require.context('../static', true, /^\.\//));
   }
@@ -15,9 +15,9 @@ class App extends React.Component {
   importAll = r => r.keys().map(r);
 
   render() {
-    const { errorLogger } = this.props;
+    const { setEventError } = this.props;
     const customProps = {
-      errorLogger,
+      setEventError,
     };
 
     return (
@@ -39,7 +39,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  errorLogger: PropTypes.func,
+  setEventError: PropTypes.func,
 };
 
-export default App;
+export default withErrorHandler(App, true);

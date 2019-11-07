@@ -26,6 +26,8 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    const { setEventError } = this.props;
+
     this.getProjects()
       .then(projects => {
         this.fetchSuccess = this.fetchSuccess(projects);
@@ -33,8 +35,7 @@ class Home extends React.Component {
       .then(this.getCategories)
       .then(categories => this.fetchSuccess(categories))
       .catch(error => {
-        console.log(error);
-        // TODO: Logging
+        setEventError(error);
       });
   }
 
@@ -45,7 +46,9 @@ class Home extends React.Component {
   render = () => {
     const { scrollIDs, categories } = this.state;
 
-    return (
+    return scrollIDs === null ? (
+      <></>
+    ) : (
       <>
         <section className="flex container">
           <HomeNav selectors={scrollIDs} categories={categories} />

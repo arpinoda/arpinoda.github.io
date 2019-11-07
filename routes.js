@@ -106,10 +106,10 @@ module.exports = (app, express) => {
   */
   app.use(jwtMW);
 
-  // app.use(
-  //   `${API_PATH}/project`,
-  //   express.static(path.join(__dirname, 'src/data', 'project.json')),
-  // );
+  app.use(
+    `${API_PATH}/project`,
+    express.static(path.join(__dirname, 'src/data', 'project.json')),
+  );
 
   app.get(`${API_PATH}/project/:id`, (req, res) => {
     const { id } = req.params;

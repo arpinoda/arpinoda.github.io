@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withErrorHandler from './withErrorHandler';
 import history, { previousFragment } from './History';
 import { lockScroll, unlockScroll } from '../util/UI';
 import API from '../util/API';
@@ -38,6 +39,7 @@ class ProjectDetail extends React.Component {
 
   getDetails = () => {
     const { projectID } = this.state;
+    const { setEventError } = this.props;
 
     this.api.endpoints.project
       .getOne(projectID)
@@ -51,8 +53,8 @@ class ProjectDetail extends React.Component {
       .then(json => {
         this.setState({ media: json, isLoading: false });
       })
-      .catch(err => {
-        console.log('getDetails error', err);
+      .catch(error => {
+        setEventError(error);
       });
   };
 
@@ -123,6 +125,7 @@ class ProjectDetail extends React.Component {
 
 ProjectDetail.propTypes = {
   match: PropTypes.object,
+  setEventError: PropTypes.func,
 };
 
-export default ProjectDetail;
+export default withErrorHandler(ProjectDetail, false);

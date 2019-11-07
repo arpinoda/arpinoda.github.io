@@ -91,7 +91,7 @@ class Login extends React.Component {
               onKeyDown={() => {}}
               autoComplete="off"
               autoCorrect="off"
-              autoCapitalize="off"
+              autoCapitalize="on"
               spellCheck="false"
             >
               <img
