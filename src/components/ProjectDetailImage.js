@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProductDetailVideo from './ProjectDetailVideo';
+import ProjectDetailVideo from './ProjectDetailVideo';
 import { fetchImage, LOADING_IMAGE } from '../util/UI';
+import brokenImage from '../static/images/public/broken.jpg';
 
 class ProjectDetailImage extends React.Component {
   constructor(props) {
@@ -13,16 +14,29 @@ class ProjectDetailImage extends React.Component {
   }
 
   componentDidMount() {
-    const { image } = this.props;
-    fetchImage(image.item).then(url => this.setState({ blobURL: url }));
+    const { image, setEventError } = this.props;
+
+    fetchImage(image.item)
+      .then(url => this.setState({ blobURL: url }))
+      .catch(error => setEventError(error));
   }
 
+  addDefaultSrc = e => {
+    e.target.src = brokenImage;
+  };
+
   render() {
-    const { image } = this.props;
+    const { image, setEventError } = this.props;
     const { blobURL } = this.state;
 
     const imageMarkup = (
-      <img src={blobURL} key={image.item} alt={image.alt} className="left" />
+      <img
+        src={blobURL}
+        onError={this.addDefaultSrc}
+        key={image.item}
+        alt={image.alt}
+        className="left"
+      />
     );
     let videoMarkup = null;
 
@@ -31,23 +45,15 @@ class ProjectDetailImage extends React.Component {
       if (image.video) {
         const { video } = image;
         videoMarkup = (
-          <ProductDetailVideo key={video.item} isWithinImage video={video} />
+          <ProjectDetailVideo
+            key={video.item}
+            isWithinImage
+            video={video}
+            setEventError={setEventError}
+          />
         );
       }
     }
-
-    /*
-      Final markup of image with embedded video
-      <section> <--- ProjectDetailSection
-        <img src="./static/images/protected/02-08.png" /> <--- ProjectDetailImage
-
-        <div class="player" videoplayer></div>
-        <video playsline type="video/mp4" loop controlsList="nodownload">
-          <source src="./static/videos/02-08.mp4#t=0.1" type="video/mp4" />
-        </video>
-
-      </section>
-    */
 
     // Return multiple elements if the image has a video component
     const returnElement = videoMarkup
@@ -60,6 +66,7 @@ class ProjectDetailImage extends React.Component {
 
 ProjectDetailImage.propTypes = {
   image: PropTypes.object,
+  setEventError: PropTypes.func,
 };
 
 export default ProjectDetailImage;

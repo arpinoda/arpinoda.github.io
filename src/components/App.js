@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import withErrorHandler from './withErrorHandler';
 import Home from './Home';
 import Login from './Login';
 
@@ -13,19 +15,31 @@ class App extends React.Component {
   importAll = r => r.keys().map(r);
 
   render() {
+    const { setEventError } = this.props;
+    const customProps = {
+      setEventError,
+    };
+
     return (
       <BrowserRouter>
         <Switch>
           <Route
             exact
             path="/login"
-            render={routeProps => <Login {...routeProps} />}
+            render={routeProps => <Login {...routeProps} {...customProps} />}
           />
-          <Route path="/" render={routeProps => <Home {...routeProps} />} />
+          <Route
+            path="/"
+            render={routeProps => <Home {...routeProps} {...customProps} />}
+          />
         </Switch>
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  setEventError: PropTypes.func,
+};
+
+export default withErrorHandler(App);

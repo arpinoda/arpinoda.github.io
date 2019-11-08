@@ -76,10 +76,10 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    const { critical, eventError, children } = this.props;
+    const { eventError, children } = this.props;
     const { renderError } = this.state;
 
-    if (critical && (renderError || eventError)) {
+    if (renderError || (eventError && eventError.isCritical)) {
       return (
         <div className="center pt4">
           <h4>
@@ -113,7 +113,6 @@ class ErrorBoundary extends React.Component {
 }
 
 ErrorBoundary.propTypes = {
-  critical: PropTypes.bool,
   eventError: PropTypes.object,
   children: PropTypes.node,
 };

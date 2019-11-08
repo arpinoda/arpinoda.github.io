@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import API from '../util/API';
 import { fetchImage } from '../util/UI';
+import brokenImage from '../static/images/public/broken.jpg';
+import { ClientError, ErrorTypes } from '../models/Logging';
 
 class HomeGridVideo extends React.Component {
   constructor(props) {
@@ -27,20 +29,28 @@ class HomeGridVideo extends React.Component {
   }
 
   componentDidMount() {
-    const { project } = this.props;
+    const { project, setEventError } = this.props;
     const { thumbnail } = project.media;
 
-    fetchImage(thumbnail).then(url => this.setState({ posterSrc: url }));
+    fetchImage(thumbnail)
+      .then(url => this.setState({ posterSrc: url }))
+      .catch(error => setEventError(error));
   }
 
   componentDidUpdate(prevProps) {
-    const { isHovering } = this.props;
+    const { isHovering, project, setEventError } = this.props;
+    const { video } = project.media;
 
     if (isHovering !== prevProps.isHovering) {
       if (isHovering) {
         this.videoPlayer.current.play().catch(error => {
-          console.log(this.videoPlayer.current.readyState);
-          console.log(error);
+          const clientError = new ClientError(
+            ErrorTypes.VideoError,
+            `projectID - ${project.projectID} video - ${video}`,
+            false,
+            error.message,
+          );
+          setEventError(clientError);
         });
 
         this.startTimer();
@@ -82,6 +92,25 @@ class HomeGridVideo extends React.Component {
     }
   };
 
+  videoLoadError = e => {
+    const { setEventError, project } = this.props;
+    const { video } = project.media;
+
+    this.addDefaultSrc(e);
+    const error = new ClientError(
+      ErrorTypes.VideoError,
+      `projectID - ${project.projectID} video - ${video}`,
+      false,
+      'Error loading video',
+    );
+
+    setEventError(error);
+  };
+
+  addDefaultSrc = e => {
+    e.target.poster = brokenImage;
+  };
+
   render = () => {
     const { videoSrc, posterSrc, initalLoadComplete } = this.state;
 
@@ -91,6 +120,7 @@ class HomeGridVideo extends React.Component {
           this.setState({ initalLoadComplete: true });
         }}
         onLoadedData={this.onLoaded}
+        onError={this.videoLoadError}
         ref={this.videoPlayer}
         poster={posterSrc}
         loop
@@ -113,6 +143,7 @@ HomeGridVideo.propTypes = {
   downloadCompleteCallback: PropTypes.func,
   minimizeDetailCallback: PropTypes.func,
   isHovering: PropTypes.bool,
+  setEventError: PropTypes.func,
 };
 
 export default HomeGridVideo;

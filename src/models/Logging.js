@@ -1,5 +1,11 @@
 class CustomError extends Error {
-  constructor(name = '', type = null, details = null, ...params) {
+  constructor(
+    name = '',
+    type = null,
+    details = null,
+    isCritical = false,
+    ...params
+  ) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
     super(...params);
 
@@ -13,18 +19,19 @@ class CustomError extends Error {
     this.clientDate = new Date();
     this.type = type;
     this.details = details;
+    this.isCritical = isCritical;
   }
 }
 
 class ClientError extends CustomError {
-  constructor(type = null, details = null, ...params) {
-    super('ClientError', type, details, ...params);
+  constructor(type = null, details = null, isCritical = false, ...params) {
+    super('ClientError', type, details, isCritical, ...params);
   }
 }
 
 class ClientWarning extends CustomError {
   constructor(type = null, details = null, ...params) {
-    super('ClientWarning', type, details, ...params);
+    super('ClientWarning', type, details, false, ...params);
   }
 }
 

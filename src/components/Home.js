@@ -5,7 +5,6 @@ import HomeNav from './HomeNav';
 import HomeGrid from './HomeGrid';
 import ProjectDetail from './ProjectDetail';
 import withAuth from './withAuth';
-import withErrorHandler from './withErrorHandler';
 import { scrollToWithRetry, HASH_PREFIX } from '../util/UI';
 import API from '../util/API';
 import Category from '../models/Category';
@@ -40,16 +39,17 @@ class Home extends React.Component {
       .then(this.getCategories)
       .then(categories => this.fetchSuccess(categories))
       .catch(error => {
-        if (error.name === 'ClientError') {
-          setEventError(error);
-        } else {
-          const clientError = new ClientError(
+        if (error.name !== 'ClientError') {
+          error = new ClientError(
             ErrorTypes.JSONError,
             'n/a',
+            true,
             error.message,
           );
-          setEventError(clientError);
         }
+
+        error.isCritical = true; // Render error screen since we cannot run the app
+        setEventError(error);
       });
   }
 
@@ -59,7 +59,10 @@ class Home extends React.Component {
 
   render = () => {
     const { scrollIDs, categories } = this.state;
-
+    const { setEventError } = this.props;
+    const customProps = {
+      setEventError,
+    };
     return (
       <>
         <section className="flex container">
@@ -69,7 +72,7 @@ class Home extends React.Component {
 
         <Route
           path="/project/:id"
-          render={props => <ProjectDetail {...props} />}
+          render={props => <ProjectDetail {...props} {...customProps} />}
         />
       </>
     );
@@ -129,4 +132,4 @@ Home.propTypes = {
   history: PropTypes.object,
 };
 
-export default withErrorHandler(withRouter(withAuth(Home)), true);
+export default withRouter(withAuth(Home));

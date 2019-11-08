@@ -5,13 +5,13 @@ import ProjectDetailImage from './ProjectDetailImage';
 import ProjectDetailVideo from './ProjectDetailVideo';
 
 const ProjectDetailSection = props => {
-  const { media } = props;
+  const { media, setEventError } = props;
   const isVideo = getFileExtension(media.item) === 'mp4';
 
   const body = isVideo ? (
-    <ProjectDetailVideo video={media} />
+    <ProjectDetailVideo setEventError={setEventError} video={media} />
   ) : (
-    <ProjectDetailImage image={media} />
+    <ProjectDetailImage setEventError={setEventError} image={media} />
   );
 
   return <section className="relative">{body}</section>;
@@ -19,6 +19,7 @@ const ProjectDetailSection = props => {
 
 ProjectDetailSection.propTypes = {
   media: PropTypes.object,
+  setEventError: PropTypes.func,
 };
 
 export default ProjectDetailSection;

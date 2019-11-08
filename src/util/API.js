@@ -39,6 +39,7 @@ class API {
         throw new ClientError(
           ErrorTypes.HttpError,
           `URL: ${url}`,
+          false,
           res.statusText,
         );
       }

@@ -2,7 +2,7 @@ import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 
 // Adapted via https://github.com/anacicconi/universal-react-logger
-function withErrorHandler(WrappedComponent, critical) {
+function withErrorHandler(WrappedComponent) {
   return class extends React.Component {
     constructor(props) {
       super(props);
@@ -23,7 +23,7 @@ function withErrorHandler(WrappedComponent, critical) {
 
       if (eventError) {
         return (
-          <ErrorBoundary critical={critical} eventError={eventError}>
+          <ErrorBoundary eventError={eventError}>
             <WrappedComponent
               setEventError={this.setEventError}
               {...this.props}
@@ -33,7 +33,7 @@ function withErrorHandler(WrappedComponent, critical) {
       }
 
       return (
-        <ErrorBoundary critical={critical}>
+        <ErrorBoundary>
           <WrappedComponent
             setEventError={this.setEventError}
             {...this.props}

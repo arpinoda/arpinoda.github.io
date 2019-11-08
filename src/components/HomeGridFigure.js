@@ -44,7 +44,7 @@ class HomeGridFigure extends React.Component {
   };
 
   render = () => {
-    const { project } = this.props;
+    const { project, setEventError } = this.props;
     const { isHovering, isVideoDownloaded, isDetailMinimized } = this.state;
     const hasVideo = project.media.video !== undefined;
 
@@ -78,11 +78,12 @@ class HomeGridFigure extends React.Component {
           <HomeGridVideo
             project={project}
             isHovering={isHovering}
+            setEventError={setEventError}
             minimizeDetailCallback={this.minimizeDetailCallback}
             downloadCompleteCallback={this.videoDownloadCallback}
           />
         ) : (
-          <HomeGridImage project={project} />
+          <HomeGridImage setEventError={setEventError} project={project} />
         )}
 
         <div className={isDetailMinimized ? 'fadeOut' : 'fadeIn'}>
@@ -109,6 +110,7 @@ class HomeGridFigure extends React.Component {
 
 HomeGridFigure.propTypes = {
   project: PropTypes.object.isRequired,
+  setEventError: PropTypes.func,
 };
 
 export default HomeGridFigure;

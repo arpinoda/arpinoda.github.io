@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withErrorHandler from './withErrorHandler';
 import history, { previousFragment } from './History';
 import { lockScroll, unlockScroll } from '../util/UI';
 import API from '../util/API';
@@ -89,7 +88,7 @@ class ProjectDetail extends React.Component {
 
   render = () => {
     this.scrollY = lockScroll(this.scrollY);
-
+    const { setEventError } = this.props;
     const { isLoading, media } = this.state;
 
     return (
@@ -126,7 +125,13 @@ class ProjectDetail extends React.Component {
           }}
         >
           {media &&
-            media.map(m => <ProjectDetailSection key={m.item} media={m} />)}
+            media.map(m => (
+              <ProjectDetailSection
+                setEventError={setEventError}
+                key={m.item}
+                media={m}
+              />
+            ))}
         </div>
       </>
     );
@@ -138,4 +143,4 @@ ProjectDetail.propTypes = {
   setEventError: PropTypes.func,
 };
 
-export default withErrorHandler(ProjectDetail, false);
+export default ProjectDetail;
