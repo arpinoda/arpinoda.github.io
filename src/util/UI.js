@@ -6,9 +6,7 @@ export const LOADING_IMAGE =
 export const HASH_PREFIX = '#';
 export const ACTIVE_SCROLL_OFFSET = 150;
 
-/* TODO: possibly refactor to avoid retries,
-  since we're loading locally.
-  Snippet via: https://stackoverflow.com/a/48195222 */
+/* Snippet via: https://stackoverflow.com/a/48195222 */
 export const scrollToWithRetry = hash => {
   if (typeof hash !== 'string') {
     ({ hash } = window.location);
