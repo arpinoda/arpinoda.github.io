@@ -5,6 +5,7 @@ import history, { previousFragment } from './History';
 import { lockScroll, unlockScroll } from '../util/UI';
 import API from '../util/API';
 import ProjectDetailSection from './ProjectDetailSection';
+import { ClientError, ErrorTypes } from '../models/Logging';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -54,7 +55,16 @@ class ProjectDetail extends React.Component {
         this.setState({ media: json, isLoading: false });
       })
       .catch(error => {
-        setEventError(error);
+        if (error.name === 'ClientError') {
+          setEventError(error);
+        } else {
+          const clientError = new ClientError(
+            ErrorTypes.JsonError,
+            `project detail id: ${projectID}`,
+            error.message,
+          );
+          setEventError(clientError);
+        }
       });
   };
 

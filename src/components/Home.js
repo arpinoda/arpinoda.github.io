@@ -45,6 +45,7 @@ class Home extends React.Component {
         } else {
           const clientError = new ClientError(
             ErrorTypes.JSONError,
+            'n/a',
             error.message,
           );
           setEventError(clientError);

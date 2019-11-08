@@ -35,7 +35,7 @@ class API {
       if (res.status === 401) {
         this.auth.logout();
         window.location.reload();
-      } else if (res.status === 404) {
+      } else if (res.status > 399) {
         throw new ClientError(
           ErrorTypes.HttpError,
           `URL: ${url}`,
