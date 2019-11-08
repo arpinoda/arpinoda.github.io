@@ -17,7 +17,6 @@ class ErrorBoundary extends React.Component {
     const { eventError } = this.props;
     const { renderError, renderErrorInfo } = this.state;
 
-    // only in production
     if (eventError || renderError) {
       let body = {};
 
@@ -34,14 +33,16 @@ class ErrorBoundary extends React.Component {
         body = {
           error: {
             message: eventError.message,
-            stack: `in ${eventError.fileName} - line ${eventError.lineNumber} in ${eventError.stack}`,
+            type: eventError.type,
+            details: eventError.details,
+            stack: eventError.stack,
           },
         };
       }
 
       // send the errors to the server (production only)
       if (process.env.NODE_ENV === 'development') {
-        console.log(body);
+        console.info(body);
       } else {
         fetch('/log-client-errors', {
           method: 'post',

@@ -1,4 +1,5 @@
 import AUTH from './AUTH';
+import { ClientError, ErrorTypes } from '../models/Error';
 
 class API {
   constructor({ url }) {
@@ -34,6 +35,12 @@ class API {
       if (res.status === 401) {
         this.auth.logout();
         window.location.reload();
+      } else if (res.status === 404) {
+        throw new ClientError(
+          ErrorTypes.HttpError,
+          `URL: ${url}`,
+          res.statusText,
+        );
       }
       return res;
     });

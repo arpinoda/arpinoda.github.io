@@ -8,6 +8,7 @@ import withAuth from './withAuth';
 import { scrollToWithRetry, HASH_PREFIX } from '../util/UI';
 import API from '../util/API';
 import Category from '../models/Category';
+import { ClientError, ErrorTypes } from '../models/Error';
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,8 +19,11 @@ class Home extends React.Component {
       scrollIDs: null,
     };
 
+    const { setEventError } = this.props;
+
     this.api = new API({
       url: process.env.API_PATH,
+      setEventError,
     });
 
     this.api.createEntities([{ name: 'project' }, { name: 'category' }]);
@@ -35,7 +39,12 @@ class Home extends React.Component {
       .then(this.getCategories)
       .then(categories => this.fetchSuccess(categories))
       .catch(error => {
-        setEventError(error);
+        if (error.type && error.type === ErrorTypes.HttpError) {
+          setEventError(error);
+        } else {
+          const clientError = new ClientError(ErrorTypes.JSON, error.message);
+          setEventError(clientError);
+        }
       });
   }
 
@@ -89,12 +98,6 @@ class Home extends React.Component {
     scrollIDs = scrollIDs.flat(Infinity);
 
     this.setState({ categories, scrollIDs });
-  };
-
-  throwResponseError = res => {
-    throw new Error(
-      `Something went wrong. HTTP: ${res.status}, ${res.statusText}`,
-    );
   };
 
   getProjects = () => this.api.endpoints.project.getAll();

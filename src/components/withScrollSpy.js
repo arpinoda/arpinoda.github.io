@@ -106,6 +106,10 @@ const withScrollSpy = OriginalComponent => {
     };
 
     unbindNavItems = () => {
+      if (!this.items) {
+        return;
+      }
+
       this.items.forEach(item => {
         item.removeEventListener(
           'click',
