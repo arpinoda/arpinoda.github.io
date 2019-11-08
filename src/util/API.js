@@ -1,5 +1,5 @@
 import AUTH from './AUTH';
-import { ClientError, ErrorTypes } from '../models/Error';
+import { ClientError, ErrorTypes } from '../models/Logging';
 
 class API {
   constructor({ url }) {

@@ -35,6 +35,7 @@ class ErrorBoundary extends React.Component {
             message: eventError.message,
             type: eventError.type,
             details: eventError.details,
+            clientDate: eventError.clientDate,
             stack: eventError.stack,
           },
         };
@@ -92,12 +93,13 @@ class ErrorBoundary extends React.Component {
           <p>
             We&apos;ve been notified, but
             <a href="/" className="bold block underline">
-              {' '}
               try refreshing
             </a>
             or
-            <a href="/" className="bold block underline">
-              {' '}
+            <a
+              href="mailto:dane@pep.cm?subject=Inquiry"
+              className="bold block underline"
+            >
               send me an email!
             </a>
           </p>

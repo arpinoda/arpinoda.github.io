@@ -5,10 +5,11 @@ import HomeNav from './HomeNav';
 import HomeGrid from './HomeGrid';
 import ProjectDetail from './ProjectDetail';
 import withAuth from './withAuth';
+import withErrorHandler from './withErrorHandler';
 import { scrollToWithRetry, HASH_PREFIX } from '../util/UI';
 import API from '../util/API';
 import Category from '../models/Category';
-import { ClientError, ErrorTypes } from '../models/Error';
+import { ClientError, ErrorTypes } from '../models/Logging';
 
 class Home extends React.Component {
   constructor(props) {
@@ -39,10 +40,13 @@ class Home extends React.Component {
       .then(this.getCategories)
       .then(categories => this.fetchSuccess(categories))
       .catch(error => {
-        if (error.type && error.type === ErrorTypes.HttpError) {
+        if (error.name === 'ClientError') {
           setEventError(error);
         } else {
-          const clientError = new ClientError(ErrorTypes.JSON, error.message);
+          const clientError = new ClientError(
+            ErrorTypes.JSONError,
+            error.message,
+          );
           setEventError(clientError);
         }
       });
@@ -124,4 +128,4 @@ Home.propTypes = {
   history: PropTypes.object,
 };
 
-export default withRouter(withAuth(Home));
+export default withErrorHandler(withRouter(withAuth(Home)), true);
