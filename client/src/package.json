@@ -26,7 +26,7 @@
       "pre-commit": "lint-staged"
     }
   },
-  "prettier" : {
+  "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
@@ -37,23 +37,23 @@
       "jest/globals": true
     },
     "extends": [
-        "prettier",
-        "airbnb"
+      "prettier",
+      "airbnb"
     ],
     "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "jest"
+      "react",
+      "jest"
     ],
     "rules": {
       "arrow-parens": 0,
@@ -63,13 +63,15 @@
       "react/jsx-filename-extension": 0,
       "react/forbid-prop-types": 0,
       "react/require-default-props": 0,
-      "implicit-arrow-linebreak" : 0,
+      "implicit-arrow-linebreak": 0,
       "operator-linebreak": 0,
       "no-param-reassign": 0
     },
     "parser": "babel-eslint"
   },
-  "eslintIgnore": ["dist/**"],
+  "eslintIgnore": [
+    "dist/**"
+  ],
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -113,7 +115,6 @@
     "react-test-renderer": "^16.8.6",
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^2.1.2",
-    "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.2"
@@ -127,6 +128,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-router-hash-link": "^1.2.2",
+    "webpack": "^4.39.1",
     "whatwg-fetch": "^3.0.0"
   }
 }
