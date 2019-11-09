@@ -9,7 +9,7 @@
   },
   "license": "UNLICENSED",
   "scripts": {
-    "heroku-postbuild": "cd client/src && yarn build"
+    "heroku-postbuild": "cd client/src && yarn install && yarn build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
