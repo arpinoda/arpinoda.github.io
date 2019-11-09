@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const merge = require('../client/src/node_modules/webpack-merge');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
@@ -6,7 +6,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   stats: 'errors-only',
   devServer: {
-    contentBase: './src',
+    contentBase: '../client/src',
     watchContentBase: true,
     historyApiFallback: true,
     proxy: {

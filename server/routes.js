@@ -2,8 +2,11 @@ const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const path = require('path');
 const fs = require('fs');
+const cors = require('./cors');
 
-const detailsRaw = fs.readFileSync('./src/data/projectDetail.json');
+const detailsRaw = fs.readFileSync(
+  path.resolve(__dirname, '../client/src/data/projectDetail.json')
+);
 const projectDetails = JSON.parse(detailsRaw);
 
 const { API_PATH } = process.env;
@@ -11,38 +14,6 @@ const { API_PATH } = process.env;
 const jwtMW = exjwt({
   secret: process.env.JWT_SECRET,
 });
-
-const cors = (req, res, next) => {
-  let oneof = false;
-  if (req.headers.origin) {
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    oneof = true;
-  }
-  if (req.headers['access-control-request-method']) {
-    res.header(
-      'Access-Control-Allow-Methods',
-      req.headers['access-control-request-method'],
-    );
-    oneof = true;
-  }
-  if (req.headers['access-control-request-headers']) {
-    res.header(
-      'Access-Control-Allow-Headers',
-      req.headers['access-control-request-headers'],
-    );
-    oneof = true;
-  }
-  if (oneof) {
-    res.header('Access-Control-Max-Age', 60 * 60 * 24 * 365);
-  }
-
-  // intercept OPTIONS method
-  if (oneof && req.method === 'OPTIONS') {
-    res.send(200);
-  } else {
-    next();
-  }
-};
 
 module.exports = (app, express) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -82,17 +53,17 @@ module.exports = (app, express) => {
   // These unauthenticated routes are hit in production ONLY
   app.get(
     ['/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
-    (req, res) => res.sendFile(path.join(__dirname, 'dist/', req.path)),
+    (req, res) => res.sendFile(path.join(__dirname, '../client/dist/', req.path)),
   );
 
   app.use(
     '/project*',
-    express.static(path.join(__dirname, 'dist', 'index.html')),
+    express.static(path.join(__dirname, '../client/dist/', 'index.html')),
   ); // --- end production routes
 
   app.use(
     `${API_PATH}/video`,
-    express.static(path.join(__dirname, 'src/static/videos')),
+    express.static(path.join(__dirname, '../client/src/static/videos')),
   );
 
   /*
@@ -102,7 +73,7 @@ module.exports = (app, express) => {
 
   app.use(
     `${API_PATH}/project`,
-    express.static(path.join(__dirname, 'src/data', 'project.json')),
+    express.static(path.join(__dirname, '../client/src/data', 'project.json')),
   );
 
   app.get(`${API_PATH}/project/:id`, (req, res) => {
@@ -125,12 +96,12 @@ module.exports = (app, express) => {
 
   app.use(
     `${API_PATH}/category`,
-    express.static(path.join(__dirname, 'src/data', 'category.json')),
+    express.static(path.join(__dirname, '../client/src/data', 'category.json')),
   );
 
   app.use(
     `${API_PATH}/image`,
-    express.static(path.join(__dirname, 'src/static/images/protected')),
+    express.static(path.join(__dirname, '../client/src/static/images/protected')),
   );
   // --- End protected routes
 };

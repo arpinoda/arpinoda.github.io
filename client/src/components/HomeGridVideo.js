@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import API from '../util/API';
-import { fetchImage } from '../util/UI';
+import { fetchImage, LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 import { ClientError, ErrorTypes } from '../models/Logging';
 
@@ -13,7 +13,7 @@ class HomeGridVideo extends React.Component {
 
     this.state = {
       videoSrc: `${process.env.API_PATH}/video/${video}`,
-      posterSrc: '',
+      posterSrc: LOADING_IMAGE,
       initalLoadComplete: false,
     };
 

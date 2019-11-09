@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fetchImage } from '../util/UI';
+import { fetchImage, LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 
 class HomeGridThumbnail extends React.Component {
@@ -8,7 +8,7 @@ class HomeGridThumbnail extends React.Component {
     super(props);
 
     this.state = {
-      imageSrc: '',
+      imageSrc: LOADING_IMAGE,
     };
   }
 
@@ -34,7 +34,6 @@ class HomeGridThumbnail extends React.Component {
       <img
         src={imageSrc}
         alt={project.name}
-        onLoad={this.handleImageLoaded}
         onError={this.addDefaultSrc}
         className={className}
       />

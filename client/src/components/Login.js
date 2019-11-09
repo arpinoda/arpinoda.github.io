@@ -62,7 +62,7 @@ class Login extends React.Component {
         return history.replace(redirectTo);
       })
       .catch(error => {
-        alert(error.message);
+        alert(error.message); // eslint-disable-line
         setEventError(error);
       });
   };

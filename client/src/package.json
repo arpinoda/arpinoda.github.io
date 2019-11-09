@@ -2,18 +2,17 @@
   "name": "portfolio",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "server/index.js",
   "engines": {
     "yarn": "1.17.3",
     "node": "12.6.0"
   },
   "license": "UNLICENSED",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
-    "build": "./node_modules/.bin/webpack --config webpack.prod.js",
-    "lint": "./node_modules/.bin/eslint ./src",
-    "test": "./node_modules/.bin/jest",
-    "heroku-postbuild": "yarn build"
+    "start": "./node_modules/.bin/webpack-dev-server --open --config ../../config/webpack.dev.js",
+    "build": "./node_modules/.bin/webpack --config ../../config/webpack.prod.js",
+    "lint": "./node_modules/.bin/eslint ./",
+    "test": "./node_modules/.bin/jest"
   },
   "lint-staged": {
     "*.js": [
@@ -26,6 +25,59 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "prettier" : {
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest/globals": true
+    },
+    "extends": [
+        "prettier",
+        "airbnb"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "jest"
+    ],
+    "rules": {
+      "arrow-parens": 0,
+      "object-curly-newline": 0,
+      "function-paren-newline": 0,
+      "import/no-extraneous-dependencies": 0,
+      "react/jsx-filename-extension": 0,
+      "react/forbid-prop-types": 0,
+      "react/require-default-props": 0,
+      "implicit-arrow-linebreak" : 0,
+      "operator-linebreak": 0,
+      "no-param-reassign": 0
+    },
+    "parser": "babel-eslint"
+  },
+  "eslintIgnore": ["dist/**"],
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -68,12 +120,7 @@
   },
   "dependencies": {
     "basscss": "^8.1.0",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "express-jwt": "^5.3.1",
-    "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
