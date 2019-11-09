@@ -5,7 +5,7 @@ const fs = require('fs');
 const cors = require('./cors');
 
 const detailsRaw = fs.readFileSync(
-  path.resolve(__dirname, '../client/src/data/projectDetail.json')
+  path.join(__dirname, '/../client/src/data/projectDetail.json')
 );
 const projectDetails = JSON.parse(detailsRaw);
 
@@ -22,7 +22,7 @@ module.exports = (app, express) => {
 
   // These unauthenticated routes are hit in BOTH dev and production
   app.get('/robots.txt', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'robots.txt')),
+    res.sendFile(path.join(__dirname, 'robots.txt')),
   );
 
   app.post('/login', (req, res) => {
@@ -53,17 +53,17 @@ module.exports = (app, express) => {
   // These unauthenticated routes are hit in production ONLY
   app.get(
     ['/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
-    (req, res) => res.sendFile(path.resolve(__dirname, '../client/dist/', req.path)),
+    (req, res) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path)),
   );
 
   app.use(
     '/project*',
-    express.static(path.resolve(__dirname, '../client/dist/', 'index.html')),
+    express.static(path.join(__dirname, '/../client/dist/', 'index.html')),
   ); // --- end production routes
 
   app.use(
     `${API_PATH}/video`,
-    express.static(path.resolve(__dirname, '../client/src/static/videos')),
+    express.static(path.join(__dirname, '/../client/src/static/videos')),
   );
 
   /*
@@ -73,7 +73,7 @@ module.exports = (app, express) => {
 
   app.use(
     `${API_PATH}/project`,
-    express.static(path.resolve(__dirname, '../client/src/data', 'project.json')),
+    express.static(path.join(__dirname, '/../client/src/data', 'project.json')),
   );
 
   app.get(`${API_PATH}/project/:id`, (req, res) => {
@@ -96,12 +96,12 @@ module.exports = (app, express) => {
 
   app.use(
     `${API_PATH}/category`,
-    express.static(path.resolve(__dirname, '../client/src/data', 'category.json')),
+    express.static(path.join(__dirname, '/../client/src/data', 'category.json')),
   );
 
   app.use(
     `${API_PATH}/image`,
-    express.static(path.resolve(__dirname, '../client/src/static/images/protected')),
+    express.static(path.join(__dirname, '/../client/src/static/images/protected')),
   );
   // --- End protected routes
 };
