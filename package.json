@@ -11,6 +11,9 @@
   "scripts": {
     "heroku-postbuild": "cd client/src && yarn build"
   },
+  "devDependencies": {
+    "webpack": "^4.39.1"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
