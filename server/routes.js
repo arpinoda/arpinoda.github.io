@@ -3,9 +3,10 @@ const exjwt = require('express-jwt');
 const path = require('path');
 const fs = require('fs');
 const cors = require('./cors');
+var logger;
 
 if (process.env.NODE_ENV === 'production') {
-  const logger = require('./logger');
+  logger = require('./logger');
 }
 
 const detailsRaw = fs.readFileSync(
