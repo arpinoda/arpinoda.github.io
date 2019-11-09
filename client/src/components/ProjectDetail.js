@@ -54,7 +54,7 @@ class ProjectDetail extends React.Component {
         this.setState({ media: json, isLoading: false });
       })
       .catch(error => {
-        if (error.name === 'ClientError') {
+        if (error.name === 'ClientError' || error.name === 'ClientWarning') {
           setEventError(error);
         } else {
           const clientError = new ClientError(

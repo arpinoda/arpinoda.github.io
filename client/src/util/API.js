@@ -1,5 +1,10 @@
 import AUTH from './AUTH';
-import { ClientError, ErrorTypes } from '../models/Logging';
+import {
+  ClientError,
+  ClientWarning,
+  WarningTypes,
+  ErrorTypes,
+} from '../models/Logging';
 
 class API {
   constructor({ url }) {
@@ -34,7 +39,14 @@ class API {
     this.auth.fetch(url, options).then(res => {
       if (res.status === 401) {
         this.auth.logout();
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
+        throw new ClientWarning(
+          WarningTypes.TokenExpiredWarning,
+          `tried accessing url: ${url}`,
+          'HTTP 401: Unauthorized',
+        );
       } else if (res.status > 399) {
         throw new ClientError(
           ErrorTypes.HttpError,
