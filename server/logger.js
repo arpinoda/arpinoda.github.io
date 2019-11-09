@@ -12,7 +12,8 @@ var logger,
 	ptTransport = new Papertrail({
 		host: 'logs.papertrailapp.com',
 		port: 12345,
-		level: 'debug',
+    level: 'debug',
+    handleExceptions: true,
 		logFormat: function(level, message) {
 			return '[' + level + '] ' + message;
 		}
@@ -32,11 +33,10 @@ logger = new winston.createLogger({
 		info: 1,
 		warn: 2,
 		error: 3
-	},
-	transports: [
-		ptTransport,
-		consoleLogger
-	]
+	}
 });
+
+logger.add(ptTransport);
+logger.add(consoleLogger);
 
 module.exports = logger;
