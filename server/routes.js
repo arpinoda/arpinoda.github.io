@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const cors = require('./cors');
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   const logger = require('./logger');
 }
 
