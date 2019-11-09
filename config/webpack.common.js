@@ -3,7 +3,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('../client/src/node_modules/clean-webpack-plugin');
 const HtmlWebpackPlugin = require('../client/src/node_modules/html-webpack-plugin');
 const webpack = require('../client/src/node_modules/webpack');
-const dotenv = require('../server/node_modules/dotenv');
+const dotenv = require('../node_modules/dotenv');
 
 const env = dotenv.config({ 
   path: path.resolve(__dirname, '../config/.env'),

@@ -11,18 +11,6 @@
   "scripts": {
     "heroku-postbuild": "cd client/src && yarn build"
   },
-  "lint-staged": {
-    "*.js": [
-      "yarn lint",
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
