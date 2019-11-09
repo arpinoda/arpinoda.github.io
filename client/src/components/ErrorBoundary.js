@@ -37,6 +37,7 @@ class ErrorBoundary extends React.Component {
             details: eventError.details,
             clientDate: eventError.clientDate,
             stack: eventError.stack,
+            name: eventError.name,
           },
         };
       }

@@ -4,6 +4,10 @@ const path = require('path');
 const fs = require('fs');
 const cors = require('./cors');
 
+if (process.env.NODE_ENV == 'production') {
+  const logger = require('./logger');
+}
+
 const detailsRaw = fs.readFileSync(
   path.join(__dirname, '/../client/src/data/projectDetail.json')
 );
@@ -45,6 +49,43 @@ module.exports = (app, express) => {
         err: 'Invalid passcode',
       });
     }
+  });
+
+  app.post('/log-client-errors', (req, res) => {
+    let type = req.body.error.type;
+    let details = req.body.error.details;
+    let message = req.body.error.message;
+    let stack = req.body.error.stack;
+    let clientDate = req.body.error.clientDate;
+    let name = req.body.error.name;
+
+    const logItem = 
+    `
+    -----
+    Log received from client
+    ${type}: ${message}
+    Client Date: ${clientDate}
+    Details: ${details}
+    Stack: ${stack}
+    -----
+    `;
+
+    if (process.env.NODE_ENV === 'production') {
+      // send this log item to papertrail via winston
+      if (name.toLowerCase().includes('warning')) {
+        logger.warn(logItem);
+      } else {
+        logger.error(logItem);
+      }
+    } else {
+      if (name.toLowerCase().includes('warning')) {
+        console.warn(logItem);
+      } else {
+        console.error(logItem);
+      }
+    }
+
+    res.status(200);
   });
 
   app.get(['/login'], (req, res) => res.redirect('/'));
