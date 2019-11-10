@@ -66,9 +66,11 @@ module.exports = (app, express) => {
     Stack: ${stack}
     -----
     `;
-
+    
+    console.log('created log item:', logItem);
     if (process.env.NODE_ENV === 'production') {
       // send this log item to papertrail via winston
+      console.log('sending to logger');
       if (name.toLowerCase().includes('warning')) {
         logger.warn(logItem);
       } else {

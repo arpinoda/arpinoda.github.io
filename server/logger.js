@@ -13,7 +13,6 @@ var logger,
 		host: 'logs.papertrailapp.com',
 		port: 12345,
     level: 'debug',
-    handleExceptions: true,
 		logFormat: function(level, message) {
 			return '[' + level + '] ' + message;
 		}
