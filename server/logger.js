@@ -27,16 +27,17 @@ ptTransport.on('connect', function(message) {
 	logger && logger.info(message);
 });
 
-logger = new winston.createLogger({
+logger = new winston.Logger({
 	levels: {
 		debug: 0,
 		info: 1,
 		warn: 2,
 		error: 3
-	}
+  },
+  transports: [
+    ptTransport,
+    consoleLogger
+  ]
 });
-
-logger.add(ptTransport);
-logger.add(consoleLogger);
 
 module.exports = logger;

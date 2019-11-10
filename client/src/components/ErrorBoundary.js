@@ -42,19 +42,15 @@ class ErrorBoundary extends React.Component {
         };
       }
 
-      // send the errors to the server (production only)
-      if (process.env.NODE_ENV === 'development') {
-        console.info(body); // eslint-disable-line no-console
-      } else {
-        fetch('/log-client-errors', {
-          method: 'post',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body),
-        });
-      }
+      // send the errors to the server
+      fetch('/log-client-errors', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
     }
   }
 
