@@ -78,4 +78,23 @@ module.exports = (app, express, logger) => {
     const { media } = project;
     return res.json(media);
   });
+
+  /**
+   * Handling 401 error
+  */
+  app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+      const logItem = util.createLogItem(
+        err.name,
+        `url path: ${req.originalUrl}`,
+        err.message,
+        err.stack,
+        new Date()
+      );
+
+      logger.error(logItem);
+
+      res.sendStatus(401);
+    }
+  });
 };

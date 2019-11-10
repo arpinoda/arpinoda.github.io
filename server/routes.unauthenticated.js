@@ -1,6 +1,7 @@
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const cors = require('./cors');
+const util = require('./util');
 const { API_PATH } = process.env;
 
 /**
@@ -80,19 +81,9 @@ function common(app, express, logger) {
     let clientDate = req.body.error.clientDate;
     let name = req.body.error.name;
 
-    const logItem = 
-    `
-    -----
-    Log received from client
-    ${type}: ${message}
-    Client Date: ${clientDate}
-    Details: ${details}
-    Stack: ${stack}
-    -----
-    `;
+    const logItem = util.createLogItem(type, details, message, stack, clientDate);
     
-    // winston will log via console or papertrail transport
-    // depending upon NODE_ENV
+    // Log via console or papertrail transport, depending upon NODE_ENV
     if (name.toLowerCase().includes('warning')) {
       logger.warn(logItem);
     } else {

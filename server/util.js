@@ -6,3 +6,17 @@ exports.isInt = function(value) {
   x = parseFloat(value);
   return (x | 0) === x;
 };
+
+exports.createLogItem = function(type, details, message, stack, date) {
+  return (
+    `
+    -----
+    Log Item Received
+    ${type}: ${message}
+    Client Date: ${date}
+    Details: ${details}
+    Stack: ${stack}
+    -----
+    `
+  );
+}
