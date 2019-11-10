@@ -1,13 +1,14 @@
 const express = require('express');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const path = require('path');
 
-const app = express();
 require('dotenv').config({ 
   path: path.resolve(__dirname, '../config/.env'),
 });
 
+const logger = require('./logger');
+const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Let server know to expect content-type "Authorization" within header
@@ -21,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-require('./routes')(app, express);
+require('./routes')(app, express, logger);
 
 app.listen(PORT);
-console.log('Listening on port:', PORT);
+logger.info(`Listening on port: ${PORT}`);

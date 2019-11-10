@@ -21,30 +21,31 @@ const withAuth = AuthComponent => {
         const nextURL = this.getNextURL(location);
         history.replace(`/login${nextURL}`);
       } else {
-        /* Try to get confirmation message from the Auth helper. */
-        try {
-          const decoded = Auth.decodeToken();
-          this.setState({
-            confirm: decoded,
-            loaded: true,
-          });
-        } catch (err) {
-          /* There's an error from Server. Confirm it's a 4XX & log the
-          user out for security reasons. */
-          console.log(err);
-          Auth.logout();
-          history.replace('/login');
+        // Get token from Auth Helper and set to state
+        const decoded = Auth.decodeToken();
+        this.setState({
+          confirm: decoded,
+          loaded: true,
+        });
+
+        // In development, parse the next path
+        if (location.search) {
+          const nextPath = location.search.replace('?next=', '');
+          history.replace(nextPath);
         }
       }
     }
 
     getNextURL = location => {
       let result = '';
-      const { pathname } = location;
+      const { pathname, search } = location;
 
       if (pathname && pathname !== '/login') {
         if (!(pathname === '/' && location.hash === '')) {
           result += `?next=${pathname}${location.hash}`;
+        } else if (search) {
+          // Workaround for development mode
+          result += `${search}`;
         }
       }
 
