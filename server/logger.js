@@ -10,8 +10,8 @@ var logger,
 		colorize: true
 	}),
 	ptTransport = new Papertrail({
-		host: 'logs.papertrailapp.com',
-		port: 12345,
+		host: process.env.PAPERTRAIL_HOST,
+		port: process.env.PAPERTRAIL_PORT,
     level: 'debug',
 		logFormat: function(level, message) {
 			return '[' + level + '] ' + message;

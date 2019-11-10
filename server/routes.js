@@ -84,7 +84,7 @@ module.exports = (app, express) => {
       }
     }
 
-    res.status(200);
+    res.sendStatus(200);
   });
 
   app.get(['/login'], (req, res) => res.redirect('/'));
