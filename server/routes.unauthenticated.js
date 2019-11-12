@@ -48,6 +48,18 @@ function common(app, express, logger) {
   app.get(['/login'], (req, res) => res.redirect('/'));  
 
   /**
+   * GET /favicon*
+   * Returns favicon in dev mode from src/static/ directory
+  */
+  app.get('/favicon*', (req, res, next) =>
+    res.sendFile(path.join(__dirname, '/../client/src/static/favicon/', req.path), {}, (err) => {
+      if (err) {
+        next(err);
+      }
+    })
+  );
+
+  /**
    * POST /login
    * Authenticates user by validating passcode
    * Returns a symmetrically signed JWT token if successful, else HTTP 401
@@ -136,16 +148,4 @@ function development(app) {
   app.get('/project*', (req, res) => {
     res.redirect(`/?next=${req.path}`);
   });
-
-  /**
-   * GET /favicon*
-   * Returns favicon in dev mode from src/static/ directory
-  */
-  app.get('/favicon*', (req, res, next) =>
-    res.sendFile(path.join(__dirname, '/../client/src/static/favicon/', req.path), {}, (err) => {
-      if (err) {
-        next(err);
-      }
-    })
-  );
 }
