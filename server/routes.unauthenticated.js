@@ -110,7 +110,7 @@ function production(app, express, logger) {
     ['/favicon*', '/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
     (req, res) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path), {}, (err) => {
       if (err) {
-        next (err);
+        next(err);
       }
     }),
   );
