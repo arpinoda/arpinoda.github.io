@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { styleToObject } from '../util/UI';
 import VideoPlayer from '../util/VideoPlayer';
-import { ClientError, ErrorTypes } from '../models/Logging';
 import brokenImage from '../static/images/public/broken.jpg';
 
 class ProjectDetailVideo extends React.Component {
@@ -41,17 +40,17 @@ class ProjectDetailVideo extends React.Component {
   };
 
   videoLoadError = e => {
-    const { setEventError, video } = this.props;
+    // const { setEventError, video } = this.props;
 
     this.addDefaultSrc(e);
-    const error = new ClientError(
-      ErrorTypes.VideoError,
-      `ProjectDetailVideo video - ${video}`,
-      false,
-      'Error loading video',
-    );
+    // const error = new ClientError(
+    //   ErrorTypes.VideoError,
+    //   `ProjectDetailVideo video - ${video}`,
+    //   false,
+    //   'Error loading video',
+    // );
 
-    setEventError(error);
+    // setEventError(error);
   };
 
   addDefaultSrc = e => {
@@ -107,7 +106,7 @@ class ProjectDetailVideo extends React.Component {
 ProjectDetailVideo.propTypes = {
   video: PropTypes.object,
   isWithinImage: PropTypes.bool,
-  setEventError: PropTypes.func,
+  // setEventError: PropTypes.func,
 };
 
 export default ProjectDetailVideo;

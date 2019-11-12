@@ -4,7 +4,7 @@ import history, { previousFragment } from './History';
 import { lockScroll, unlockScroll } from '../util/UI';
 import API from '../util/API';
 import ProjectDetailSection from './ProjectDetailSection';
-import { ClientError, ErrorTypes } from '../models/Logging';
+import NotFoundImage from '../static/images/public/not-found.jpg';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class ProjectDetail extends React.Component {
       projectID: match.params.id,
       isLoading: true,
       media: null,
+      errorMessage: '',
     };
 
     this.scrollY = null;
@@ -39,14 +40,13 @@ class ProjectDetail extends React.Component {
 
   getDetails = () => {
     const { projectID } = this.state;
-    const { setEventError } = this.props;
 
     this.api.endpoints.project
       .getOne(projectID)
       .then(res => {
         if (!res.ok) {
           this.setState({ isLoading: false });
-          throw Error(res.statusText);
+          throw Error(res.message);
         }
         return res.json();
       })
@@ -54,16 +54,7 @@ class ProjectDetail extends React.Component {
         this.setState({ media: json, isLoading: false });
       })
       .catch(error => {
-        if (error.name === 'ClientError' || error.name === 'ClientWarning') {
-          setEventError(error);
-        } else {
-          const clientError = new ClientError(
-            ErrorTypes.JsonError,
-            `project detail id: ${projectID}`,
-            error.message,
-          );
-          setEventError(clientError);
-        }
+        this.setState({ isLoading: false, errorMessage: error.message });
       });
   };
 
@@ -89,7 +80,7 @@ class ProjectDetail extends React.Component {
   render = () => {
     this.scrollY = lockScroll(this.scrollY);
     const { setEventError } = this.props;
-    const { isLoading, media } = this.state;
+    const { isLoading, media, errorMessage } = this.state;
 
     return (
       <>
@@ -125,6 +116,7 @@ class ProjectDetail extends React.Component {
           }}
         >
           {media &&
+            !errorMessage &&
             media.map(m => (
               <ProjectDetailSection
                 setEventError={setEventError}
@@ -132,6 +124,7 @@ class ProjectDetail extends React.Component {
                 media={m}
               />
             ))}
+          {errorMessage && <img src={NotFoundImage} alt={errorMessage} />}
         </div>
       </>
     );

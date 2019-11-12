@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import API from '../util/API';
-import { fetchImage, LOADING_IMAGE } from '../util/UI';
+import { fetchProtectedImage, LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
-import { ClientError, ErrorTypes } from '../models/Logging';
 
 class HomeGridVideo extends React.Component {
   constructor(props) {
@@ -32,25 +31,26 @@ class HomeGridVideo extends React.Component {
     const { project, setEventError } = this.props;
     const { thumbnail } = project.media;
 
-    fetchImage(thumbnail)
+    fetchProtectedImage(thumbnail)
       .then(url => this.setState({ posterSrc: url }))
       .catch(error => setEventError(error));
   }
 
   componentDidUpdate(prevProps) {
-    const { isHovering, project, setEventError } = this.props;
-    const { video } = project.media;
+    const { isHovering } = this.props;
+    // const { video } = project.media;
 
     if (isHovering !== prevProps.isHovering) {
       if (isHovering) {
         this.videoPlayer.current.play().catch(error => {
-          const clientError = new ClientError(
-            ErrorTypes.VideoError,
-            `projectID - ${project.projectID} video - ${video}`,
-            false,
-            error.message,
-          );
-          setEventError(clientError);
+          // const clientError = new ClientError(
+          //   ErrorTypes.VideoError,
+          //   `projectID - ${project.projectID} video - ${video}`,
+          //   false,
+          //   error.message,
+          // );
+          // setEventError(clientError);
+          console.log(error);
         });
 
         this.startTimer();
@@ -93,18 +93,18 @@ class HomeGridVideo extends React.Component {
   };
 
   videoLoadError = e => {
-    const { setEventError, project } = this.props;
-    const { video } = project.media;
+    // const { setEventError, project } = this.props;
+    // const { video } = project.media;
 
     this.addDefaultSrc(e);
-    const error = new ClientError(
-      ErrorTypes.VideoError,
-      `projectID - ${project.projectID} video - ${video}`,
-      false,
-      'Error loading video',
-    );
+    // const error = new ClientError(
+    //   ErrorTypes.VideoError,
+    //   `projectID - ${project.projectID} video - ${video}`,
+    //   false,
+    //   'Error loading video',
+    // );
 
-    setEventError(error);
+    // setEventError(error);
   };
 
   addDefaultSrc = e => {

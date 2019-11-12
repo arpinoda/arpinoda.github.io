@@ -8,7 +8,7 @@ import withAuth from './withAuth';
 import { scrollToWithRetry, HASH_PREFIX } from '../util/UI';
 import API from '../util/API';
 import Category from '../models/Category';
-import { ClientError, ErrorTypes } from '../models/Logging';
+import { ClientError } from '../../../server/errors';
 
 class Home extends React.Component {
   constructor(props) {
@@ -33,22 +33,27 @@ class Home extends React.Component {
     const { setEventError } = this.props;
 
     this.getProjects()
+      .then(res => {
+        if (!res.ok) {
+          throw new ClientError(true, res);
+        }
+        return res.json();
+      })
       .then(projects => {
         this.fetchSuccess = this.fetchSuccess(projects);
       })
       .then(this.getCategories)
+      .then(res => {
+        if (!res.ok) {
+          throw new ClientError(true, res);
+        }
+        return res.json();
+      })
       .then(categories => this.fetchSuccess(categories))
       .catch(error => {
         if (error.name !== 'ClientError') {
-          error = new ClientError(
-            ErrorTypes.JSONError,
-            'n/a',
-            true,
-            error.message,
-          );
+          error = new ClientError(true, error);
         }
-
-        error.isCritical = true; // Render error screen since we cannot run the app
         setEventError(error);
       });
   }

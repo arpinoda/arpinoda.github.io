@@ -33,11 +33,7 @@ class ErrorBoundary extends React.Component {
         body = {
           error: {
             message: eventError.message,
-            type: eventError.type,
-            details: eventError.details,
-            clientDate: eventError.clientDate,
             stack: eventError.stack,
-            name: eventError.name,
           },
         };
       }
@@ -76,7 +72,7 @@ class ErrorBoundary extends React.Component {
     const { eventError, children } = this.props;
     const { renderError } = this.state;
 
-    if (renderError || (eventError && eventError.isCritical)) {
+    if (renderError || (eventError && eventError.showErrorPage)) {
       return (
         <div className="center pt4">
           <h4>

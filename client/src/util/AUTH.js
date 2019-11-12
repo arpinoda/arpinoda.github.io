@@ -1,5 +1,4 @@
 import decode from 'jwt-decode';
-
 // adapted via
 // https://medium.com/@romanchvalbo/how-i-set-up-react-and-node-with-json-web-token-for-authentication-259ec1a90352
 
@@ -63,6 +62,13 @@ export default class AUTH {
     return fetch(url, {
       headers,
       ...options,
-    }).then(res => res);
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res;
+      })
+      .then(res => res);
   };
 }

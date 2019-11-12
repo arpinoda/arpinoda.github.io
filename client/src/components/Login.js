@@ -4,7 +4,6 @@ import AUTH from '../util/AUTH';
 import withErrorHandler from './withErrorHandler';
 import { LOADING_IMAGE } from '../util/UI';
 import arrowRight from '../static/images/public/right-arrow.svg';
-import { ClientWarning, WarningTypes } from '../models/Logging';
 
 class Login extends React.Component {
   constructor(props) {
@@ -39,19 +38,11 @@ class Login extends React.Component {
       return;
     }
 
-    const { history, setEventError } = this.props;
+    const { history } = this.props;
 
     this.auth
       .login(passcode)
-      .then(res => {
-        if (!res.success) {
-          throw new ClientWarning(
-            WarningTypes.LoginFailureWarning,
-            'n/a',
-            'Whoops! Incorrect passcode',
-          );
-        }
-
+      .then(() => {
         const { href } = window.location;
         let redirectTo = '/';
 
@@ -62,8 +53,13 @@ class Login extends React.Component {
         return history.replace(redirectTo);
       })
       .catch(error => {
-        alert(error.message); // eslint-disable-line
-        setEventError(error);
+        let { message } = error;
+
+        if (message === 'Unauthorized') {
+          message = 'Whoops, incorrect passcode! Please try again.';
+        }
+
+        alert(message); // eslint-disable-line
       });
   };
 
@@ -125,7 +121,6 @@ class Login extends React.Component {
 
 Login.propTypes = {
   history: PropTypes.object,
-  setEventError: PropTypes.func,
 };
 
 export default withErrorHandler(Login, false);

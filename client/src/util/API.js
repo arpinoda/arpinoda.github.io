@@ -1,10 +1,4 @@
 import AUTH from './AUTH';
-import {
-  ClientError,
-  ClientWarning,
-  WarningTypes,
-  ErrorTypes,
-} from '../models/Logging';
 
 class API {
   constructor({ url }) {
@@ -26,9 +20,7 @@ class API {
     const resourceURL = `${this.url}/${name}`;
 
     endpoints.getAll = ({ query } = {}) =>
-      this.authenticatedFetch(resourceURL, { params: { query } }).then(res =>
-        res.json(),
-      );
+      this.authenticatedFetch(resourceURL, { params: { query } });
 
     endpoints.getOne = id => this.authenticatedFetch(`${resourceURL}/${id}`);
 
@@ -36,27 +28,17 @@ class API {
   }
 
   authenticatedFetch = (url, options) =>
-    this.auth.fetch(url, options).then(res => {
-      if (res.status === 401) {
-        this.auth.logout();
-        setTimeout(() => {
-          window.location.reload();
-        }, 800);
-        throw new ClientWarning(
-          WarningTypes.TokenExpiredWarning,
-          `tried accessing url: ${url}`,
-          'HTTP 401: Unauthorized',
-        );
-      } else if (res.status > 399) {
-        throw new ClientError(
-          ErrorTypes.HttpError,
-          `URL: ${url}`,
-          false,
-          res.statusText,
-        );
-      }
-      return res;
-    });
+    this.auth
+      .fetch(url, options)
+      .then(res => res)
+      .catch(err => {
+        if (err.message === 'Unauthorized') {
+          this.auth.logout();
+          return window.location.reload();
+        }
+
+        return err;
+      });
 }
 
 export default API;

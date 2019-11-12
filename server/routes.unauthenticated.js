@@ -2,7 +2,9 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const cors = require('./cors');
 const util = require('./util');
+const { FailedLoginError, ClientError } = require('./errors');
 const { API_PATH } = process.env;
+const TOKEN_LIFETIME_STRING = '6h';
 
 /**
  * Retrieves pertinent unauthenticated routes
@@ -31,8 +33,12 @@ function common(app, express, logger) {
    * GET /robots.txt
    * Returns local robots.txt file
   */
-  app.get('/robots.txt', (req, res) =>
-    res.sendFile(path.join(__dirname, 'robots.txt')),
+  app.get('/robots.txt', (req, res, next) =>
+    res.sendFile(path.join(__dirname, 'robots.txt'), {}, (err) => {
+      if (err) {
+        next (err);
+      }
+    }),
   );
 
   /**
@@ -52,7 +58,7 @@ function common(app, express, logger) {
 
     if (passcode === process.env.PASSCODE) {
       const token = jwt.sign({ IP }, process.env.JWT_SECRET, {
-        expiresIn: 60 * 10,
+        expiresIn: TOKEN_LIFETIME_STRING,
       });
       res.status(200).json({
         success: true,
@@ -60,11 +66,7 @@ function common(app, express, logger) {
         token,
       });
     } else {
-      res.status(401).json({
-        success: false,
-        token: null,
-        err: 'Invalid passcode',
-      });
+      throw new FailedLoginError();
     }
   });
 
@@ -74,21 +76,12 @@ function common(app, express, logger) {
    * Log items are sent to Papertrail via Winston.
   */
   app.post('/log-client-errors', (req, res) => {
-    let type = req.body.error.type;
-    let details = req.body.error.details;
-    let message = req.body.error.message;
-    let stack = req.body.error.stack;
-    let clientDate = req.body.error.clientDate;
-    let name = req.body.error.name;
+    const { error } = req.body;
+    const { stack } = error;
 
-    const logItem = util.createLogItem(type, details, message, stack, clientDate);
-    
-    // Log via console or papertrail transport, depending upon NODE_ENV
-    if (name.toLowerCase().includes('warning')) {
-      logger.warn(logItem);
-    } else {
-      logger.error(logItem);
-    }
+    const errorMessage = `${stack}`;
+
+    logger.error(errorMessage);
     
     res.sendStatus(200);
   });
@@ -114,8 +107,12 @@ function production(app, express, logger) {
    * Returns specific static assets from dist directory
   */
   app.get(
-    ['/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
-    (req, res) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path)),
+    ['/favicon*', '/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
+    (req, res) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path), {}, (err) => {
+      if (err) {
+        next (err);
+      }
+    }),
   );
 
   /**
@@ -139,4 +136,16 @@ function development(app) {
   app.get('/project*', (req, res) => {
     res.redirect(`/?next=${req.path}`);
   });
+
+  /**
+   * GET /favicon*
+   * Returns favicon in dev mode from src/static/ directory
+  */
+  app.get('/favicon*', (req, res, next) =>
+    res.sendFile(path.join(__dirname, '/../client/src/static/favicon/', req.path), {}, (err) => {
+      if (err) {
+        next(err);
+      }
+    })
+  );
 }

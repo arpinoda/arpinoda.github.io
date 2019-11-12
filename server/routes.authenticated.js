@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const exjwt = require('express-jwt');
 const util = require('./util');
+const { BadRequestError, ResourceNotFoundError } = require('./errors');
 
 /**
  * Authenticated routes used within development and production
@@ -15,7 +16,7 @@ module.exports = (app, express, logger) => {
   const jwtMW = exjwt({
     secret: process.env.JWT_SECRET,
   });
-  app.use(jwtMW);
+  app.use(API_PATH, jwtMW);
 
   // Read and parse local json into memory
   var projectDetails = '';
@@ -27,7 +28,7 @@ module.exports = (app, express, logger) => {
     projectDetails = JSON.parse(detailsRaw);
 
   } catch (error) {
-    logger.error(`Error: projectDetail.json.\nStack: ${error.stack}`);
+    logger.error(`Error: projectDetail.json. ${error.message}`);
   }
   
   /**
@@ -65,36 +66,17 @@ module.exports = (app, express, logger) => {
     const { id } = req.params;
 
     if (!util.isInt(id)) {
-      return res.sendStatus(400);
+      throw new BadRequestError(`Integer required. Received: ${id}`)
     }
 
     const projectID = parseInt(id, 10);
     const project = projectDetails.find(x => x.projectID === projectID);
 
     if (!project) {
-      return res.sendStatus(404);
+      throw new ResourceNotFoundError(`'Project'`, `projectID: ${projectID}`);
     }
 
     const { media } = project;
     return res.json(media);
-  });
-
-  /**
-   * Handling 401 error
-  */
-  app.use(function (err, req, res, next) {
-    if (err.name === 'UnauthorizedError') {
-      const logItem = util.createLogItem(
-        err.name,
-        `url path: ${req.originalUrl}`,
-        err.message,
-        err.stack,
-        new Date()
-      );
-
-      logger.error(logItem);
-
-      res.sendStatus(401);
-    }
   });
 };

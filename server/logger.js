@@ -1,7 +1,12 @@
 const winston = require('winston');
 const	Papertrail = require('winston-papertrail').Papertrail;
+const { config } = winston;
+let logger;
 
-var logger;
+const getFormatter = (options) => new Date().toLocaleString() + ' ' +
+    config.colorize(options.level, options.level.toUpperCase()) + ' ' +
+    (options.message ? options.message : '') +
+    (options.meta && Object.keys(options.meta).length ? '\n\t'+ JSON.stringify(options.meta) : '' );
 
 if (process.env.NODE_ENV === 'production') {
   const ptTransport = new Papertrail({
@@ -9,7 +14,8 @@ if (process.env.NODE_ENV === 'production') {
     host: process.env.PAPERTRAIL_HOST,
     port: process.env.PAPERTRAIL_PORT,
     colorize:true,
-    handleExceptions: true
+    handleExceptions: true,
+    formatter: getFormatter
   });
   
   ptTransport.on('error', function(err) {
@@ -29,13 +35,8 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   const consoleLogger = new winston.transports.Console({
     level: 'debug',
-    logFormat: function(level, message) {
-      return '[' + level + '] ' + message;
-    },
-    timestamp: function() {
-      return new Date().toString();
-    },
-    colorize: true
+    colorize: true,
+    formatter: getFormatter
   });
 
   logger = new winston.Logger({

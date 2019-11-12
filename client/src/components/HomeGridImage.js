@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fetchImage, LOADING_IMAGE } from '../util/UI';
+import { fetchProtectedImage, LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 
 class HomeGridThumbnail extends React.Component {
@@ -17,7 +17,7 @@ class HomeGridThumbnail extends React.Component {
     const { thumbnail } = project.media;
 
     // LoadingImage has just displayed,
-    fetchImage(thumbnail)
+    fetchProtectedImage(thumbnail)
       .then(url => this.setState({ imageSrc: url }))
       .catch(error => setEventError(error));
   }

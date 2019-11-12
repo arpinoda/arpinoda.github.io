@@ -21,8 +21,10 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.enable('trust proxy');
 
 require('./routes')(app, express, logger);
+require('./errorHandlers')(app, logger);
 
 app.listen(PORT);
 logger.info(`Listening on port: ${PORT}`);
