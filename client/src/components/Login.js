@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
 import withErrorHandler from './withErrorHandler';
-import { LOADING_IMAGE } from '../util/UI';
-import arrowRight from '../static/images/public/right-arrow.svg';
+import { LOADING_IMAGE, ARROW_RIGHT_IMAGE } from '../util/UI';
 
 class Login extends React.Component {
   constructor(props) {
@@ -98,7 +97,7 @@ class Login extends React.Component {
               spellCheck="false"
             >
               <img
-                src={arrowRight}
+                src={ARROW_RIGHT_IMAGE}
                 className="svg"
                 alt="login"
                 style={{
