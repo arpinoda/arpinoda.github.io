@@ -34,7 +34,7 @@ function common(app, express, logger) {
    * Returns local robots.txt file
   */
   app.get('/robots.txt', (req, res, next) =>
-    res.sendFile(path.join(__dirname, 'robots.txt'), {}, (err, next) => {
+    res.sendFile(path.join(__dirname, 'robots.txt'), {}, (err) => {
       if (err) {
         next(err);
       }
@@ -108,7 +108,7 @@ function production(app, express, logger) {
   */
   app.get(
     ['/favicon*', '/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
-    (req, res) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path), {}, (err) => {
+    (req, res, next) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path), {}, (err) => {
       if (err) {
         next(err);
       }
