@@ -34,7 +34,7 @@ function common(app, express, logger) {
    * Returns local robots.txt file
   */
   app.get('/robots.txt', (req, res, next) =>
-    res.sendFile(path.join(__dirname, 'robots.txt'), {}, (err) => {
+    res.sendFile(path.join(__dirname, 'robots.txt'), {}, (err, req, res, next) => {
       if (err) {
         next (err);
       }
