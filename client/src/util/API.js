@@ -30,14 +30,13 @@ class API {
   authenticatedFetch = (url, options) =>
     this.auth
       .fetch(url, options)
-      .then(res => res)
+      .then(res => res.json())
       .catch(err => {
         if (err.message === 'Unauthorized') {
           this.auth.logout();
           return window.location.reload();
         }
-
-        return err;
+        throw err;
       });
 }
 

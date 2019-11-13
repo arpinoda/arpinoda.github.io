@@ -10,6 +10,7 @@ class HomeGrid extends React.Component {
     if (categories) {
       result = categories.length !== prevProps.categories.length;
     }
+
     return result;
   }
 

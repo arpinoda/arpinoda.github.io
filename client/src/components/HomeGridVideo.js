@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import API from '../util/API';
-import { fetchProtectedImage, LOADING_IMAGE } from '../util/UI';
+import { LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 
 class HomeGridVideo extends React.Component {
@@ -28,12 +28,11 @@ class HomeGridVideo extends React.Component {
   }
 
   componentDidMount() {
-    const { project, setEventError } = this.props;
-    const { thumbnail } = project.media;
-
-    fetchProtectedImage(thumbnail)
-      .then(url => this.setState({ posterSrc: url }))
-      .catch(error => setEventError(error));
+    // const { project, setEventError } = this.props;
+    // const { thumbnail } = project.media;
+    // fetchProtectedImage(thumbnail)
+    //   .then(url => this.setState({ posterSrc: url }))
+    //   .catch(error => setEventError(error));
   }
 
   componentDidUpdate(prevProps) {
@@ -143,7 +142,7 @@ HomeGridVideo.propTypes = {
   downloadCompleteCallback: PropTypes.func,
   minimizeDetailCallback: PropTypes.func,
   isHovering: PropTypes.bool,
-  setEventError: PropTypes.func,
+  // setEventError: PropTypes.func,
 };
 
 export default HomeGridVideo;

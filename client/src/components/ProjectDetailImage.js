@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProjectDetailVideo from './ProjectDetailVideo';
-import { fetchProtectedImage, LOADING_IMAGE } from '../util/UI';
+import { LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 
 class ProjectDetailImage extends React.Component {
@@ -14,11 +14,10 @@ class ProjectDetailImage extends React.Component {
   }
 
   componentDidMount() {
-    const { image, setEventError } = this.props;
-
-    fetchProtectedImage(image.item)
-      .then(url => this.setState({ blobURL: url }))
-      .catch(error => setEventError(error));
+    // const { image, setEventError } = this.props;
+    // getProtectedImage(image.item)
+    //   .then(url => this.setState({ blobURL: url }))
+    //   .catch(error => setEventError(error));
   }
 
   addDefaultSrc = e => {

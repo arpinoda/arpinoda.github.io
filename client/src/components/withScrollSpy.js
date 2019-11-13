@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ACTIVE_SCROLL_OFFSET } from '../util/UI';
+import { ACTIVE_SCROLL_OFFSET, HASH_PREFIX } from '../util/UI';
 import History from './History';
 
 // adapted from https://github.com/denislins/scrollmenu
@@ -14,7 +14,7 @@ const withScrollSpy = OriginalComponent => {
       };
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
       this.tryinit();
     }
 
@@ -27,7 +27,8 @@ const withScrollSpy = OriginalComponent => {
       const { hasInitialized } = this.state;
       if (!hasInitialized) {
         const { selectors } = this.props;
-        if (selectors !== undefined) {
+
+        if (selectors.length !== 0) {
           this.domLoaded();
           this.setState({
             hasInitialized: true,
@@ -45,6 +46,7 @@ const withScrollSpy = OriginalComponent => {
       this.getSectionPositions();
       this.bindWindowEvents();
       this.bindNavItems();
+      this.doInitialScroll();
     };
 
     initDefaultOptions = () => {
@@ -76,6 +78,18 @@ const withScrollSpy = OriginalComponent => {
         const element = document.querySelector(`nav a[href='/#${selector}']`);
         this.items.push(element);
       });
+    };
+
+    doInitialScroll = () => {
+      // NavLink will already match the url to side nav item and set active class
+      const activeItem = this.items.find(item =>
+        item.classList.contains('active'),
+      );
+
+      if (activeItem) {
+        activeItem.classList.remove('active');
+        this.onNavItemClick({ target: activeItem });
+      }
     };
 
     getTargetOffset = item => {
@@ -119,7 +133,14 @@ const withScrollSpy = OriginalComponent => {
       });
     };
 
-    onNavItemClick = () => {};
+    onNavItemClick = e => {
+      const { href } = e.target;
+      const item = this.items.find(i => i.href === href);
+      this.changeActiveNavItem(item);
+      const id = item.hash.replace(HASH_PREFIX, '');
+      const $bodyTarget = document.getElementById(id);
+      $bodyTarget.scrollIntoView();
+    };
 
     updateLocationHash = href => {
       History.replace(href);
@@ -218,7 +239,7 @@ const withScrollSpy = OriginalComponent => {
     };
 
     render() {
-      return <OriginalComponent callback={this.initCallback} {...this.props} />;
+      return <OriginalComponent {...this.props} />;
     }
   }
 

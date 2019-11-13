@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
 import withErrorHandler from './withErrorHandler';
-import { LOADING_IMAGE, ARROW_RIGHT_IMAGE } from '../util/UI';
+import { LOADING_IMAGE, ARROW_RIGHT_IMAGE, nextPathFromHref } from '../util/UI';
 
+/**
+ * Responsible for granting user access to Home component.
+ */
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
+    /** Redirects user to Home component, if logged in */
     if (this.auth.loggedIn()) {
       const { history } = this.props;
       history.replace('/');
@@ -23,6 +27,7 @@ class Login extends React.Component {
   }
 
   onInputChange = e => {
+    /** Sets the state to text input's value */
     const { target } = e;
     this.setState({
       passcode: target.value,
@@ -30,6 +35,7 @@ class Login extends React.Component {
   };
 
   handleFormSubmit = e => {
+    /** Performs HTTP request for authenticating the user */
     e.preventDefault();
     const { passcode } = this.state;
 
@@ -43,18 +49,14 @@ class Login extends React.Component {
       .login(passcode)
       .then(() => {
         const { href } = window.location;
-        let redirectTo = '/';
-
-        if (href.indexOf('next=') > 0) {
-          redirectTo = href.substring(href.indexOf('next=') + 5);
-        }
+        const redirectTo = nextPathFromHref(href);
 
         return history.replace(redirectTo);
       })
       .catch(error => {
         let { message } = error;
 
-        if (message === 'Unauthorized') {
+        if (message.toLowerCase().includes('unauthorized')) {
           message = 'Whoops, incorrect passcode! Please try again.';
         }
 
@@ -119,6 +121,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
+  /** Used for redirecting user to Home component */
   history: PropTypes.object,
 };
 

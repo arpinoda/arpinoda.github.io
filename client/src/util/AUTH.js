@@ -65,7 +65,7 @@ export default class AUTH {
     })
       .then(res => {
         if (!res.ok) {
-          throw Error(res.statusText);
+          throw Error(`HTTP ${res.status} - ${res.statusText} ${url}`);
         }
         return res;
       })

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fetchProtectedImage, LOADING_IMAGE } from '../util/UI';
+import { LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 
 class HomeGridThumbnail extends React.Component {
@@ -13,13 +13,12 @@ class HomeGridThumbnail extends React.Component {
   }
 
   componentDidMount() {
-    const { project, setEventError } = this.props;
-    const { thumbnail } = project.media;
-
+    // const { project, setEventError } = this.props;
+    // const { thumbnail } = project.media;
     // LoadingImage has just displayed,
-    fetchProtectedImage(thumbnail)
-      .then(url => this.setState({ imageSrc: url }))
-      .catch(error => setEventError(error));
+    // fetchProtectedImage(thumbnail)
+    //   .then(url => this.setState({ imageSrc: url }))
+    //   .catch(error => setEventError(error));
   }
 
   addDefaultSrc = e => {
@@ -44,7 +43,7 @@ class HomeGridThumbnail extends React.Component {
 HomeGridThumbnail.propTypes = {
   project: PropTypes.object.isRequired,
   className: PropTypes.string,
-  setEventError: PropTypes.func,
+  // setEventError: PropTypes.func,
 };
 
 export default HomeGridThumbnail;
