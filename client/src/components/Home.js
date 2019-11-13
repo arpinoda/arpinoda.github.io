@@ -10,6 +10,8 @@ import { setDefaultHash } from './History';
 
 /**
  * Access-restricted component displaying projects, project details, and categories
+ * @param {Object[]} scrollIDs Element ID's used by ScrollSpy
+ * @param {Object[]} categories Category models containing projects
  */
 const Home = ({ scrollIDs, categories }) => {
   setDefaultHash(categories);

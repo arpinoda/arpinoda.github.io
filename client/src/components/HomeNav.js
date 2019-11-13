@@ -4,11 +4,17 @@ import TreeItem from './TreeItem';
 import HomeNavLink from './HomeNavLink';
 import withScrollSpy from './withScrollSpy';
 
+/**
+ * The site's main navigation. Displayed on left for tablet & desktop, top of screen for mobile.
+ * @param {Object[]} categories An array of category objects loaded by withDataLoader HOC.
+ */
 const HomeNav = ({ categories }) => (
   <nav className="relative">
     <ul className="list-reset pl3 pt4 pb4 fixed top-0 bottom-0">
       {categories &&
         categories.map(category => (
+          // Render a recursion-capable "TreeItem" component,
+          // since category models may be nested within one another.
           <TreeItem
             item={category}
             key={category.categoryID}

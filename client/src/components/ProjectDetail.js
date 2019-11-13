@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history, { previousFragment } from './History';
-import { lockScroll, unlockScroll } from '../util/UI';
+import { disableScrollAt, enableScroll } from '../util/UI';
 import API from '../util/API';
 import ProjectDetailSection from './ProjectDetailSection';
 import NotFoundImage from '../static/images/public/not-found.jpg';
@@ -33,13 +33,13 @@ class ProjectDetail extends React.Component {
       isLoading: true,
     });
 
-    lockScroll(this.scrollY);
+    disableScrollAt(this.scrollY);
 
     this.getDetails();
   }
 
   componentWillUnmount() {
-    unlockScroll();
+    enableScroll();
   }
 
   getDetails = () => {
@@ -69,20 +69,20 @@ class ProjectDetail extends React.Component {
     if (previousURL !== '') {
       history.goBack();
       setTimeout(() => {
-        unlockScroll();
+        enableScroll();
       }, 100);
     } else {
       history.push('/');
       history.goBack();
       setTimeout(() => {
         history.goForward();
-        unlockScroll();
+        enableScroll();
       }, 100);
     }
   };
 
   render = () => {
-    this.scrollY = lockScroll(this.scrollY);
+    this.scrollY = disableScrollAt(this.scrollY);
     const { setEventError } = this.props;
     const { isLoading, media, errorMessage } = this.state;
 

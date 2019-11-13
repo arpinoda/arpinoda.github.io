@@ -1,15 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ACTIVE_SCROLL_OFFSET, HASH_PREFIX } from '../util/UI';
+import { HASH_PREFIX } from '../util/UI';
 import History from './History';
 
-// adapted from https://github.com/denislins/scrollmenu
+/**
+ * Scroll spy functionality for a React component. Applies an 'active' css class to a navigation
+ * element whose corresponding body content is focused on screen. OriginalComponent must have
+ * a "selectors" property containing element ID's.
+ * Adapted from https://github.com/denislins/scrollmenu
+ * @param {Object} OriginalComponent A react component to apply ScrollSpy functionality
+ */
 const withScrollSpy = OriginalComponent => {
   class ScrollSpy extends React.Component {
     constructor(props) {
       super(props);
 
+      // Class name applied to active anchor elements
       this.ACTIVE_CLASS_NAME = 'active';
+
+      // Padding added to recognize a section as active when scrolling
+      this.ACTIVE_SCROLL_OFFSET = 150;
 
       this.state = {
         hasInitialized: false,
@@ -53,7 +63,7 @@ const withScrollSpy = OriginalComponent => {
 
     initDefaultOptions = () => {
       this.options = {
-        activeOffset: ACTIVE_SCROLL_OFFSET,
+        activeOffset: this.ACTIVE_SCROLL_OFFSET,
         urlPathName: '/',
       };
     };
@@ -69,6 +79,7 @@ const withScrollSpy = OriginalComponent => {
     };
 
     initNavItems = selectors => {
+      // Looks up element in DOM by selector and stores result in this.items array.
       this.$nav = document.querySelector('nav');
       this.items = [];
 
@@ -83,19 +94,22 @@ const withScrollSpy = OriginalComponent => {
     };
 
     doInitialScroll = () => {
-      // Use URL hash to lookup and set active item
+      // Upon intitialization (page load), scrolls to section specified by href
       const { href } = window.location;
+
+      // Use href to lookup item from collection
       const item = this.items.find(i => i.href === href);
 
       if (item) {
         item.classList.remove(this.ACTIVE_CLASS_NAME);
         setTimeout(() => {
-          this.onNavItemClick({ target: item });
+          this.onNavItemClick({ target: item }); // "scroll" by calling click handler
         }, 200);
       }
     };
 
     getTargetOffset = item => {
+      // Looks element up in dom and returns its offset top property.
       let selector = item.getAttribute('href');
 
       if (selector.match(/^#?$/)) {
@@ -117,6 +131,7 @@ const withScrollSpy = OriginalComponent => {
     };
 
     bindNavItems = () => {
+      // Hooks into anchor onclick event
       this.items.forEach(item => {
         item.addEventListener('click', this.onNavItemClick);
       });
@@ -137,8 +152,13 @@ const withScrollSpy = OriginalComponent => {
     };
 
     onNavItemClick = e => {
+      // Looks up item in collection, sets result active, scrolls to
+      // corresponding section.
       const { href } = e.target;
       const item = this.items.find(i => i.href === href);
+
+      if (!item) return;
+
       this.changeActiveNavItem(item);
       const id = item.hash.replace(HASH_PREFIX, '');
       const $bodyTarget = document.getElementById(id);
@@ -151,6 +171,7 @@ const withScrollSpy = OriginalComponent => {
     };
 
     setNavScrollPosition = href => {
+      // Scrolls side navigation as body is scrolled.
       const $list = this.$nav.querySelector('ul');
       const itemDepth = href.split('/').length - 1;
 
@@ -185,7 +206,7 @@ const withScrollSpy = OriginalComponent => {
     };
 
     updateActiveNavItem = () => {
-      // if scrolled to the end of the page
+      // Fired as the page is scrolled. Identifies the item that should be active.
       const scrolledDistance = this.getScrollOffset() + window.innerHeight;
 
       if (scrolledDistance === document.body.clientHeight) {
@@ -214,18 +235,19 @@ const withScrollSpy = OriginalComponent => {
       });
     };
 
-    resetParentActiveNavItem = () => {
-      this.$nav.querySelectorAll('.has-active').forEach(item => {
-        item.classList.remove('has-active');
-      });
-    };
-
     changeActiveNavItem = item => {
       if (!item.classList.contains(this.ACTIVE_CLASS_NAME)) {
         this.resetActiveNavItem();
         item.classList.add(this.ACTIVE_CLASS_NAME);
         this.updateLocationHash(item.getAttribute('href'));
       }
+    };
+
+    // TODO : Extract this and implement via callback
+    resetParentActiveNavItem = () => {
+      this.$nav.querySelectorAll('.has-active').forEach(item => {
+        item.classList.remove('has-active');
+      });
     };
 
     changeActiveParentItem = item => {
@@ -240,6 +262,7 @@ const withScrollSpy = OriginalComponent => {
         this.resetParentActiveNavItem();
       }
     };
+    // --- End
 
     render() {
       return <OriginalComponent {...this.props} />;

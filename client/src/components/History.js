@@ -1,6 +1,11 @@
 import { createBrowserHistory } from 'history';
 import { HASH_PREFIX } from '../util/UI';
 
+/**
+ * Wrapper for History package. Automatically stores previous
+ * URL fragment every time changes occur within current location
+ * https://github.com/ReactTraining/history
+ */
 const history = createBrowserHistory();
 let previous = '';
 
