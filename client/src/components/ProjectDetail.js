@@ -38,6 +38,10 @@ class ProjectDetail extends React.Component {
     this.getDetails();
   }
 
+  componentWillUnmount() {
+    unlockScroll();
+  }
+
   getDetails = () => {
     const { projectID } = this.state;
 
