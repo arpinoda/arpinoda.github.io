@@ -8,7 +8,9 @@ const withScrollSpy = OriginalComponent => {
   class ScrollSpy extends React.Component {
     constructor(props) {
       super(props);
-      this.props = props;
+
+      this.ACTIVE_CLASS_NAME = 'active';
+
       this.state = {
         hasInitialized: false,
       };
@@ -86,7 +88,7 @@ const withScrollSpy = OriginalComponent => {
       const item = this.items.find(i => i.href === href);
 
       if (item) {
-        item.classList.remove('active');
+        item.classList.remove(this.ACTIVE_CLASS_NAME);
         setTimeout(() => {
           this.onNavItemClick({ target: item });
         }, 200);
@@ -208,7 +210,7 @@ const withScrollSpy = OriginalComponent => {
 
     resetActiveNavItem = () => {
       this.items.forEach(item => {
-        item.classList.remove('active');
+        item.classList.remove(this.ACTIVE_CLASS_NAME);
       });
     };
 
@@ -219,9 +221,9 @@ const withScrollSpy = OriginalComponent => {
     };
 
     changeActiveNavItem = item => {
-      if (!item.classList.contains('active')) {
+      if (!item.classList.contains(this.ACTIVE_CLASS_NAME)) {
         this.resetActiveNavItem();
-        item.classList.add('active');
+        item.classList.add(this.ACTIVE_CLASS_NAME);
         this.updateLocationHash(item.getAttribute('href'));
       }
     };
