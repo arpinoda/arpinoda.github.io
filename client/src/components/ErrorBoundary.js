@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Adapted from https://github.com/anacicconi/universal-react-logger
+/**
+ * Catches render & event errors for child components and logs accordingly.
+ * If error is crticial, show error screen preventing user from using app.
+ */
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -9,8 +13,6 @@ class ErrorBoundary extends React.Component {
       renderError: null,
       renderErrorInfo: null,
     };
-    this.resetRenderError = this.resetRenderError.bind(this);
-    this.resetEventError = this.resetEventError.bind(this);
   }
 
   componentDidUpdate() {
@@ -38,7 +40,7 @@ class ErrorBoundary extends React.Component {
         };
       }
 
-      // send the errors to the server
+      // Send the errors to the server
       fetch('/log-client-errors', {
         method: 'post',
         headers: {
@@ -50,6 +52,17 @@ class ErrorBoundary extends React.Component {
     }
   }
 
+  resetRenderError = () => {
+    this.setState({
+      renderError: null,
+      renderErrorInfo: null,
+    });
+  };
+
+  resetEventError = () => {
+    this.props.eventError = null;
+  };
+
   componentDidCatch(renderError, renderErrorInfo) {
     this.setState({
       renderError,
@@ -57,21 +70,11 @@ class ErrorBoundary extends React.Component {
     });
   }
 
-  resetRenderError() {
-    this.setState({
-      renderError: null,
-      renderErrorInfo: null,
-    });
-  }
-
-  resetEventError() {
-    this.props.eventError = null;
-  }
-
   render() {
     const { eventError, children } = this.props;
     const { renderError } = this.state;
 
+    // If the error is critical, show error page
     if (renderError || (eventError && eventError.showErrorPage)) {
       return (
         <div className="center pt4">
@@ -100,7 +103,7 @@ class ErrorBoundary extends React.Component {
       );
     }
 
-    // if the component error is not critical keep displaying the children
+    // If the error is NOT critical, display children
     return children;
   }
 }

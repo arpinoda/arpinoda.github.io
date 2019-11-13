@@ -1,9 +1,14 @@
 import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 
-// Adapted via https://github.com/anacicconi/universal-react-logger
-function withErrorHandler(WrappedComponent) {
-  return class extends React.Component {
+/**
+ * Wraps a component within an ErrorBoundary and exposes a function for catching & logging
+ * event-based errors.
+ * Adapted via https://github.com/anacicconi/universal-react-logger
+ * @param {Object} WrappedComponent A React component to inherit render and event error handling
+ */
+const withErrorHandler = WrappedComponent => {
+  class Outer extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -41,7 +46,9 @@ function withErrorHandler(WrappedComponent) {
         </ErrorBoundary>
       );
     }
-  };
-}
+  }
+
+  return Outer;
+};
 
 export default withErrorHandler;
