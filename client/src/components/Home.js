@@ -6,23 +6,26 @@ import HomeGrid from './HomeGrid';
 import ProjectDetail from './ProjectDetail';
 import withAuth from './withAuth';
 import withDataLoader from './withDataLoader';
+import { setDefaultHash } from './History';
 
 /**
  * Access-restricted component displaying projects, project details, and categories
  */
-const Home = ({ scrollIDs, categories }) => (
-  <>
-    <section className="flex container">
-      <HomeNav selectors={scrollIDs} categories={categories} />
-      <HomeGrid categories={categories} />
-    </section>
-
-    <Route
-      path="/project/:id"
-      render={routeProps => <ProjectDetail {...routeProps} />}
-    />
-  </>
-);
+const Home = ({ scrollIDs, categories }) => {
+  setDefaultHash(categories);
+  return (
+    <>
+      <section className="flex container">
+        <HomeNav selectors={scrollIDs} categories={categories} />
+        <HomeGrid categories={categories} />
+      </section>
+      <Route
+        path="/project/:id"
+        render={routeProps => <ProjectDetail {...routeProps} />}
+      />
+    </>
+  );
+};
 
 Home.propTypes = {
   categories: PropTypes.array,

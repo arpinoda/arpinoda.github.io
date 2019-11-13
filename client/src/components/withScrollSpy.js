@@ -81,14 +81,15 @@ const withScrollSpy = OriginalComponent => {
     };
 
     doInitialScroll = () => {
-      // NavLink will already match the url to side nav item and set active class
-      const activeItem = this.items.find(item =>
-        item.classList.contains('active'),
-      );
+      // Use URL hash to lookup and set active item
+      const { href } = window.location;
+      const item = this.items.find(i => i.href === href);
 
-      if (activeItem) {
-        activeItem.classList.remove('active');
-        this.onNavItemClick({ target: activeItem });
+      if (item) {
+        item.classList.remove('active');
+        setTimeout(() => {
+          this.onNavItemClick({ target: item });
+        }, 200);
       }
     };
 
