@@ -54,7 +54,7 @@ class Login extends React.Component {
       })
       .catch(error => {
         let { message } = error;
-
+        console.log(error, error.statusCode);
         if (error.name === 'ClientError') {
           if (error.statusCode === 401) {
             message =
