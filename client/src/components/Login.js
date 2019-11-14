@@ -54,12 +54,10 @@ class Login extends React.Component {
       })
       .catch(error => {
         let { message } = error;
-        console.log(error, error.statusCode);
-        if (error.name === 'ClientError') {
-          if (error.statusCode === 401) {
-            message =
-              'Whoops! Passcode is incorrect or has expired.\n\nPlease try again.';
-          }
+
+        if (error.statusCode && error.statusCode === 401) {
+          message =
+            'Whoops! Passcode is incorrect or has expired.\n\nPlease try again.';
         }
 
         alert(message); // eslint-disable-line
