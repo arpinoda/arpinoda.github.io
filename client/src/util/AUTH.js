@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+import { ClientError } from '../../../server/errors';
+
 // adapted via
 // https://medium.com/@romanchvalbo/how-i-set-up-react-and-node-with-json-web-token-for-authentication-259ec1a90352
 
@@ -65,7 +67,7 @@ export default class AUTH {
     })
       .then(res => {
         if (!res.ok) {
-          throw Error(`HTTP ${res.status} - ${res.statusText} ${url}`);
+          throw new ClientError(false, res.status, res.statusText);
         }
         return res;
       })

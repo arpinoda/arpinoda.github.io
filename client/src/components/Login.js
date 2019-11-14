@@ -5,7 +5,7 @@ import withErrorHandler from './withErrorHandler';
 import { LOADING_IMAGE, ARROW_RIGHT_IMAGE, nextPathFromHref } from '../util/UI';
 
 /**
- * Responsible for granting user access to Home component.
+ * Grants user access to Home component and its children.
  */
 class Login extends React.Component {
   constructor(props) {
@@ -56,8 +56,11 @@ class Login extends React.Component {
       .catch(error => {
         let { message } = error;
 
-        if (message.toLowerCase().includes('unauthorized')) {
-          message = 'Whoops, incorrect passcode! Please try again.';
+        if (error.name === 'ClientError') {
+          if (error.statusCode === 401) {
+            message =
+              'Whoops!\nPasscode is incorrect or has expired.\nPlease try again.';
+          }
         }
 
         alert(message); // eslint-disable-line

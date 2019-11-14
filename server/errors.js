@@ -1,6 +1,7 @@
 class ClientError extends Error {
   constructor(
     showErrorPage = false,
+    statusCode = 0,
     ...params
   ) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
@@ -15,6 +16,7 @@ class ClientError extends Error {
 
     // Custom debugging information
     this.showErrorPage = showErrorPage;
+    this.statusCode = statusCode;
   }
 }
 
