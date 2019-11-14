@@ -7,7 +7,7 @@ import { HASH_PREFIX } from '../util/UI';
  * The actual clickable NavLink component (anchor element) within HomeNav
  * @param {Object} children - The react property that contains "content" within
  * parent component's opening & closing tags.
- * @param {Object} props - Parent properties that have been spread
+ * @param {Object} props - Contains category model and className string
  */
 const HomeNavLink = ({ children, ...props }) => {
   const { category, className } = props;

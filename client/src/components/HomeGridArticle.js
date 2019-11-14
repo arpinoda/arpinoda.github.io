@@ -1,29 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HomeNavLink from './HomeNavLink';
 import HomeGridFigure from './HomeGridFigure';
 
 const HomeGridArticle = ({ category, ...props }) => {
-  if (category.projects.length === 0 && category.children) {
-    return (
-      <article id={category.elementID}>
-        {category.children.map(child => (
-          <HomeGridArticle key={child.categoryID} category={child} {...props} />
-        ))}
-      </article>
-    );
-  }
-
+  const className = `col-12 ${category.className ? category.className : ''}`;
   return (
-    <article id={category.elementID} className="flex flex-wrap">
-      <HomeNavLink
-        category={category}
-        className={category.className ? category.className : ''}
-      >
+    <article id={category.elementID} className="flex pt4 flex-wrap">
+      <div className={className}>
         <h4 className="mt2 mr3 mb2 pt2 h3 border-top">
           {category.displayCrumbs}
         </h4>
-      </HomeNavLink>
+      </div>
       {category.projects &&
         category.projects.map(project => (
           <HomeGridFigure

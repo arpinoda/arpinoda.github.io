@@ -39,7 +39,9 @@ class ProjectDetail extends React.Component {
   }
 
   componentWillUnmount() {
-    enableScroll();
+    setTimeout(() => {
+      enableScroll();
+    }, 100);
   }
 
   getDetails = () => {
@@ -68,16 +70,11 @@ class ProjectDetail extends React.Component {
 
     if (previousURL !== '') {
       history.goBack();
-      setTimeout(() => {
-        enableScroll();
-      }, 100);
     } else {
+      // User likely landed on project detail page
+      history.push('/');
       history.push('/');
       history.goBack();
-      setTimeout(() => {
-        history.goForward();
-        enableScroll();
-      }, 100);
     }
   };
 

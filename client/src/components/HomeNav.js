@@ -8,7 +8,7 @@ import withScrollSpy from './withScrollSpy';
  * The site's main navigation. Displayed on left for tablet & desktop, top of screen for mobile.
  * @param {Object[]} categories An array of category objects loaded by withDataLoader HOC.
  */
-const HomeNav = ({ categories }) => (
+const HomeNav = ({ categories, ...props }) => (
   <nav className="relative">
     <ul className="list-reset pl3 pt4 pb4 fixed top-0 bottom-0">
       {categories &&
@@ -19,7 +19,9 @@ const HomeNav = ({ categories }) => (
             item={category}
             key={category.categoryID}
             render={item => (
-              <HomeNavLink category={item}>{item.name}</HomeNavLink>
+              <HomeNavLink category={item} {...props}>
+                {item.name}
+              </HomeNavLink>
             )}
           />
         ))}

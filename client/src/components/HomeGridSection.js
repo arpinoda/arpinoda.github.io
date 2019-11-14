@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import HomeNavLink from './HomeNavLink';
 import HomeGridArticle from './HomeGridArticle';
 
+// renders root categories and subcategories
 const HomeGridSection = ({ category, ...props }) => (
   <section id={category.elementID} className="pt4">
     <HomeNavLink

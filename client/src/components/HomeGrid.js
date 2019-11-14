@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HomeGridSection from './HomeGridSection';
+import TreeItem from './TreeItem';
+import HomeGridArticle from './HomeGridArticle';
 
 class HomeGrid extends React.Component {
   shouldComponentUpdate(prevProps) {
@@ -20,10 +21,16 @@ class HomeGrid extends React.Component {
       <main className="pb4 pl2">
         {categories &&
           categories.map(category => (
-            <HomeGridSection
-              key={category.categoryID}
-              category={category}
-              {...this.props}
+            <TreeItem
+              item={category}
+              key={`HomeGrid-${category.categoryID}`}
+              render={item => (
+                <HomeGridArticle
+                  id={item.elementID}
+                  key={`Article-${item.categoryID}`}
+                  category={item}
+                />
+              )}
             />
           ))}
       </main>
