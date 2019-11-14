@@ -1,3 +1,6 @@
+/**
+ * Thrown by the React.js app, which then is logged by ErrorBoundary and POSTed to the API
+ */
 class ClientError extends Error {
   constructor(
     showErrorPage = false,
@@ -20,8 +23,9 @@ class ClientError extends Error {
   }
 }
 
-// Will be thrown by server-side code
-// and logged by server-side middleware (errorHandlers.js)
+/**
+ * Base class for errors thrown by the express.js app
+ */
 class ServerError extends Error {
   constructor(...params) {
     super(...params);
@@ -34,6 +38,9 @@ class ServerError extends Error {
   }
 }
 
+/**
+ * Thrown when a user submits the wrong passcode
+ */
 class FailedLoginError extends ServerError {
   constructor(message) {
     super(message);
@@ -41,6 +48,9 @@ class FailedLoginError extends ServerError {
   }
 }
 
+/**
+ * Thrown if a url parameter is an unexpected type
+ */
 class BadRequestError extends ServerError {
   constructor(message) {
     super(message);
@@ -48,6 +58,9 @@ class BadRequestError extends ServerError {
   }
 }
 
+/**
+ * Thrown if a requested resource does not exist
+ */
 class ResourceNotFoundError extends ServerError {
   constructor(resource, query) {
     super(`Resource '${resource}' was not found. Query: ${query}`);

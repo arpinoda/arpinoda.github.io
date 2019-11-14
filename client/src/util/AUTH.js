@@ -1,16 +1,18 @@
 import decode from 'jwt-decode';
 import { ClientError } from '../../../server/errors';
 
-// adapted via
-// https://medium.com/@romanchvalbo/how-i-set-up-react-and-node-with-json-web-token-for-authentication-259ec1a90352
-
+/**
+ * Authentication helper methods used by the React.js app
+ * Adapted via https://medium.com/@romanchvalbo
+ */
 export default class AUTH {
   constructor(baseUrl) {
     this.baseURL = baseUrl || '';
-    this.storageKey = 'id_token';
+    this.STORAGE_KEY = 'id_token';
   }
 
   login = passcode =>
+    // Make HTTP request to authenticate user
     this.fetch(`${this.baseURL}login`, {
       method: 'POST',
       body: JSON.stringify({
@@ -26,12 +28,13 @@ export default class AUTH {
       });
 
   loggedIn = () => {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken(); // Getting token from localstorage
-    return !!token && !this.isTokenExpired(token); // handwaiving here
+    // Checks if there is a saved valid token
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
   };
 
   isTokenExpired = token => {
+    // Returns whether token is still valid
     try {
       const decoded = decode(token);
       const isExpired = decoded.exp < Date.now() / 1000;
@@ -41,26 +44,35 @@ export default class AUTH {
     }
   };
 
-  setToken = idToken => localStorage.setItem(this.storageKey, idToken);
+  // Stores token within LocalStorage
+  setToken = idToken => localStorage.setItem(this.STORAGE_KEY, idToken);
 
-  getToken = () => localStorage.getItem(this.storageKey);
+  // Gets token from LocalStorage
+  getToken = () => localStorage.getItem(this.STORAGE_KEY);
 
-  logout = () => localStorage.removeItem(this.storageKey);
+  // Removes token from LocalStorage
+  logout = () => localStorage.removeItem(this.STORAGE_KEY);
 
+  // Decodes the token using jwt-decode module
   decodeToken = () => decode(this.getToken());
 
+  /**
+   * Wrapper function that sets an Authorization Header, if token is available
+   * @param {string} url The path for the resource
+   * @param {Object} options Additional customizations
+   */
   fetch = (url, options) => {
-    // performs api calls sending the required authentication headers
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
-    // Setting Authorization header
-    // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+
+    // Setting Authorization header, e.g. Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
     if (this.loggedIn()) {
       headers.Authorization = `Bearer ${this.getToken()}`;
     }
 
+    // If erroneous, create and throw ClientError to be caught by higher-level .catch() methods
     return fetch(url, {
       headers,
       ...options,

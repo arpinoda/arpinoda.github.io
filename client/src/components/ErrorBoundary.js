@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Adapted from https://github.com/anacicconi/universal-react-logger
 /**
  * Catches render & event errors for child components and logs accordingly.
- * If error is crticial, show error screen preventing user from using app.
+ * If error is crticial, error screen is displayed preventing usage of app.
+ * Adapted from https://github.com/anacicconi/universal-react-logger
  */
 class ErrorBoundary extends React.Component {
   constructor(props) {

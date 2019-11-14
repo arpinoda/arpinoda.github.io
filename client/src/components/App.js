@@ -5,10 +5,16 @@ import withErrorHandler from './withErrorHandler';
 import Home from './Home';
 import Login from './Login';
 
+/**
+ * The entry point for our React.js application, called by Index.js
+ * Creates two of three application routes. Wrapped in ErrorHandler HOC
+ * so all child-component event and render errors are collected and logged.
+ */
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // Force WebPack to include all imagery within 'static' directory
+
+    // Force WebPack to include all imagery & videos within 'static' file directory
     this.importAll(require.context('../static', true, /^\.\//));
   }
 

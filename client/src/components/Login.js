@@ -50,7 +50,6 @@ class Login extends React.Component {
       .then(() => {
         const { href } = window.location;
         const redirectTo = nextPathFromHref(href);
-
         return history.replace(redirectTo);
       })
       .catch(error => {
@@ -59,7 +58,7 @@ class Login extends React.Component {
         if (error.name === 'ClientError') {
           if (error.statusCode === 401) {
             message =
-              'Whoops!\nPasscode is incorrect or has expired.\nPlease try again.';
+              'Whoops! Passcode is incorrect or has expired.\n\nPlease try again.';
           }
         }
 
@@ -68,6 +67,7 @@ class Login extends React.Component {
   };
 
   onChange = e => {
+    // Sets the state's passcode attribute to value in <input>. Fires every time key is pressed
     const { value } = e.target;
     const passcode = value.trim();
 
