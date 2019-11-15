@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { HASH_PREFIX } from '../util/UI';
 import History from './History';
 
+// TODO: Refactor to use WindowDimensions context
+
 /**
  * Scroll spy functionality for a React component. Applies an 'active' css class to a navigation
  * element whose corresponding body content is focused on screen. OriginalComponent must have
- * a "selectors" property containing element ID's.
+ * a "scrollIDs" property containing element ID's.
  * Adapted from https://github.com/denislins/scrollmenu
  * @param {Object} OriginalComponent A react component to apply ScrollSpy functionality
  */
@@ -38,9 +40,9 @@ const withScrollSpy = OriginalComponent => {
     tryinit = () => {
       const { hasInitialized } = this.state;
       if (!hasInitialized) {
-        const { selectors } = this.props;
+        const { scrollIDs } = this.props;
 
-        if (selectors.length !== 0) {
+        if (scrollIDs.length !== 0) {
           this.domLoaded();
           this.setState({
             hasInitialized: true,
@@ -50,11 +52,11 @@ const withScrollSpy = OriginalComponent => {
     };
 
     domLoaded = () => {
-      const { options, selectors } = this.props;
+      const { options, scrollIDs } = this.props;
 
       this.initDefaultOptions();
       this.extendOptions(options);
-      this.initNavItems(selectors);
+      this.initNavItems(scrollIDs);
       this.getSectionPositions();
       this.bindWindowEvents();
       this.bindNavItems();
@@ -78,16 +80,16 @@ const withScrollSpy = OriginalComponent => {
       });
     };
 
-    initNavItems = selectors => {
+    initNavItems = scrollIDs => {
       // Looks up element in DOM by selector and stores result in this.items array.
       this.$nav = document.querySelector('nav');
       this.items = [];
 
-      if (Array.isArray(selectors) === false) {
-        selectors = [selectors];
+      if (Array.isArray(scrollIDs) === false) {
+        scrollIDs = [scrollIDs];
       }
 
-      selectors.forEach(selector => {
+      scrollIDs.forEach(selector => {
         const element = document.querySelector(`nav a[href='/#${selector}']`);
         this.items.push(element);
       });
@@ -271,7 +273,7 @@ const withScrollSpy = OriginalComponent => {
 
   ScrollSpy.propTypes = {
     options: PropTypes.object,
-    selectors: PropTypes.array,
+    scrollIDs: PropTypes.array,
     children: PropTypes.node,
   };
 

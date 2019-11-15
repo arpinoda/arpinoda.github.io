@@ -18,7 +18,7 @@ const Home = ({ scrollIDs, categories }) => {
   return (
     <>
       <section className="flex container">
-        <HomeNav selectors={scrollIDs} categories={categories} />
+        <HomeNav scrollIDs={scrollIDs} categories={categories} />
         <HomeGrid categories={categories} />
       </section>
       <Route
