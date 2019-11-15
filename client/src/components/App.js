@@ -1,51 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import withErrorHandler from './withErrorHandler';
 import Home from './Home';
 import Login from './Login';
+import WindowDimensionsProvider from './WindowDimensionsProvider';
 
 /**
  * The entry point for our React.js application, called by Index.js
  * Creates two of three application routes. Wrapped in ErrorHandler HOC
  * so all child-component event and render errors are collected and logged.
  */
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const importAll = r => r.keys().map(r);
 
-    // Force WebPack to include all imagery & videos within 'static' file directory
-    this.importAll(require.context('../static', true, /^\.\//));
-  }
+  // Force WebPack to include all imagery & videos within 'static' file directory
+  importAll(require.context('../static', true, /^\.\//));
 
-  importAll = r => r.keys().map(r);
-
-  render() {
-    const { setEventError } = this.props;
-    const customProps = {
-      setEventError,
-    };
-
-    return (
+  return (
+    <WindowDimensionsProvider>
       <BrowserRouter>
         <Switch>
           <Route
             exact
             path="/login"
-            render={routeProps => <Login {...routeProps} {...customProps} />}
+            render={routeProps => <Login {...routeProps} />}
           />
-          <Route
-            path="/"
-            render={routeProps => <Home {...routeProps} {...customProps} />}
-          />
+          <Route path="/" render={routeProps => <Home {...routeProps} />} />
         </Switch>
       </BrowserRouter>
-    );
-  }
-}
-
-App.propTypes = {
-  setEventError: PropTypes.func,
+    </WindowDimensionsProvider>
+  );
 };
 
 export default withErrorHandler(App);
