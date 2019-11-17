@@ -1,11 +1,12 @@
 @import "basscss";
-@import "basscss-colors";
 @import "basscss-background-colors";
+@import "basscss-colors";
 @import "./whitespace.css";
 @import "./media-queries.css";
 @import "./fonts.css";
 @import "./loading.css";
 @import "./video-player.css";
+@import "./login-input.css";
 
 :root {
   --container-width:1500px;
@@ -19,18 +20,20 @@
 * {
   margin: 0px;
   color: var(--black);
-  font: 300 14px 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size:14px;
   overflow: auto;
+  outline:none;
 }
 
 html, body { 
   width:100%;
 }
-
 main {
   height: calc(100% - 100px);
 }
-.border-top {
+.border {
   border-color: var(--border-color);
 }
 ul, li {
@@ -175,73 +178,19 @@ figure > img:not(.loading), figure > video {
   width:100%;
 }
 
-.login-container {
-  width: 40%;
-  margin: 0 auto;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;
-  border-radius: 3px;
-  padding: 10px;
-  margin-top:25%;
-}
-
-.embed-submit-field {
-  position: relative;
-  
-}
-
-.login-container input {
-  width: 100%;
-  width: calc(100% - 35px);
-  padding: 15px;
-  text-align: center;
-}
-
-.login-container input:focus, .login-container .button:focus {
-  outline:none;
-}
-
-.login-container .button:focus .svg {
-  opacity: 1;
-}
-
-.login-container .button {
-  position: absolute;
-  right: 7px;
-  top: 3px;
-  -webkit-transition: all .2s;
-  transition: all .2s;
-  border: none;
-  bottom: 3px;
-  width: 30px;
-  cursor: pointer;
-}
-
-.login-container .svg {
-  filter: invert(.0) sepia(0) saturate(0) hue-rotate(0deg);
-  -webkit-transition: all .2s;
-  transition: all .2s;
-  opacity: .4;
-}
-
-.login-container .button:hover .svg {
-  filter: invert(.0) sepia(0) saturate(0) hue-rotate(0deg);
-  opacity: 1;
-}
-
-.fadeIn {
-  transition: opacity 1.25s;
-  -moz-transition: opacity 1.25s;
-  opacity:1!important;
-}
 .fadeOut{
   opacity:0;
-  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
-  -moz-transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  transition: width 0.5s, height 0.5s, opacity 0.35s;
+  -moz-transition: width 0.5s, height 0.5s, opacity 0.35s;
 }
 .fadeIn{
   opacity:1;
-  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
-  -moz-transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  transition: width 0.5s, height 0.5s, opacity 0.35s;
+  -moz-transition: width 0.5s, height 0.5s, opacity 0.35s;
+}
+
+.light-shadow {
+  -webkit-box-shadow: 0px 0px 38px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 38px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 38px 0px rgba(0,0,0,0.1);
 }

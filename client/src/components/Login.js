@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
 import withErrorHandler from './withErrorHandler';
-import { LOADING_IMAGE, ARROW_RIGHT_IMAGE, nextPathFromHref } from '../util/UI';
+import LoginInput from './LoginInput';
+import { LOADING_IMAGE, nextPathFromHref } from '../util/UI';
 
 /**
  * Grants user access to Home component and its children.
@@ -13,6 +14,7 @@ class Login extends React.Component {
 
     this.state = {
       passcode: '',
+      isSubmitting: false,
     };
 
     this.auth = new AUTH();
@@ -34,14 +36,16 @@ class Login extends React.Component {
     });
   };
 
-  handleFormSubmit = e => {
+  onSubmit = e => {
     /** Performs HTTP request for authenticating the user */
     e.preventDefault();
-    const { passcode } = this.state;
+    const { passcode, isSubmitting } = this.state;
 
-    if (!passcode) {
+    if (!passcode || isSubmitting) {
       return;
     }
+
+    this.setState({ isSubmitting: true });
 
     const { history } = this.props;
 
@@ -50,6 +54,7 @@ class Login extends React.Component {
       .then(() => {
         const { href } = window.location;
         const redirectTo = nextPathFromHref(href);
+        this.setState({ isSubmitting: false });
         return history.replace(redirectTo);
       })
       .catch(error => {
@@ -59,7 +64,7 @@ class Login extends React.Component {
           message =
             'Whoops! Passcode is incorrect or has expired.\n\nPlease try again.';
         }
-
+        this.setState({ isSubmitting: false });
         alert(message); // eslint-disable-line
       });
   };
@@ -72,49 +77,32 @@ class Login extends React.Component {
     this.setState({ passcode });
   };
 
+  onKeyPress = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.onSubmit(e);
+    }
+  };
+
   render() {
-    const { passcode } = this.state;
+    const { passcode, isSubmitting } = this.state;
 
     return (
-      <div>
-        <div className="login-container">
-          <div className="embed-submit-field">
-            <input
-              tabIndex="0"
-              onChange={this.onChange}
-              type="text"
-              placeholder="Enter a passcode"
-            />
-            <div
-              type="button"
-              className={
-                passcode.length !== 0 ? 'fadeIn button' : 'fadeOut button'
-              }
-              onClick={this.handleFormSubmit}
-              role="button"
-              tabIndex="0"
-              onKeyDown={() => {}}
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="on"
-              spellCheck="false"
-            >
-              <img
-                src={ARROW_RIGHT_IMAGE}
-                className="svg"
-                alt="login"
-                style={{
-                  height: '40%',
-                  marginTop: '60%',
-                }}
-              />
-            </div>
-          </div>
-        </div>
+      <div
+        className="absolute flex login"
+        style={{ top: 'calc(50% - 50px)', left: 'calc(50% - 157px)' }}
+      >
         <img
           className="display-none"
           src={LOADING_IMAGE}
           alt="preloading asset"
+        />
+        <LoginInput
+          onChange={this.onChange}
+          onSubmit={this.onSubmit}
+          onKeyPress={this.onKeyPress}
+          isSubmitting={isSubmitting}
+          isSubmitVisible={passcode.trim().length > 0}
         />
       </div>
     );
