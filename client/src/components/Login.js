@@ -78,6 +78,7 @@ class Login extends React.Component {
   };
 
   onKeyPress = e => {
+    // Allows user to submit by pressing enter key
     if (e.key === 'Enter') {
       e.preventDefault();
       this.onSubmit(e);
