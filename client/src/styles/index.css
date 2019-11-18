@@ -78,10 +78,6 @@ nav ul:nth-child(1) > li:not(:first-child) {
 }
 
 /* Home Grid*/
-div.featured {
-  visibility: hidden;
-}
-
 figure > div {
   background-color: transparent;
   height: auto;
