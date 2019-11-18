@@ -9,8 +9,7 @@ import withScrollSpy from './withScrollSpy';
  */
 const HomeNavMobile = ({ categories }) => (
   // Additional elements ie hamburger menu, etc
-  <div>
-    asdf
+  <div className="display-none">
     <HomeNavTree categories={categories} />
   </div>
 );

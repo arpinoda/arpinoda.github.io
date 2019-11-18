@@ -21,7 +21,7 @@ const withScrollSpy = OriginalComponent => {
       this.ACTIVE_CLASS_NAME = 'active';
 
       // Padding added to recognize a section as active when scrolling
-      this.ACTIVE_SCROLL_OFFSET = 150;
+      this.ACTIVE_SCROLL_OFFSET = 0;
 
       this.state = {
         hasInitialized: false,

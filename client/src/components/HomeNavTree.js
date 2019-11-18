@@ -4,8 +4,11 @@ import TreeItem from './TreeItem';
 import HomeNavLink from './HomeNavLink';
 
 const HomeNavTree = ({ categories, ...props }) => (
-  <nav className="relative">
-    <ul className="list-reset pl3 pt4 pb4 fixed top-0 bottom-0">
+  <nav className="relative" style={{ minWidth: '215px' }}>
+    <ul
+      className="overflow-hidden list-reset pl3 pt4 pb3 fixed top-0 bottom-0"
+      style={{ scrollBehavior: 'smooth', maxWidth: '205px' }}
+    >
       {categories &&
         categories.map(category => (
           // Render a recursion-capable "TreeItem" component,
@@ -13,6 +16,7 @@ const HomeNavTree = ({ categories, ...props }) => (
           <TreeItem
             item={category}
             key={category.categoryID}
+            childGroupClass="pl2"
             render={item => (
               <HomeNavLink category={item} {...props}>
                 {item.name}

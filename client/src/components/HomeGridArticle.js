@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import HomeGridFigure from './HomeGridFigure';
 
 const HomeGridArticle = ({ category, ...props }) => {
-  const className = `col-12 ${category.className ? category.className : ''}`;
+  const divClassName = `col-12 ${category.className ? category.className : ''}`;
   return (
-    <article id={category.elementID} className="flex pt4 flex-wrap">
-      <div className={className}>
-        <h4 className="mt2 mr3 mb2 pt2 h3 border-top">
-          {category.displayCrumbs}
-        </h4>
+    <article id={category.elementID} className="flex flex-wrap">
+      <div className={divClassName}>
+        <h3 className="pt2 pr3 pb2 h3">{category.breadcrumbs}</h3>
       </div>
       {category.projects &&
         category.projects.map(project => (
