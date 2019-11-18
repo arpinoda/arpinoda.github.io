@@ -21,7 +21,11 @@ const withScrollSpy = OriginalComponent => {
       this.ACTIVE_CLASS_NAME = 'active';
 
       // Padding added to recognize a section as active when scrolling
-      this.ACTIVE_SCROLL_OFFSET = 0;
+      this.ACTIVE_SCROLL_OFFSET = 1;
+
+      if (!('scrollBehavior' in document.documentElement.style)) {
+        import('scroll-behavior-polyfill');
+      }
 
       this.state = {
         hasInitialized: false,
