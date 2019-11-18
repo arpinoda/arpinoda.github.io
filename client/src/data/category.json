@@ -129,7 +129,7 @@
   },
   {  
     "categoryID":21,
-    "name":"Front-End Web",
+    "name":"Javascript",
     "urlFragment":"front-end-web",
     "className":"",
     "parentIDs":[7],

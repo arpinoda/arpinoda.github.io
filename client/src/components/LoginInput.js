@@ -38,6 +38,10 @@ const LoginInput = ({
         onChange={onChange}
         className="input__field input__field--nao"
         type="text"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
       />
       <label className="input__label input__label--nao">
         <span className="input__label-content input__label-content--nao">
@@ -50,7 +54,7 @@ const LoginInput = ({
         id="login-submit"
         onClick={onSubmit}
         className={`pl2 pb2 pt1 mt2 absolute right-0 border-none bg-white ${
-          isSubmitVisible ? 'fadeIn' : 'fadeOut'
+          isSubmitVisible ? 'display-block' : 'display-none'
         } ${isSubmitting ? 'active' : ''}`}
       >
         <img src={ARROW_RIGHT_IMAGE} style={{ width: '22px' }} alt="submit" />

@@ -91,20 +91,22 @@ class Login extends React.Component {
     return (
       <div
         className="absolute flex login"
-        style={{ top: 'calc(50% - 50px)', left: 'calc(50% - 157px)' }}
+        style={{ top: '-40%', left: '0', right: '0', bottom: '0' }}
       >
         <img
           className="display-none"
           src={LOADING_IMAGE}
           alt="preloading asset"
         />
-        <LoginInput
-          onChange={this.onChange}
-          onSubmit={this.onSubmit}
-          onKeyPress={this.onKeyPress}
-          isSubmitting={isSubmitting}
-          isSubmitVisible={passcode.trim().length > 0}
-        />
+        <div className="m-auto">
+          <LoginInput
+            onChange={this.onChange}
+            onSubmit={this.onSubmit}
+            onKeyPress={this.onKeyPress}
+            isSubmitting={isSubmitting}
+            isSubmitVisible={passcode.trim().length > 0}
+          />
+        </div>
       </div>
     );
   }
