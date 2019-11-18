@@ -216,7 +216,7 @@ const withScrollSpy = OriginalComponent => {
       const scrolledDistance = this.getScrollOffset() + window.innerHeight;
 
       if (scrolledDistance === document.body.clientHeight) {
-        this.changeActiveNavItem(this.items[this.items.length - 1]);
+        // this.changeActiveNavItem(this.items[this.items.length - 1]);
       } else {
         const filtered = this.items.filter(
           (item, index) => this.positions[index] <= this.getScrollOffset(),
