@@ -34,7 +34,7 @@ class ProjectDetailImage extends React.Component {
         onError={this.addDefaultSrc}
         key={image.item}
         alt={image.alt}
-        className="left"
+        className="left col-12"
       />
     );
     let videoMarkup = null;

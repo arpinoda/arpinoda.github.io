@@ -17,7 +17,7 @@ const Home = ({ scrollIDs, categories }) => {
   setDefaultHash(categories);
   return (
     <>
-      <section className="flex container">
+      <section className="flex container mx-auto">
         <HomeNav scrollIDs={scrollIDs} categories={categories} />
         <HomeGrid categories={categories} />
       </section>

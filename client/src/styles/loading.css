@@ -1,3 +1,13 @@
+.fadeOut{
+  opacity:0;
+  transition: width 0.5s, height 0.5s, opacity 0.35s;
+  -moz-transition: width 0.5s, height 0.5s, opacity 0.35s;
+}
+.fadeIn{
+  opacity:1;
+  transition: width 0.5s, height 0.5s, opacity 0.35s;
+  -moz-transition: width 0.5s, height 0.5s, opacity 0.35s;
+}
 .spinner {
   width: 40px;
   height: 20px;
@@ -13,17 +23,16 @@
   line-height: 21px;
   overflow: hidden;
   color:#000!important;
+  position:absolute;
 }
 .spinner:after {
   content: 'MOV';
 }
-
 @-webkit-keyframes sk-rotateplane {
   0% { -webkit-transform: perspective(120px) }
   50% { -webkit-transform: perspective(120px) rotateY(180deg) }
   100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
 }
-
 @keyframes sk-rotateplane {
   0% { 
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
@@ -36,7 +45,6 @@
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
 }
-
 .lds-hourglass {
   display: inline-block;
   position: absolute;

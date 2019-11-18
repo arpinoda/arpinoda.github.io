@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
 
-class HomeGridThumbnail extends React.Component {
+class HomeGridImage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,18 +32,19 @@ class HomeGridThumbnail extends React.Component {
     return (
       <img
         src={imageSrc}
+        style={{ height: '100%' }}
         alt={project.name}
         onError={this.addDefaultSrc}
-        className={className}
+        className={`col-12 ${className}`}
       />
     );
   };
 }
 
-HomeGridThumbnail.propTypes = {
+HomeGridImage.propTypes = {
   project: PropTypes.object.isRequired,
   className: PropTypes.string,
   // setEventError: PropTypes.func,
 };
 
-export default HomeGridThumbnail;
+export default HomeGridImage;

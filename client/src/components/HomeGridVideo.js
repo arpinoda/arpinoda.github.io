@@ -112,27 +112,48 @@ class HomeGridVideo extends React.Component {
 
   render = () => {
     const { videoSrc, posterSrc, initalLoadComplete } = this.state;
+    const { isHovering, isVideoDownloaded, className } = this.props;
+    const gifStyle = {
+      WebkitAnimation:
+        isHovering && !isVideoDownloaded
+          ? 'sk-rotateplane 1.2s infinite ease-in-out'
+          : 'none',
+      animation:
+        isHovering && !isVideoDownloaded
+          ? 'sk-rotateplane 1.2s infinite ease-in-out'
+          : 'none',
+      color: !isHovering ? 'inherit' : 'rgba(0,0,0,0)',
+    };
 
     return (
-      <video
-        onLoadStart={() => {
-          this.setState({ initalLoadComplete: true });
-        }}
-        onLoadedData={this.onLoaded}
-        onError={this.videoLoadError}
-        ref={this.videoPlayer}
-        poster={posterSrc}
-        loop
-        preload="metadata"
-        muted
-        playsInline
-        src={videoSrc}
-        className={initalLoadComplete ? 'fadeIn' : 'fadeOut'}
-      >
-        <source src={videoSrc} type="video/mp4" />
-        Your browser does not support the video tag.
-        <track kind="captions" />
-      </video>
+      <>
+        <div
+          style={gifStyle}
+          className={`spinner z2 ${isHovering ? 'hide' : 'block'}`}
+        />
+        <video
+          onLoadStart={() => {
+            this.setState({ initalLoadComplete: true });
+          }}
+          onLoadedData={this.onLoaded}
+          onError={this.videoLoadError}
+          ref={this.videoPlayer}
+          poster={posterSrc}
+          loop
+          preload="metadata"
+          muted
+          playsInline
+          src={videoSrc}
+          style={{ height: '100%' }}
+          className={`${className} ${
+            initalLoadComplete ? 'fadeIn' : 'fadeOut'
+          }`}
+        >
+          <source src={videoSrc} type="video/mp4" />
+          Your browser does not support the video tag.
+          <track kind="captions" />
+        </video>
+      </>
     );
   };
 }
@@ -142,6 +163,8 @@ HomeGridVideo.propTypes = {
   downloadCompleteCallback: PropTypes.func,
   minimizeDetailCallback: PropTypes.func,
   isHovering: PropTypes.bool,
+  isVideoDownloaded: PropTypes.bool,
+  className: PropTypes.string,
   // setEventError: PropTypes.func,
 };
 

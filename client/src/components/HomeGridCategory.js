@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HomeGridFigure from './HomeGridFigure';
+import HomeGridProject from './HomeGridProject';
 
-const HomeGridArticle = ({ category, ...props }) => {
+/**
+ * Renders a category an child project(s)
+ * @param {Object} category A category model to render
+ */
+const HomeGridCategory = ({ category, ...props }) => {
   const divClassName = `col-12 bg-white ${
     category.className ? category.className : ''
   }`;
@@ -11,6 +15,7 @@ const HomeGridArticle = ({ category, ...props }) => {
 
   return (
     <article id={category.elementID}>
+      {/* Category Breadcrumbs */}
       <div className={divClassName}>
         <h3 className="pt2 pb2 h3">
           {hidden.map(title => (
@@ -19,10 +24,12 @@ const HomeGridArticle = ({ category, ...props }) => {
           {headings[headings.length - 1]}
         </h3>
       </div>
+
+      {/* Category Projects */}
       <div className="projects flex flex-wrap">
         {category.projects &&
           category.projects.map(project => (
-            <HomeGridFigure
+            <HomeGridProject
               key={project.projectID}
               project={project}
               {...props}
@@ -33,9 +40,9 @@ const HomeGridArticle = ({ category, ...props }) => {
   );
 };
 
-HomeGridArticle.propTypes = {
+HomeGridCategory.propTypes = {
   projects: PropTypes.array,
   category: PropTypes.object,
 };
 
-export default HomeGridArticle;
+export default HomeGridCategory;

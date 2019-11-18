@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TreeItem from './TreeItem';
-import HomeGridArticle from './HomeGridArticle';
+import HomeGridCategory from './HomeGridCategory';
 
 /**
- * Displays categories and projects, adjacent to main navigation within Home component
+ * Grid displaying all categories and projects within Home component
  */
 class HomeGrid extends React.Component {
   shouldComponentUpdate(prevProps) {
@@ -29,9 +29,9 @@ class HomeGrid extends React.Component {
                 item={category}
                 key={`HomeGridCategory-${category.categoryID}`}
                 render={item => (
-                  <HomeGridArticle
+                  <HomeGridCategory
                     id={item.elementID}
-                    key={`HomeGridArticle-${item.categoryID}`}
+                    key={`HomeGridCategory-${item.categoryID}`}
                     category={item}
                   />
                 )}
