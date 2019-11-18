@@ -155,7 +155,11 @@ figure > img:not(.loading), figure > video {
   position: fixed;
   top: 0px;
   background: white;
-  width: 100%;
+  z-index: 1;
+}
+
+.sticky + .projects {
+  margin-top: 49px;
 }
 
 .fadeOut{

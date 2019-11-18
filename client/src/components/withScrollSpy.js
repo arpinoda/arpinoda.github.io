@@ -246,10 +246,28 @@ const withScrollSpy = OriginalComponent => {
         this.resetActiveNavItem();
         item.classList.add(this.ACTIVE_CLASS_NAME);
         this.updateLocationHash(item.getAttribute('href'));
+        this.setSticky(item);
       }
     };
 
     // TODO : Extract this and implement via callback
+    resetSticky = () => {
+      document.querySelectorAll('.sticky').forEach(item => {
+        item.classList.remove('sticky');
+      });
+    };
+
+    setSticky = item => {
+      this.resetSticky();
+      const id = item.hash.replace(HASH_PREFIX, '');
+      const $bodyTarget = document.getElementById(id);
+
+      const $header = $bodyTarget.querySelector('h3').parentNode;
+      if ($header) {
+        $header.classList.add('sticky');
+      }
+    };
+
     resetParentActiveNavItem = () => {
       this.$nav.querySelectorAll('.has-active').forEach(item => {
         item.classList.remove('has-active');

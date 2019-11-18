@@ -5,18 +5,20 @@ import HomeGridFigure from './HomeGridFigure';
 const HomeGridArticle = ({ category, ...props }) => {
   const divClassName = `col-12 ${category.className ? category.className : ''}`;
   return (
-    <article id={category.elementID} className="flex flex-wrap">
+    <article id={category.elementID}>
       <div className={divClassName}>
-        <h3 className="pt2 pr3 pb2 h3">{category.breadcrumbs}</h3>
+        <h3 className="pt2 pb2 h3">{category.breadcrumbs}</h3>
       </div>
-      {category.projects &&
-        category.projects.map(project => (
-          <HomeGridFigure
-            key={project.projectID}
-            project={project}
-            {...props}
-          />
-        ))}
+      <div className="projects flex flex-wrap">
+        {category.projects &&
+          category.projects.map(project => (
+            <HomeGridFigure
+              key={project.projectID}
+              project={project}
+              {...props}
+            />
+          ))}
+      </div>
     </article>
   );
 };
