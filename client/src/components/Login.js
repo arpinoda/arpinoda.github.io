@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
-import withErrorHandler from './withErrorHandler';
 import LoginInput from './LoginInput';
 import { LOADING_IMAGE, nextPathFromHref } from '../util/UI';
 
@@ -117,4 +116,4 @@ Login.propTypes = {
   history: PropTypes.object,
 };
 
-export default withErrorHandler(Login, false);
+export default Login;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import HomeGridImage from './HomeGridImage';
+import ProjectImage from './ProjectImage';
 import HomeGridVideo from './HomeGridVideo';
 import { LOADING_IMAGE } from '../util/UI';
 import HomeGridProjectSnippet from './HomeGridProjectSnippet';
@@ -52,6 +52,7 @@ class HomeGridProject extends React.Component {
     const { isHovering, isDetailMinimized, isVideoDownloaded } = this.state;
     const hasVideo = project.media.video !== undefined;
     const mediaClassName = 'absolute left-0 top-0';
+    const { thumbnail } = project.media;
 
     return (
       <figure
@@ -79,9 +80,10 @@ class HomeGridProject extends React.Component {
             downloadCompleteCallback={this.videoDownloadCallback}
           />
         ) : (
-          <HomeGridImage
+          <ProjectImage
             setEventError={setEventError}
-            project={project}
+            imageAlt={project.title}
+            fileName={thumbnail}
             className={mediaClassName}
           />
         )}

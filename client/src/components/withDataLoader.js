@@ -112,10 +112,10 @@ const withDataLoader = OriginalComponent => {
 
       return (
         <OriginalComponent
+          {...this.props}
           categories={categories}
           scrollIDs={scrollIDs}
           isLoading={isLoading}
-          {...this.props}
         />
       );
     }

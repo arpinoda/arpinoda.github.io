@@ -61,10 +61,10 @@ const withAuth = AuthComponent => {
 
           return (
             <AuthComponent
+              {...this.props}
               history={history}
               location={location}
               confirm={confirm}
-              {...this.props}
             />
           );
         }

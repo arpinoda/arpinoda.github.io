@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import HomeGridProject from './HomeGridProject';
 
 /**
- * Renders a category an child project(s)
+ * Renders a category and their child project(s)
  * @param {Object} category A category model to render
  */
 const HomeGridCategory = ({ category, ...props }) => {
@@ -30,9 +30,9 @@ const HomeGridCategory = ({ category, ...props }) => {
         {category.projects &&
           category.projects.map(project => (
             <HomeGridProject
+              {...props}
               key={project.projectID}
               project={project}
-              {...props}
             />
           ))}
       </div>

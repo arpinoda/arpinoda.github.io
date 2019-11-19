@@ -18,7 +18,7 @@ const HomeNavTree = ({ categories, ...props }) => (
             key={category.categoryID}
             childGroupClass="pl2"
             render={item => (
-              <HomeNavLink category={item} {...props}>
+              <HomeNavLink {...props} category={item}>
                 {item.name}
               </HomeNavLink>
             )}

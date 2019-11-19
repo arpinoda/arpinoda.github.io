@@ -8,7 +8,7 @@ import ErrorBoundary from './ErrorBoundary';
  * @param {Object} WrappedComponent A React component to inherit render and event error handling
  */
 const withErrorHandler = WrappedComponent => {
-  class Outer extends React.Component {
+  class ErrorOuter extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -30,8 +30,8 @@ const withErrorHandler = WrappedComponent => {
         return (
           <ErrorBoundary eventError={eventError}>
             <WrappedComponent
-              setEventError={this.setEventError}
               {...this.props}
+              setEventError={this.setEventError}
             />
           </ErrorBoundary>
         );
@@ -40,15 +40,15 @@ const withErrorHandler = WrappedComponent => {
       return (
         <ErrorBoundary>
           <WrappedComponent
-            setEventError={this.setEventError}
             {...this.props}
+            setEventError={this.setEventError}
           />
         </ErrorBoundary>
       );
     }
   }
 
-  return Outer;
+  return ErrorOuter;
 };
 
 export default withErrorHandler;
