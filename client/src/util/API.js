@@ -1,10 +1,14 @@
 import AUTH from './AUTH';
 
 class API {
-  constructor({ url }) {
+  constructor({ url, endpoints }) {
     this.url = url;
     this.endpoints = {};
     this.auth = new AUTH(url);
+
+    if (endpoints) {
+      this.createCRUDEndpoints(endpoints);
+    }
   }
 
   createEntity(entity) {
@@ -28,16 +32,13 @@ class API {
   }
 
   authenticatedFetch = (url, options) =>
-    this.auth
-      .fetch(url, options)
-      .then(res => res.json())
-      .catch(err => {
-        if (err.message === 'Unauthorized') {
-          this.auth.logout();
-          return window.location.reload();
-        }
-        throw err;
-      });
+    this.auth.fetch(url, options).catch(err => {
+      if (err.message === 'Unauthorized') {
+        this.auth.logout();
+        return window.location.reload();
+      }
+      throw err;
+    });
 }
 
 export default API;

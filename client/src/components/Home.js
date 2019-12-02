@@ -13,13 +13,15 @@ import { setDefaultHash } from './History';
  * @param {Object[]} scrollIDs Element ID's used by ScrollSpy
  * @param {Object[]} categories Category models containing projects
  */
-const Home = ({ scrollIDs, categories }) => {
+const Home = props => {
+  const { categories } = props;
   setDefaultHash(categories);
+
   return (
     <>
       <section className="flex container mx-auto">
-        <HomeNav scrollIDs={scrollIDs} categories={categories} />
-        <HomeGrid categories={categories} />
+        <HomeNav {...props} />
+        <HomeGrid {...props} />
       </section>
       <Route
         path="/project/:id"

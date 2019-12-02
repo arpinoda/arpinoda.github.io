@@ -38,10 +38,12 @@ const withDataLoader = OriginalComponent => {
       const { setEventError } = this.props;
 
       this.getProjects()
+        .then(res => res.json())
         .then(projects => {
           this.bootstrapSuccess = this.bootstrapSuccess(projects);
         })
         .then(this.getCategories)
+        .then(res => res.json())
         .then(categories => this.bootstrapSuccess(categories))
         .catch(error => {
           this.setState({ isLoading: false });

@@ -81,6 +81,7 @@ class HomeGridProject extends React.Component {
           />
         ) : (
           <ProjectImage
+            {...this.props}
             alt={project.title}
             src={thumbnail}
             className={mediaClassName}

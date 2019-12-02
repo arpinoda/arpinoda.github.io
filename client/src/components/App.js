@@ -4,6 +4,7 @@ import withErrorHandler from './withErrorHandler';
 import Home from './Home';
 import Login from './Login';
 import WindowDimensionsProvider from './WindowDimensionsProvider';
+import { ImageCache } from './DataCache';
 
 /**
  * The entry point for our React.js application, called by Index.js
@@ -12,6 +13,7 @@ import WindowDimensionsProvider from './WindowDimensionsProvider';
  */
 const App = () => {
   const importAll = r => r.keys().map(r);
+  const imageCache = new ImageCache();
 
   // Force WebPack to include all imagery & videos within 'static' file directory
   importAll(require.context('../static', true, /^\.\//));
@@ -25,7 +27,12 @@ const App = () => {
             path="/login"
             render={routeProps => <Login {...routeProps} />}
           />
-          <Route path="/" render={routeProps => <Home {...routeProps} />} />
+          <Route
+            path="/"
+            render={routeProps => (
+              <Home {...routeProps} imageCache={imageCache} />
+            )}
+          />
         </Switch>
       </BrowserRouter>
     </WindowDimensionsProvider>

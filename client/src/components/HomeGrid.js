@@ -30,6 +30,7 @@ class HomeGrid extends React.Component {
                 key={`HomeGridCategory-${category.categoryID}`}
                 render={item => (
                   <HomeGridCategory
+                    {...this.props}
                     id={item.elementID}
                     key={`HomeGridCategory-${item.categoryID}`}
                     category={item}
