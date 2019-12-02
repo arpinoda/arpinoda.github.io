@@ -81,9 +81,8 @@ class HomeGridProject extends React.Component {
           />
         ) : (
           <ProjectImage
-            setEventError={setEventError}
-            imageAlt={project.title}
-            fileName={thumbnail}
+            alt={project.title}
+            src={thumbnail}
             className={mediaClassName}
           />
         )}
