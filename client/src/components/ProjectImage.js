@@ -13,7 +13,7 @@ const ProjectImage = ({ alt, className, src, imageCache }) => {
   const [url, setURL] = useState();
 
   useEffect(() => {
-    imageCache.get(src, setURL);
+    imageCache.get(src, setURL, setError);
   }, [url]);
 
   return (

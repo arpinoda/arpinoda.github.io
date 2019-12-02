@@ -27,21 +27,13 @@ class ImageCache extends DataCache {
     ImageCache.api.createEntity({ name: 'image' });
   }
 
-  get = (key, success) => {
+  get = (key, success, error) => {
     const value = ImageCache.get(key);
     if (value) {
       success(value);
     } else {
-      console.log(`Key ${key} not found. Requesting`);
-
       ImageCache.api.endpoints.image
         .getOne(key)
-        .then(res => {
-          if (!res.ok) {
-            throw Error(res.message);
-          }
-          return res;
-        })
         .then(res => {
           res.blob().then(blob => {
             const url = URL.createObjectURL(blob);
@@ -49,7 +41,8 @@ class ImageCache extends DataCache {
             success(url);
             return url;
           });
-        });
+        })
+        .catch(() => error(true));
     }
   };
 }
