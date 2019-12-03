@@ -34,15 +34,18 @@ class ImageCache extends DataCache {
     } else {
       ImageCache.api.endpoints.image
         .getOne(key)
-        .then(res => {
-          res.blob().then(blob => {
-            const url = URL.createObjectURL(blob);
+        .then(res =>
+          res.arrayBuffer().then(buffer => {
+            const url = URL.createObjectURL(new Blob([buffer]));
             ImageCache.set(key, url);
             success(url);
             return url;
-          });
-        })
-        .catch(() => error(true));
+          }),
+        )
+        .catch(err => {
+          console.log(err);
+          error(true);
+        });
     }
   };
 }

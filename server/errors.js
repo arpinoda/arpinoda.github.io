@@ -59,6 +59,16 @@ class BadRequestError extends ServerError {
 }
 
 /**
+ * Thrown during pipelining stream of an image file
+ */
+class StreamImageError extends ServerError {
+  constructor(message) {
+    super(message);
+    this.statusCode = 400;
+  }
+}
+
+/**
  * Thrown if a requested resource does not exist
  */
 class ResourceNotFoundError extends ServerError {
@@ -73,4 +83,5 @@ module.exports = {
   FailedLoginError,
   BadRequestError,
   ResourceNotFoundError,
+  StreamImageError,
 };

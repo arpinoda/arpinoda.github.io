@@ -2,7 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const exjwt = require('express-jwt');
 const util = require('./util');
-const { BadRequestError, ResourceNotFoundError } = require('./errors');
+const stream = require('stream');
+const { StreamImageError, BadRequestError, ResourceNotFoundError } = require('./errors');
 
 /**
  * Authenticated routes used within development and production
@@ -50,13 +51,23 @@ module.exports = (app, express, logger) => {
   );
 
   /**
-   * USE /image
+   * GET /image
    * Returns a protected, static image matching requested filename
   */
-  app.use(
-    `${API_PATH}/image`,
-    express.static(path.join(__dirname, '/../client/src/static/images/protected')),
-  );
+  app.get(`${API_PATH}/image/:fileName`, (req, res, next) => {
+    const { fileName } = req.params;
+    const filePath = path.join(__dirname, '/../client/src/static/images/protected', fileName);
+    const readStream = fs.createReadStream(filePath);
+    const passThrough = new stream.PassThrough();
+
+    stream.pipeline(readStream, passThrough, (err) => {
+      if (err) {
+        err = new StreamImageError(err);
+        next(err);
+      }
+    });
+    passThrough.pipe(res);
+  });
 
   /**
    * GET /project/:id
