@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 const VideoSpinner = ({ isHovering, isVideoDownloaded }) => {
   const isAnimating = isHovering && !isVideoDownloaded;
+  const isVisible = (!isVideoDownloaded && isHovering) || !isHovering;
+
   const animatingStyle = 'sk-rotateplane 1.2s infinite ease-in-out';
 
   const gifStyle = {
@@ -14,7 +16,7 @@ const VideoSpinner = ({ isHovering, isVideoDownloaded }) => {
   return (
     <div
       style={gifStyle}
-      className={`spinner z2 ${isHovering ? 'hide' : 'block'}`}
+      className={`spinner z2 ${isVisible ? 'block' : 'hide'}`}
     />
   );
 };

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import useHover from './useHover';
 import ProjectImage from './ProjectImage';
 import ProjectVideo from './ProjectVideo';
 import GridProjectSnippet from './GridProjectSnippet';
+import VideoSpinner from './VideoSpinner';
 
 const GridProjectDesktop = ({ project, className }) => {
   const [ref, hovered] = useHover();
+  const [videoDownloaded, setVideoDownloaded] = useState(false);
 
   const isVideo = project.media.video !== undefined;
 
@@ -15,11 +17,18 @@ const GridProjectDesktop = ({ project, className }) => {
 
   if (isVideo) {
     component = (
-      <ProjectVideo
-        alt={project.title}
-        src={project.media.thumbnail}
-        className={className}
-      />
+      <>
+        <ProjectVideo
+          className={className}
+          project={project}
+          onLoadedData={setVideoDownloaded}
+          isPlaying={hovered}
+        />
+        <VideoSpinner
+          isHovering={hovered}
+          isVideoDownloaded={videoDownloaded}
+        />
+      </>
     );
   } else {
     component = (

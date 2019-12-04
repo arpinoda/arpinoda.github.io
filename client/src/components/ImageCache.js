@@ -4,6 +4,7 @@ const urls = new WeakMap();
 
 const blobUrl = blob => {
   if (urls.has(blob)) {
+    console.log('blob exists');
     return urls.get(blob);
   }
 
@@ -20,6 +21,7 @@ const ImageCache = id => {
   const existingValue = blobs.get(id);
 
   if (existingValue !== undefined) {
+    console.log('exists!');
     return new Promise(existingValue);
   }
 
