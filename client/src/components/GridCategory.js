@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HomeGridProject from './HomeGridProject';
+import GridProject from './GridProject';
 
 /**
  * Renders a category and their child project(s)
  * @param {Object} category A category model to render
  */
-const HomeGridCategory = ({ category, ...props }) => {
+const GridCategory = ({ category }) => {
   const divClassName = `col-12 bg-white ${
     category.className ? category.className : ''
   }`;
@@ -29,20 +29,16 @@ const HomeGridCategory = ({ category, ...props }) => {
       <div className="projects flex flex-wrap">
         {category.projects &&
           category.projects.map(project => (
-            <HomeGridProject
-              {...props}
-              key={project.projectID}
-              project={project}
-            />
+            <GridProject key={project.projectID} project={project} />
           ))}
       </div>
     </article>
   );
 };
 
-HomeGridCategory.propTypes = {
+GridCategory.propTypes = {
   projects: PropTypes.array,
   category: PropTypes.object,
 };
 
-export default HomeGridCategory;
+export default GridCategory;

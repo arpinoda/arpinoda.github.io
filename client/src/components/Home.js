@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import HomeNav from './HomeNav';
-import HomeGrid from './HomeGrid';
+import Grid from './Grid';
 import ProjectDetail from './ProjectDetail';
 import withAuth from './withAuth';
 import withDataLoader from './withDataLoader';
@@ -21,7 +21,7 @@ const Home = props => {
     <>
       <section className="flex container mx-auto">
         <HomeNav {...props} />
-        <HomeGrid {...props} />
+        <Grid {...props} />
       </section>
       <Route
         path="/project/:id"

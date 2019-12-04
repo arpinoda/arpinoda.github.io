@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TreeItem from './TreeItem';
-import HomeGridCategory from './HomeGridCategory';
+import GridCategory from './GridCategory';
 
 /**
  * Grid displaying all categories and projects within Home component
  */
-class HomeGrid extends React.Component {
+class Grid extends React.Component {
   shouldComponentUpdate(prevProps) {
     const { categories } = this.props;
     let result = true;
@@ -27,12 +27,12 @@ class HomeGrid extends React.Component {
             categories.map(category => (
               <TreeItem
                 item={category}
-                key={`HomeGridCategory-${category.categoryID}`}
+                key={`GridCategory-${category.categoryID}`}
                 render={item => (
-                  <HomeGridCategory
+                  <GridCategory
                     {...this.props}
                     id={item.elementID}
-                    key={`HomeGridCategory-${item.categoryID}`}
+                    key={`GridCategory-${item.categoryID}`}
                     category={item}
                   />
                 )}
@@ -44,7 +44,7 @@ class HomeGrid extends React.Component {
   };
 }
 
-HomeGrid.propTypes = {
+Grid.propTypes = {
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       categoryID: PropTypes.number,
@@ -58,4 +58,4 @@ HomeGrid.propTypes = {
   ),
 };
 
-export default HomeGrid;
+export default Grid;

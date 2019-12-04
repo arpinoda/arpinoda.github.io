@@ -4,7 +4,7 @@ const cors = require('./cors');
 const util = require('./util');
 const { FailedLoginError, ClientError } = require('./errors');
 const { API_PATH } = process.env;
-const TOKEN_LIFETIME_STRING = (process.env.NODE_ENV === 'production') ? '6h' : '10m';
+const TOKEN_LIFETIME_STRING = (process.env.NODE_ENV === 'production') ? '6h' : '1h';
 
 /**
  * Retrieves pertinent unauthenticated routes

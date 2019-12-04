@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 /**
  * The animated pane displayed on a project when a user is hovering
- * @param {Boolean} isHovering True if the user is hovering the project
- * @param {Boolean} isDetailMinimized Will be true for videos after N seconds of hovering
+ * @param {Boolean} isVisible True if the user is hovering the project
+ * @param {Boolean} forceHide Will be true for videos after N seconds of hovering
+ * @param {Object} project Used to display project name & description
  */
-const HomeGridProjectSnippet = ({ isHovering, isDetailMinimized, project }) => {
+const GridProjectSnippet = ({ isVisible, forceHide, project }) => {
   const snippetStyle = {
     position: 'relative',
     height: 'calc(100% - 20px)',
@@ -15,8 +16,8 @@ const HomeGridProjectSnippet = ({ isHovering, isDetailMinimized, project }) => {
     transformOrigin: 'bottom',
     background:
       'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))',
-    transform: isHovering ? 'rotateX(0deg)' : 'rotateX(30deg)',
-    opacity: isHovering ? '1' : '0',
+    transform: isVisible ? 'rotateX(0deg)' : 'rotateX(30deg)',
+    opacity: isVisible ? '1' : '0',
   };
 
   const paragaphStyle = {
@@ -29,7 +30,7 @@ const HomeGridProjectSnippet = ({ isHovering, isDetailMinimized, project }) => {
     <div
       style={{ perspective: '1000px' }}
       className={`absolute bottom-0 left-0 right-0 ${
-        isDetailMinimized ? 'fadeOut' : 'fadeIn'
+        forceHide ? 'fadeOut' : 'fadeIn'
       }`}
     >
       <div style={snippetStyle} className="p1">
@@ -47,10 +48,10 @@ const HomeGridProjectSnippet = ({ isHovering, isDetailMinimized, project }) => {
   );
 };
 
-HomeGridProjectSnippet.propTypes = {
-  isHovering: PropTypes.bool,
-  isDetailMinimized: PropTypes.bool,
+GridProjectSnippet.propTypes = {
+  isVisible: PropTypes.bool,
+  forceHide: PropTypes.bool,
   project: PropTypes.object,
 };
 
-export default HomeGridProjectSnippet;
+export default GridProjectSnippet;

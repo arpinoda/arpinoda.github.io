@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import API from '../util/API';
-import { LOADING_IMAGE } from '../util/UI';
+// import { LOADING_IMAGE } from '../util/UI';
 import brokenImage from '../static/images/public/broken.jpg';
+
+// const HomeGridVideo = (props, { isHovering,
+// project, className, onMaxHover, onDownloadComplete}) => {
+
+//   return (
+//     <ProjectImage
+
+//     />
+//   );
+// };
 
 class HomeGridVideo extends React.Component {
   constructor(props) {
@@ -12,7 +22,7 @@ class HomeGridVideo extends React.Component {
 
     this.state = {
       videoSrc: `${process.env.API_PATH}/video/${video}`,
-      posterSrc: LOADING_IMAGE,
+      // posterSrc: LOADING_IMAGE,
       initalLoadComplete: false,
     };
 
@@ -28,7 +38,7 @@ class HomeGridVideo extends React.Component {
   }
 
   componentDidMount() {
-    // const { project, setEventError } = this.props;
+    // const { project } = this.props;
     // const { thumbnail } = project.media;
     // fetchProtectedImage(thumbnail)
     //   .then(url => this.setState({ posterSrc: url }))
@@ -68,8 +78,8 @@ class HomeGridVideo extends React.Component {
   }
 
   onLoaded = () => {
-    const { downloadCompleteCallback } = this.props;
-    downloadCompleteCallback();
+    // const { onDownloadComplete } = this.props;
+    // onDownloadComplete();
   };
 
   startTimer = () => {
@@ -111,26 +121,11 @@ class HomeGridVideo extends React.Component {
   };
 
   render = () => {
-    const { videoSrc, posterSrc, initalLoadComplete } = this.state;
-    const { isHovering, isVideoDownloaded, className } = this.props;
-    const gifStyle = {
-      WebkitAnimation:
-        isHovering && !isVideoDownloaded
-          ? 'sk-rotateplane 1.2s infinite ease-in-out'
-          : 'none',
-      animation:
-        isHovering && !isVideoDownloaded
-          ? 'sk-rotateplane 1.2s infinite ease-in-out'
-          : 'none',
-      color: !isHovering ? 'inherit' : 'rgba(0,0,0,0)',
-    };
+    const { videoSrc, initalLoadComplete } = this.state;
+    const { className } = this.props;
 
     return (
       <>
-        <div
-          style={gifStyle}
-          className={`spinner z2 ${isHovering ? 'hide' : 'block'}`}
-        />
         <video
           onLoadStart={() => {
             this.setState({ initalLoadComplete: true });
@@ -138,13 +133,13 @@ class HomeGridVideo extends React.Component {
           onLoadedData={this.onLoaded}
           onError={this.videoLoadError}
           ref={this.videoPlayer}
-          poster={posterSrc}
           loop
-          preload="metadata"
+          /* poster="http://public.media.smithsonianmag.com/legacy_blog/smiley-face-1.jpg" */
+          preload="none"
           muted
           playsInline
           src={videoSrc}
-          style={{ height: '100%' }}
+          style={{ width: '100%', height: '100%' }}
           className={`${className} ${
             initalLoadComplete ? 'fadeIn' : 'fadeOut'
           }`}
@@ -160,10 +155,8 @@ class HomeGridVideo extends React.Component {
 
 HomeGridVideo.propTypes = {
   project: PropTypes.object,
-  downloadCompleteCallback: PropTypes.func,
   minimizeDetailCallback: PropTypes.func,
   isHovering: PropTypes.bool,
-  isVideoDownloaded: PropTypes.bool,
   className: PropTypes.string,
   // setEventError: PropTypes.func,
 };
