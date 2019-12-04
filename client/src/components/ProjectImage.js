@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { BROKEN_IMAGE, LOADING_IMAGE } from '../util/UI';
+import imageCache from './ImageCache';
 
 /**
  * Displays a project's image retrieved via API endpoint or cache
@@ -8,17 +9,21 @@ import { BROKEN_IMAGE, LOADING_IMAGE } from '../util/UI';
  * @param {String} className Class names applied to the image
  * @param {String} src The url path of the image
  */
-const ProjectImage = ({ alt, className, src, imageCache }) => {
-  const [hasError, setError] = useState(false);
+const ProjectImage = ({ alt, className, src }) => {
+  const [error, setError] = useState(null);
   const [url, setURL] = useState();
 
   useEffect(() => {
-    imageCache.get(src, setURL, setError);
-  }, [url]);
+    imageCache(src)
+      .then(blobURL => {
+        setURL(blobURL);
+      })
+      .catch(err => setError(err));
+  }, [src]);
 
   return (
     <img
-      src={hasError ? BROKEN_IMAGE : url ? url : LOADING_IMAGE} //eslint-disable-line
+      src={error ? BROKEN_IMAGE : url ? url : LOADING_IMAGE} //eslint-disable-line
       style={{ height: '100%' }}
       alt={alt}
       onError={() => setError(true)}
@@ -31,7 +36,6 @@ ProjectImage.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
   className: PropTypes.string,
-  imageCache: PropTypes.object,
 };
 
 export default ProjectImage;

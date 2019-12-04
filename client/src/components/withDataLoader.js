@@ -4,7 +4,6 @@ import API from '../util/API';
 import Category from '../models/Category';
 import { ClientError } from '../../../server/errors';
 import Loading from './Loading';
-import { createBlobURL } from '../util/UI';
 
 const withDataLoader = OriginalComponent => {
   class Wrapped extends React.Component {
@@ -88,21 +87,6 @@ const withDataLoader = OriginalComponent => {
       scrollIDs = scrollIDs.flat(Infinity);
 
       this.setState({ categories, scrollIDs, isLoading: false });
-    };
-
-    getProtectedImage = imageURL => {
-      const api = new API({
-        url: process.env.API_PATH,
-      });
-
-      api.createEntities([{ name: 'image' }]);
-
-      const result = api.endpoints.image
-        .getOne(imageURL)
-        .then(res => createBlobURL(res, imageURL))
-        .then(url => url);
-
-      return result;
     };
 
     render() {

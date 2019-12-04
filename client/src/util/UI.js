@@ -60,42 +60,6 @@ export const enableScroll = () => {
 };
 
 /**
- * Reads an image from a readable stream, then creates and returns URL for BLOB object
- * @param {Object} res HTTP Fetch Response
- * @param {errorCallback} onError A callback function triggered if an error occurs
- */
-export const createBlobURL = (res, onError) => {
-  const reader = res.body.getReader();
-  return new Promise(resolve => {
-    const stream = new ReadableStream({
-      start(controller) {
-        function pump() {
-          return reader.read().then(({ done, value }) => {
-            // When no more data needs to be consumed, close the stream
-            if (done) {
-              controller.close();
-              return;
-            }
-            // Enqueue the next data chunk into our target stream
-            controller.enqueue(value);
-            pump();
-          });
-        }
-        return pump();
-      },
-    });
-    resolve(stream);
-  })
-    .then(stream => new Response(stream))
-    .then(response => response.blob())
-    .then(blob => URL.createObjectURL(blob))
-    .then(url => url)
-    .catch(err => {
-      onError(err);
-    });
-};
-
-/**
  * Parses an href for querystring 'next'. Returns a string path
  * @param {Object} location - The location attribute obtained from global window object.
  */

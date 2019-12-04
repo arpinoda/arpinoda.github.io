@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import ErrorBoundary from './ErrorBoundary';
+
+const ErrorHandlerCtx = createContext(null);
 
 /**
  * Wraps a component within an ErrorBoundary and exposes a function for catching & logging
@@ -38,12 +40,14 @@ const withErrorHandler = WrappedComponent => {
       }
 
       return (
-        <ErrorBoundary>
-          <WrappedComponent
-            {...this.props}
-            setEventError={this.setEventError}
-          />
-        </ErrorBoundary>
+        <ErrorHandlerCtx.Provider value={this.setEventError}>
+          <ErrorBoundary>
+            <WrappedComponent
+              {...this.props}
+              setEventError={this.setEventError}
+            />
+          </ErrorBoundary>
+        </ErrorHandlerCtx.Provider>
       );
     }
   }
@@ -52,3 +56,4 @@ const withErrorHandler = WrappedComponent => {
 };
 
 export default withErrorHandler;
+export const useEventError = () => useContext(ErrorHandlerCtx);
