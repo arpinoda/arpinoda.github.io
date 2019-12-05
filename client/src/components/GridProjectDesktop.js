@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import useHover from './useHover';
@@ -8,12 +8,31 @@ import GridProjectSnippet from './GridProjectSnippet';
 import VideoSpinner from './VideoSpinner';
 
 const GridProjectDesktop = ({ project, className }) => {
-  const [ref, hovered] = useHover();
+  const [hoverRef, hovered] = useHover();
   const [videoDownloaded, setVideoDownloaded] = useState(false);
-
-  const isVideo = project.media.video !== undefined;
+  const [forceHide, setForceHide] = useState(false);
 
   let component = null;
+
+  const isVideo = project.media.video !== undefined;
+  const HIDE_VIDEO_SNIPPET_SECONDS = 4;
+
+  useEffect(() => {
+    if (hovered && isVideo) {
+      let value = 0;
+      const interval = setInterval(() => {
+        value += 1;
+
+        if (value === HIDE_VIDEO_SNIPPET_SECONDS) {
+          setForceHide(true);
+        }
+      }, 1000);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+    return () => setForceHide(false);
+  }, [hovered]);
 
   if (isVideo) {
     component = (
@@ -41,11 +60,11 @@ const GridProjectDesktop = ({ project, className }) => {
   }
 
   return (
-    <div ref={ref}>
+    <div ref={hoverRef}>
       {component}
       <GridProjectSnippet
         isVisible={hovered}
-        forceHide={false}
+        forceHide={forceHide}
         project={project}
       />
       <NavLink

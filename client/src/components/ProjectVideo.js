@@ -25,6 +25,8 @@ const ProjectVideo = ({ className, project, onLoadedData, isPlaying }) => {
   }, [thumbnail]);
 
   useEffect(() => {
+    if (isPlaying === null) return;
+
     if (isPlaying) {
       videoRef.current.play();
     } else {
