@@ -9,7 +9,7 @@ import VideoSpinner from './VideoSpinner';
 
 const GridProjectDesktop = ({ project, className }) => {
   const [hoverRef, hovered] = useHover();
-  const [videoDownloaded, setVideoDownloaded] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
   const [forceHide, setForceHide] = useState(false);
 
   let component = null;
@@ -31,7 +31,10 @@ const GridProjectDesktop = ({ project, className }) => {
         clearInterval(interval);
       };
     }
-    return () => setForceHide(false);
+    return () => {
+      setForceHide(false);
+      setIsBuffering(false);
+    };
   }, [hovered]);
 
   if (isVideo) {
@@ -40,13 +43,10 @@ const GridProjectDesktop = ({ project, className }) => {
         <ProjectVideo
           className={className}
           project={project}
-          onLoadedData={setVideoDownloaded}
+          setIsBuffering={setIsBuffering}
           isPlaying={hovered}
         />
-        <VideoSpinner
-          isHovering={hovered}
-          isVideoDownloaded={videoDownloaded}
-        />
+        <VideoSpinner isHovering={hovered} isBuffering={isBuffering} />
       </>
     );
   } else {

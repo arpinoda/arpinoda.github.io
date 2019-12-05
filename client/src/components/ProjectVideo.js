@@ -7,10 +7,10 @@ import imageCache from './ImageCache';
  * Displays a project's video
  * @param {String} className Class names applied to the image
  * @param {Object} project For accessing media attributes
- * @param {Function} onLoadedData Callback for setting parent state, if provided
+ * @param {Function} setIsBuffering Callback for setting parent state, if provided
  * @param {Boolean} isPlaying Is the video playing or stopped
  */
-const ProjectVideo = ({ className, project, onLoadedData, isPlaying }) => {
+const ProjectVideo = ({ className, project, setIsBuffering, isPlaying }) => {
   const [error, setError] = useState(null);
   const [url, setURL] = useState();
   const videoRef = useRef();
@@ -39,10 +39,16 @@ const ProjectVideo = ({ className, project, onLoadedData, isPlaying }) => {
     <>
       <video
         ref={videoRef}
-        onLoadedData={
-          onLoadedData &&
+        onPlaying={
+          setIsBuffering &&
           (() => {
-            onLoadedData(true);
+            setIsBuffering(false);
+          })
+        }
+        onWaiting={
+          setIsBuffering &&
+          (() => {
+            setIsBuffering(true);
           })
         }
         onError={setError}
@@ -66,7 +72,7 @@ const ProjectVideo = ({ className, project, onLoadedData, isPlaying }) => {
 ProjectVideo.propTypes = {
   project: PropTypes.object,
   className: PropTypes.string,
-  onLoadedData: PropTypes.func,
+  setIsBuffering: PropTypes.func,
   isPlaying: PropTypes.bool,
 };
 

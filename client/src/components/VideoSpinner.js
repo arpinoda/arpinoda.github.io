@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const VideoSpinner = ({ isHovering, isVideoDownloaded }) => {
-  const isAnimating = isHovering && !isVideoDownloaded;
-  const isVisible = (!isVideoDownloaded && isHovering) || !isHovering;
+const VideoSpinner = ({ isHovering, isBuffering }) => {
+  const isAnimating = isBuffering;
+  const isVisible = isBuffering || !isHovering;
 
   const animatingStyle = 'sk-rotateplane 1.2s infinite ease-in-out';
 
@@ -23,7 +23,7 @@ const VideoSpinner = ({ isHovering, isVideoDownloaded }) => {
 
 VideoSpinner.propTypes = {
   isHovering: PropTypes.bool,
-  isVideoDownloaded: PropTypes.bool,
+  isBuffering: PropTypes.bool,
 };
 
 export default VideoSpinner;

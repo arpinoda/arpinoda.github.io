@@ -4,7 +4,6 @@ const urls = new WeakMap();
 
 const blobUrl = blob => {
   if (urls.has(blob)) {
-    console.log('blob exists');
     return urls.get(blob);
   }
 
