@@ -25,15 +25,22 @@ const ProjectVideo = ({ className, project, setIsBuffering, isPlaying }) => {
   }, [thumbnail]);
 
   useEffect(() => {
-    if (isPlaying === null) return;
+    const playPromise = videoRef.current.play();
 
-    if (isPlaying) {
-      videoRef.current.play();
-    } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // We're playing, and can now safely pause video if necessary
+          if (!isPlaying) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
-  });
+  }, [isPlaying]);
 
   return (
     <>

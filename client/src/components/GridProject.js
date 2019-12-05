@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ResponsiveLayout from './ResponsiveLayout';
 import GridProjectDesktop from './GridProjectDesktop';
+import GridProjectMobile from './GridProjectMobile';
 import { LOADING_IMAGE } from '../util/UI';
 
 /**
@@ -19,7 +20,7 @@ const GridProject = ({ project }) => {
           <GridProjectDesktop className={className} project={project} />
         )}
         renderMobile={() => (
-          <GridProjectDesktop className={className} project={project} />
+          <GridProjectMobile className={className} project={project} />
         )}
       />
     </figure>

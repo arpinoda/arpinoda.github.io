@@ -27,7 +27,7 @@ const ImageCache = id => {
     const url = existingValue[1];
 
     if (url) {
-      return new Promise(url);
+      return Promise.resolve(url);
     }
 
     return promise;

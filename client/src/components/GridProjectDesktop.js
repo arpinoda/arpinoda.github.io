@@ -8,7 +8,7 @@ import GridProjectSnippet from './GridProjectSnippet';
 import VideoSpinner from './VideoSpinner';
 
 const GridProjectDesktop = ({ project, className }) => {
-  const [hoverRef, hovered] = useHover();
+  const [hoverRef, hovered] = useHover(false);
   const [isBuffering, setIsBuffering] = useState(false);
   const [forceHide, setForceHide] = useState(false);
 
