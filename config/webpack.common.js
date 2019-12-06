@@ -15,7 +15,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 }, {});
 
 module.exports = {
-  entry: ['whatwg-fetch', path.resolve(__dirname, '../client/src/index.js')],
+  entry: ['whatwg-fetch', 'babel-polyfill', path.resolve(__dirname, '../client/src/index.js')],
   context: path.join(__dirname, '../client/src'),
   plugins: [
     new CleanWebpackPlugin(),
