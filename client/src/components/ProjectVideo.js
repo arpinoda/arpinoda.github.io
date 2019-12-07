@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { BROKEN_IMAGE } from '../util/UI';
 import imageCache from './ImageCache';
@@ -10,12 +10,10 @@ import imageCache from './ImageCache';
  * @param {Function} setIsBuffering Callback for setting parent state, if provided
  * @param {Boolean} isPlaying Is the video playing or stopped
  */
-const ProjectVideo = ({ className, project, setIsBuffering }) => {
+const ProjectVideo = React.forwardRef((props, ref) => {
   const [error, setError] = useState(null);
   const [url, setURL] = useState();
-  // const [playPromise, setPlayPromise] = useState(null);
-  const videoRef = useRef();
-  const { thumbnail, video } = project.media;
+  const { thumbnail, video } = props.project.media;
 
   useEffect(() => {
     imageCache(thumbnail)
@@ -25,72 +23,22 @@ const ProjectVideo = ({ className, project, setIsBuffering }) => {
       .catch(err => setError(err));
   }, [thumbnail]);
 
-  // useEffect(() => {
-  //   // if (isPlaying) {
-
-  //   //   videoRef.current.play()
-  //   //     .catch(err => alert(err));
-  //   // } else {
-  //   //   videoRef.current.pause();
-  //   //   videoRef.current.currentTime = 0;
-  //   // }
-  //   // const playPromise = videoRef.current.play();
-  //   // if (playPromise !== undefined) {
-  //   //   playPromise.then(() => {
-  //   //     // Automatic playback started!
-  //   //     // Show playing UI.
-  //   //     // We can now safely pause video...
-  //   //     if (!isPlaying) {
-  //   //       videoRef.current.pause();
-  //   //       videoRef.current.currentTime = 0;
-  //   //     }
-  //   //   })
-  //   //     .catch(err => {
-  //   //       alert(err);
-  //   //       setError(err);
-  //   //       // Auto-play was prevented
-  //   //       // Show paused UI.
-  //   //     });
-  //   // }
-
-  //   const handlePlay = () => {
-  //     if (isPlaying) {
-  //       const promise = videoRef.current.play()
-  //         .catch(err => {
-  //           alert(err);
-  //           setError(err);
-  //         });
-  //       setPlayPromise(promise);
-  //     } else if (playPromise && !isPlaying) {
-  //       playPromise
-  //         .then(() => {
-  //           videoRef.current.pause();
-  //           videoRef.current.currentTime = 0;
-  //         })
-  //         .catch(err => {
-  //           alert(err);
-  //           setError(err);
-  //         });
-  //     }
-  //   };
-
-  //   handlePlay();
-  // }, [isPlaying]);
-
   return (
     <>
       <video
-        ref={videoRef}
+        ref={ref}
         onPlaying={
-          setIsBuffering &&
+          props.setIsBuffering &&
           (() => {
-            setIsBuffering(false);
+            props.setIsBuffering(false);
+            return true;
           })
         }
         onWaiting={
-          setIsBuffering &&
+          props.setIsBuffering &&
           (() => {
-            setIsBuffering(true);
+            props.setIsBuffering(true);
+            return true;
           })
         }
         onError={() => {
@@ -101,10 +49,8 @@ const ProjectVideo = ({ className, project, setIsBuffering }) => {
         preload="metadata"
         playsInline
         muted
-        controls
-        src={`${process.env.API_PATH}/video/${video}`}
         style={{ height: '100%' }}
-        className={className}
+        className={props.className}
       >
         <source
           src={`${process.env.API_PATH}/video/${video}`}
@@ -112,49 +58,14 @@ const ProjectVideo = ({ className, project, setIsBuffering }) => {
         />
         Your browser does not support the video tag.
       </video>
-      <button
-        className="absolute top-0 right-0"
-        type="button"
-        onClick={() => {
-          const playPromise = videoRef.current.play();
-
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                // Automatic playback started!
-                // Show playing UI.
-                // We can now safely pause video...
-              })
-              .catch(err => {
-                alert(err);
-                // Auto-play was prevented
-                // Show paused UI.
-              });
-          }
-        }}
-      >
-        Play
-      </button>
-
-      <button
-        className="absolute top-0 left-0"
-        type="button"
-        onClick={() => {
-          videoRef.current.pause();
-          videoRef.current.currentTime = 0;
-        }}
-      >
-        Stop
-      </button>
     </>
   );
-};
+});
 
 ProjectVideo.propTypes = {
   project: PropTypes.object,
   className: PropTypes.string,
   setIsBuffering: PropTypes.func,
-  // isPlaying: PropTypes.bool,
 };
 
 export default ProjectVideo;

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayButton = ({ onClick, isPlaying }) => {
+const VideoPlayButton = ({ onClick }) => {
   const startRef = useRef();
   const stopRef = useRef();
 
@@ -36,7 +36,7 @@ const VideoPlayButton = ({ onClick, isPlaying }) => {
 
   return (
     <svg
-      onClick={() => onClick(!isPlaying)}
+      onClick={onClick}
       style={svgStyle}
       className="absolute z3"
       viewBox="0 0 140 140"
@@ -88,7 +88,6 @@ const VideoPlayButton = ({ onClick, isPlaying }) => {
 
 VideoPlayButton.propTypes = {
   onClick: PropTypes.func,
-  isPlaying: PropTypes.bool,
 };
 
 export default VideoPlayButton;

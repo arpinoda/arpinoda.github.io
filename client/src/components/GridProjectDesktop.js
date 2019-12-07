@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import useHover from './useHover';
@@ -11,6 +11,7 @@ const GridProjectDesktop = ({ project, className }) => {
   const [hoverRef, hovered] = useHover(false);
   const [isBuffering, setIsBuffering] = useState(false);
   const [forceHide, setForceHide] = useState(false);
+  const videoRef = useRef();
 
   let component = null;
 
@@ -37,10 +38,24 @@ const GridProjectDesktop = ({ project, className }) => {
     };
   }, [hovered]);
 
+  function togglePlayPause() {
+    if (hovered) {
+      videoRef.current.play().catch(err => alert(err));
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }
+
+  if (videoRef.current) {
+    togglePlayPause();
+  }
+
   if (isVideo) {
     component = (
       <>
         <ProjectVideo
+          ref={videoRef}
           className={className}
           project={project}
           setIsBuffering={setIsBuffering}
