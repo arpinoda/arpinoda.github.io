@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 /**
  * The animated pane displayed on a project when a user is hovering
@@ -7,7 +8,7 @@ import PropTypes from 'prop-types';
  * @param {Boolean} forceHide Will be true for videos after N seconds of hovering
  * @param {Object} project Used to display project name & description
  */
-const GridProjectSnippet = ({ isVisible, forceHide, project }) => {
+const GridProjectSnippet = ({ isvisible, forceHide, project }) => {
   const snippetStyle = {
     position: 'relative',
     height: 'calc(100% - 20px)',
@@ -16,8 +17,8 @@ const GridProjectSnippet = ({ isVisible, forceHide, project }) => {
     transformOrigin: 'bottom',
     background:
       'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))',
-    transform: isVisible ? 'rotateX(0deg)' : 'rotateX(30deg)',
-    opacity: isVisible ? '1' : '0',
+    transform: isvisible ? 'rotateX(0deg)' : 'rotateX(30deg)',
+    opacity: isvisible ? '1' : '0',
   };
 
   const paragaphStyle = {
@@ -27,29 +28,37 @@ const GridProjectSnippet = ({ isVisible, forceHide, project }) => {
   };
 
   return (
-    <div
-      style={{ perspective: '1000px' }}
-      className={`absolute bottom-0 left-0 right-0 ${
-        forceHide ? 'fadeOut' : 'fadeIn'
-      }`}
-    >
-      <div style={snippetStyle} className="p1">
-        <p
-          style={{ ...paragaphStyle, ...{ padding: '7px 0 4px 0' } }}
-          className="bold white"
-        >
-          {project.name}
-        </p>
-        <p style={paragaphStyle} className="line-height-4 white">
-          {project.description}
-        </p>
+    <>
+      <div
+        style={{ perspective: '1000px' }}
+        className={`absolute bottom-0 left-0 right-0 ${
+          forceHide ? 'fadeOut' : 'fadeIn'
+        }`}
+      >
+        <div style={snippetStyle} className="p1">
+          <p
+            style={{ ...paragaphStyle, ...{ padding: '7px 0 4px 0' } }}
+            className="bold white"
+          >
+            {project.name}
+          </p>
+          <p style={paragaphStyle} className="line-height-4 white">
+            {project.description}
+          </p>
+        </div>
       </div>
-    </div>
+      {isvisible && (
+        <NavLink
+          to={`/project/${project.projectID}`}
+          className="absolute top-0 left-0 bottom-0 right-0 z2"
+        />
+      )}
+    </>
   );
 };
 
 GridProjectSnippet.propTypes = {
-  isVisible: PropTypes.bool,
+  isvisible: PropTypes.bool,
   forceHide: PropTypes.bool,
   project: PropTypes.object,
 };
