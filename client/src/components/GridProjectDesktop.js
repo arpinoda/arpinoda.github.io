@@ -1,94 +1,53 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-// import VideoSpinner from './VideoSpinner';
+import GridProjectCommon from './GridProjectCommon';
+import GridProjectSnippet from './GridProjectSnippet';
+import VideoTag from './VideoTag';
+import { videoStates } from './Video';
 
-// const GridProjectDesktop = (props) => {
-//   const [hoverRef, hovered] = useHover(false);
-//   const [isBuffering, setIsBuffering] = useState(false);
-//   const [forceHide, setForceHide] = useState(false);
-//   const videoRef = useRef();
+const GridProjectDesktop = props => {
+  const [isSnippetVisible, setSnippetVisible] = useState(false);
 
-//   let component = null;
+  const { project } = props;
+  let seconds = 0;
+  let timer = null;
 
-//   const isVideo = project.media.video !== undefined;
-//   const HIDE_VIDEO_SNIPPET_SECONDS = 4;
+  useEffect(() => () => clearInterval(timer), [isSnippetVisible]);
 
-//   useEffect(() => {
-//     if (hovered && isVideo) {
-//       let value = 0;
-//       const interval = setInterval(() => {
-//         value += 1;
+  function onTick() {
+    seconds += 1;
+    if (seconds === 4) {
+      setSnippetVisible(false);
+    }
+  }
 
-//         if (value === HIDE_VIDEO_SNIPPET_SECONDS) {
-//           setForceHide(true);
-//         }
-//       }, 1000);
-//       return () => {
-//         clearInterval(interval);
-//       };
-//     }
-//     return () => {
-//       setForceHide(false);
-//       setIsBuffering(false);
-//     };
-//   }, [hovered]);
+  // Start timer which hides snippet after N seconds
+  function onVideoStateChange(videoState) {
+    if (videoState === videoStates.PLAYING) {
+      timer = setInterval(onTick, 1000);
+    }
+  }
 
-//   function togglePlayPause() {
-//     if (hovered) {
-//       videoRef.current.play().catch(err => alert(err));
-//     } else {
-//       videoRef.current.pause();
-//       videoRef.current.currentTime = 0;
-//     }
-//   }
+  const desktopVideoOptions = {
+    onVideoStateChange,
+    playOnHover: true,
+  };
 
-//   if (videoRef.current) {
-//     togglePlayPause();
-//   }
+  return (
+    <div
+      onMouseEnter={() => setSnippetVisible(true)}
+      onMouseLeave={() => setSnippetVisible(false)}
+    >
+      <GridProjectCommon {...props} videoOptions={desktopVideoOptions} />
+      <GridProjectSnippet isvisible={isSnippetVisible} project={project} />
+      <VideoTag isVisible={timer !== null} />
+    </div>
+  );
+};
 
-//   if (isVideo) {
-//     component = (
-//       <>
-//         <ProjectVideo
-//           ref={videoRef}
-//           className={className}
-//           project={project}
-//           setIsBuffering={setIsBuffering}
-//           isPlaying={hovered}
-//         />
-//         <VideoSpinner isHovering={hovered} isBuffering={isBuffering} />
-//       </>
-//     );
-//   } else {
-//     component = (
-//       <ProjectImage
-//         alt={project.title}
-//         src={project.media.thumbnail}
-//         className={className}
-//       />
-//     );
-//   }
+GridProjectDesktop.propTypes = {
+  project: PropTypes.object,
+};
 
-//   return (
-//     <div ref={hoverRef}>
-//       {component}
-//       <GridProjectSnippet
-//         isVisible={hovered}
-//         forceHide={forceHide}
-//         project={project}
-//       />
-//       <NavLink
-//         to={`/project/${project.projectID}`}
-//         className="absolute top-0 left-0 bottom-0 right-0 z2"
-//       />
-//     </div>
-//   );
-// };
-
-// GridProjectDesktop.propTypes = {
-//   project: PropTypes.object,
-//   className: PropTypes.string,
-// };
-
-// export default GridProjectDesktop;
+export default GridProjectDesktop;

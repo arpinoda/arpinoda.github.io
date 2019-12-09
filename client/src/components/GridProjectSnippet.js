@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 
 /**
  * The animated pane displayed on a project when a user is hovering
@@ -48,12 +47,6 @@ const GridProjectSnippet = ({ isvisible, forceHide, project }) => {
           </p>
         </div>
       </div>
-      {isvisible && (
-        <NavLink
-          to={`/project/${project.projectID}`}
-          className="absolute top-0 left-0 bottom-0 right-0 z2"
-        />
-      )}
     </>
   );
 };

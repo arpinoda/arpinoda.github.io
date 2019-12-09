@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import ProjectImage from './ProjectImage';
 import ProjectVideo from './ProjectVideo';
 
@@ -20,11 +21,17 @@ const GridProjectCommon = props => {
     );
   } else {
     component = (
-      <ProjectImage
-        {...props}
-        alt={project.title}
-        src={project.media.thumbnail}
-      />
+      <>
+        <ProjectImage
+          {...props}
+          alt={project.title}
+          src={project.media.thumbnail}
+        />
+        <NavLink
+          to={`/project/${project.projectID}`}
+          className="absolute top-0 right-0 left-0 bottom-0 z1"
+        />
+      </>
     );
   }
 

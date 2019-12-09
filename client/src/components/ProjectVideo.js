@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Video, { videoStates } from './Video';
 import VideoPlayButton from './VideoPlayButton';
 import VideoLoading from './VideoLoading';
+import VideoInputHandler from './VideoInputHandler';
 
 // Wrapper function that displays a custom video player.
 // Responsilbility is to read the option object
@@ -10,7 +12,8 @@ import VideoLoading from './VideoLoading';
 const ProjectVideo = props => {
   const [videoState, setVideoState] = useState(videoStates.READY);
   const videoRef = useRef();
-  const { options } = props;
+  const { options, project } = props;
+  const fullScreenClass = 'absolute top-0 left-0 bottom-0 right-0 z1';
 
   // Parent component's callback function triggered
   useEffect(() => {
@@ -18,8 +21,6 @@ const ProjectVideo = props => {
       options.onVideoStateChange(videoState);
     }
   }, [videoState]);
-
-  let hoverRef;
 
   function playVideo() {
     const promise = videoRef.current.play();
@@ -36,13 +37,69 @@ const ProjectVideo = props => {
   }
 
   return (
-    <div ref={hoverRef} className="waa">
+    <>
       {/* Main Video Element */}
       <Video
         {...props}
         ref={videoRef}
         onStateChange={setVideoState}
         currentState={videoState}
+      />
+
+      {/* Transparent "Target" for capturing touches and clicks */}
+      <VideoInputHandler
+        videoState={videoState}
+        onDuringPlaying={() => (
+          // Stop video from playing
+          <div
+            onMouseLeave={() => {
+              if (options.playOnHover) {
+                setVideoState(videoStates.READY);
+              }
+            }}
+            className={fullScreenClass}
+            role="button"
+            tabIndex="0"
+            onMouseUp={() => {
+              setVideoState(videoStates.READY);
+            }}
+          />
+        )}
+        onDuringError={() => (
+          <div
+            className={fullScreenClass}
+            role="button"
+            tabIndex="0"
+            onMouseUp={() => {
+              setVideoState(videoStates.READY);
+            }}
+          />
+        )}
+        onDuringLoading={() => (
+          <div
+            onMouseLeave={() => {
+              setVideoState(videoStates.READY);
+            }}
+            className={fullScreenClass}
+            role="button"
+            tabIndex="0"
+            onMouseUp={() => {
+              setVideoState(videoStates.READY);
+            }}
+          />
+        )}
+        onDuringReady={() => (
+          <NavLink
+            to={`/project/${project.projectID}`}
+            className={fullScreenClass}
+            onMouseEnter={() => {
+              if (options.playOnHover) {
+                playVideo();
+              }
+            }}
+            onFocus={() => {}}
+          />
+        )}
       />
 
       {/* Loading Indicator Element */}
@@ -52,7 +109,7 @@ const ProjectVideo = props => {
       {options.playButton && videoState === videoStates.READY && (
         <VideoPlayButton onClick={playVideo} />
       )}
-    </div>
+    </>
   );
 };
 
@@ -63,6 +120,7 @@ ProjectVideo.defaultProps = {
 ProjectVideo.propTypes = {
   currentState: PropTypes.string,
   options: PropTypes.object,
+  project: PropTypes.object,
   onStateChange: PropTypes.func,
 };
 

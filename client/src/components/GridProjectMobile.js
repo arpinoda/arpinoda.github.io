@@ -12,9 +12,9 @@ const GridProjectMobile = props => {
   // Sets snippet visibilty. Hidden when playing and loading
   function onVideoStateChange(videoState) {
     const result =
-      videoState !== videoStates.PLAYING && videoState !== videoStates.LOADING;
+      videoState === videoStates.PLAYING || videoState === videoStates.LOADING;
 
-    setSnippetVisible(result);
+    setSnippetVisible(!result);
   }
 
   const mobileVideoOptions = {

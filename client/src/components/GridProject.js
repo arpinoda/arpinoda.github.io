@@ -8,7 +8,7 @@ import LoadingTile from './LoadingTile';
 /**
  * Represents one square tile on the Home screen
  */
-const GridProject = ({ project }) => {
+const GridProject = props => {
   const className = 'absolute left-0 top-0';
 
   return (
@@ -17,10 +17,10 @@ const GridProject = ({ project }) => {
       <ResponsiveLayout
         breakpoint={767}
         renderDesktop={() => (
-          <GridProjectDesktop className={className} project={project} />
+          <GridProjectDesktop {...props} className={className} />
         )}
         renderMobile={() => (
-          <GridProjectMobile className={className} project={project} />
+          <GridProjectMobile {...props} className={className} />
         )}
       />
     </figure>

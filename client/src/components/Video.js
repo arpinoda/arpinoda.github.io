@@ -30,6 +30,7 @@ const Video = React.forwardRef((props, ref) => {
       })
       .catch(err => {
         onStateChange(videoStates.ERROR);
+        setPosterURL(BROKEN_IMAGE);
         console.log(err);
       });
   }, [thumbnail]);
@@ -39,7 +40,6 @@ const Video = React.forwardRef((props, ref) => {
 
     switch (currentState) {
       case videoStates.ERROR:
-        setPosterURL(BROKEN_IMAGE);
         break;
       case videoStates.READY:
         ref.current.pause();
