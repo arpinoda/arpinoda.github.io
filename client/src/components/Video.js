@@ -21,46 +21,36 @@ export const videoStates = {
 
 const Video = React.forwardRef((props, ref) => {
   const [posterURL, setPosterURL] = useState();
-  const {
-    className,
-    thumbnail,
-    onStateChange,
-    videoURL,
-    currentState,
-    playFn,
-  } = props;
+  const { className, thumbnail, onStateChange, videoURL, currentState } = props;
+
+  useEffect(() => {
+    imageCache(thumbnail)
+      .then(blobURL => {
+        setPosterURL(blobURL);
+      })
+      .catch(err => {
+        onStateChange(videoStates.ERROR);
+        console.log(err);
+      });
+  }, [thumbnail]);
 
   useEffect(() => {
     console.log(`${thumbnail} state: ${currentState}`);
-    if (currentState === videoStates.ERROR) {
-      setPosterURL(BROKEN_IMAGE);
-    } else {
-      imageCache(thumbnail)
-        .then(blobURL => {
-          setPosterURL(blobURL);
-        })
-        .catch(err => {
-          onStateChange(videoStates.ERROR);
-          console.log(err);
-        });
-    }
-    if (playFn != null) {
-      console.log(playFn.current);
-      playFn();
-      // const promise = ref.current.play();
-      // if (promise !== undefined) {
-      //   promise.then(() => {
-      //     // Play started
-      //   }).catch(err => {
-      //     alert(err);
-      //     onStateChange(videoStates.ERROR);
-      //   });
-      // }
-    }
-    if (currentState === videoStates.READY) {
-      // alert('pausing')
-      ref.current.pause();
-      ref.current.currentTime = 0;
+
+    switch (currentState) {
+      case videoStates.ERROR:
+        setPosterURL(BROKEN_IMAGE);
+        break;
+      case videoStates.READY:
+        ref.current.pause();
+        ref.current.currentTime = 0;
+        break;
+      case videoStates.PLAYING:
+        // Triggering play() occurs within ProjectVideo.js, unfortunately.
+        // Was experiencing "NotAllowedError" in Mobile Safari, low power mode.
+        // Occured when using a React DOM reference outside context of onClick handler.
+        break;
+      default:
     }
   }, [currentState]);
 
@@ -70,7 +60,6 @@ const Video = React.forwardRef((props, ref) => {
       className={className}
       onEnded={() => {
         onStateChange(videoStates.READY);
-        ref.current.currentTime = 0;
       }}
       onError={() => {
         onStateChange(videoStates.ERROR);
@@ -102,7 +91,6 @@ Video.propTypes = {
   videoURL: PropTypes.string,
   currentState: PropTypes.string,
   onStateChange: PropTypes.func,
-  playFn: PropTypes.func,
 };
 
 export default Video;

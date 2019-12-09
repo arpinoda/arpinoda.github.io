@@ -3,30 +3,36 @@ import PropTypes from 'prop-types';
 import Video, { videoStates } from './Video';
 import VideoPlayButton from './VideoPlayButton';
 import VideoLoading from './VideoLoading';
-import useHover from './useHover';
 
 // Wrapper function that displays a custom video player.
 // Responsilbility is to read the option object
 // and render approriate video component(s)
 const ProjectVideo = props => {
   const [videoState, setVideoState] = useState(videoStates.READY);
-  const [playFn, setPlayFn] = useState(null);
   const videoRef = useRef();
-
   const { options } = props;
+
+  // Parent component's callback function triggered
+  useEffect(() => {
+    if (options.onVideoStateChange) {
+      options.onVideoStateChange(videoState);
+    }
+  }, [videoState]);
+
   let hoverRef;
-  let hovered;
 
-  if (options.playOnHover) {
-    [hoverRef, hovered] = useHover(false);
-
-    useEffect(() => {
-      if (hovered) {
-        setVideoState(videoStates.PLAYING);
-      } else {
-        setVideoState(videoStates.READY);
-      }
-    }, [hovered]);
+  function playVideo() {
+    const promise = videoRef.current.play();
+    if (promise !== undefined) {
+      promise
+        .then(() => {
+          // Play started
+        })
+        .catch(err => {
+          alert(err);
+          setVideoState(videoStates.ERROR);
+        });
+    }
   }
 
   return (
@@ -34,7 +40,6 @@ const ProjectVideo = props => {
       {/* Main Video Element */}
       <Video
         {...props}
-        playFn={playFn}
         ref={videoRef}
         onStateChange={setVideoState}
         currentState={videoState}
@@ -45,11 +50,7 @@ const ProjectVideo = props => {
 
       {/* Play Button */}
       {options.playButton && videoState === videoStates.READY && (
-        <VideoPlayButton
-          onClick={() => {
-            setPlayFn(videoRef);
-          }}
-        />
+        <VideoPlayButton onClick={playVideo} />
       )}
     </div>
   );
