@@ -1,98 +1,94 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import useHover from './useHover';
-import ProjectImage from './ProjectImage';
-import ProjectVideo from './ProjectVideo';
-import GridProjectSnippet from './GridProjectSnippet';
-import VideoSpinner from './VideoSpinner';
+// import React from 'react';
+// import PropTypes from 'prop-types';
 
-const GridProjectDesktop = ({ project, className }) => {
-  const [hoverRef, hovered] = useHover(false);
-  const [isBuffering, setIsBuffering] = useState(false);
-  const [forceHide, setForceHide] = useState(false);
-  const videoRef = useRef();
+// import VideoSpinner from './VideoSpinner';
 
-  let component = null;
+// const GridProjectDesktop = (props) => {
+//   const [hoverRef, hovered] = useHover(false);
+//   const [isBuffering, setIsBuffering] = useState(false);
+//   const [forceHide, setForceHide] = useState(false);
+//   const videoRef = useRef();
 
-  const isVideo = project.media.video !== undefined;
-  const HIDE_VIDEO_SNIPPET_SECONDS = 4;
+//   let component = null;
 
-  useEffect(() => {
-    if (hovered && isVideo) {
-      let value = 0;
-      const interval = setInterval(() => {
-        value += 1;
+//   const isVideo = project.media.video !== undefined;
+//   const HIDE_VIDEO_SNIPPET_SECONDS = 4;
 
-        if (value === HIDE_VIDEO_SNIPPET_SECONDS) {
-          setForceHide(true);
-        }
-      }, 1000);
-      return () => {
-        clearInterval(interval);
-      };
-    }
-    return () => {
-      setForceHide(false);
-      setIsBuffering(false);
-    };
-  }, [hovered]);
+//   useEffect(() => {
+//     if (hovered && isVideo) {
+//       let value = 0;
+//       const interval = setInterval(() => {
+//         value += 1;
 
-  function togglePlayPause() {
-    if (hovered) {
-      videoRef.current.play().catch(err => alert(err));
-    } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  }
+//         if (value === HIDE_VIDEO_SNIPPET_SECONDS) {
+//           setForceHide(true);
+//         }
+//       }, 1000);
+//       return () => {
+//         clearInterval(interval);
+//       };
+//     }
+//     return () => {
+//       setForceHide(false);
+//       setIsBuffering(false);
+//     };
+//   }, [hovered]);
 
-  if (videoRef.current) {
-    togglePlayPause();
-  }
+//   function togglePlayPause() {
+//     if (hovered) {
+//       videoRef.current.play().catch(err => alert(err));
+//     } else {
+//       videoRef.current.pause();
+//       videoRef.current.currentTime = 0;
+//     }
+//   }
 
-  if (isVideo) {
-    component = (
-      <>
-        <ProjectVideo
-          ref={videoRef}
-          className={className}
-          project={project}
-          setIsBuffering={setIsBuffering}
-          isPlaying={hovered}
-        />
-        <VideoSpinner isHovering={hovered} isBuffering={isBuffering} />
-      </>
-    );
-  } else {
-    component = (
-      <ProjectImage
-        alt={project.title}
-        src={project.media.thumbnail}
-        className={className}
-      />
-    );
-  }
+//   if (videoRef.current) {
+//     togglePlayPause();
+//   }
 
-  return (
-    <div ref={hoverRef}>
-      {component}
-      <GridProjectSnippet
-        isVisible={hovered}
-        forceHide={forceHide}
-        project={project}
-      />
-      <NavLink
-        to={`/project/${project.projectID}`}
-        className="absolute top-0 left-0 bottom-0 right-0 z2"
-      />
-    </div>
-  );
-};
+//   if (isVideo) {
+//     component = (
+//       <>
+//         <ProjectVideo
+//           ref={videoRef}
+//           className={className}
+//           project={project}
+//           setIsBuffering={setIsBuffering}
+//           isPlaying={hovered}
+//         />
+//         <VideoSpinner isHovering={hovered} isBuffering={isBuffering} />
+//       </>
+//     );
+//   } else {
+//     component = (
+//       <ProjectImage
+//         alt={project.title}
+//         src={project.media.thumbnail}
+//         className={className}
+//       />
+//     );
+//   }
 
-GridProjectDesktop.propTypes = {
-  project: PropTypes.object,
-  className: PropTypes.string,
-};
+//   return (
+//     <div ref={hoverRef}>
+//       {component}
+//       <GridProjectSnippet
+//         isVisible={hovered}
+//         forceHide={forceHide}
+//         project={project}
+//       />
+//       <NavLink
+//         to={`/project/${project.projectID}`}
+//         className="absolute top-0 left-0 bottom-0 right-0 z2"
+//       />
+//     </div>
+//   );
+// };
 
-export default GridProjectDesktop;
+// GridProjectDesktop.propTypes = {
+//   project: PropTypes.object,
+//   className: PropTypes.string,
+// };
+
+// export default GridProjectDesktop;

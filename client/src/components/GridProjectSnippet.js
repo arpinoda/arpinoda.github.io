@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
  */
 const GridProjectSnippet = ({ isvisible, forceHide, project }) => {
   const snippetStyle = {
+    userSelect: 'none',
     position: 'relative',
     height: 'calc(100% - 20px)',
     transition: 'opacity 0.3s, transform 0.3s',

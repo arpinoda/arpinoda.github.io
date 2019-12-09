@@ -1,55 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import ProjectImage from './ProjectImage';
-import ProjectVideo from './ProjectVideo';
+import GridProjectCommon from './GridProjectCommon';
 import GridProjectSnippet from './GridProjectSnippet';
-import { videoStates } from './Video';
+// import { videoStates } from './Video';
 
-const GridProjectMobile = ({ project, className }) => {
-  const [videoState, setVideoState] = useState(videoStates.READY);
-
-  let component = null;
-  const isVideo = project.media.video !== undefined;
-
-  useEffect(() => {
-    console.log(`${project.projectID} state: ${videoState}`);
-  }, [videoState]);
-
-  if (isVideo) {
-    component = (
-      <ProjectVideo
-        className={className}
-        project={project}
-        onStateChange={setVideoState}
-        currentState={videoState}
-        options={null}
-      />
-    );
-  } else {
-    component = (
-      <ProjectImage
-        alt={project.title}
-        src={project.media.thumbnail}
-        className={className}
-      />
-    );
-  }
+const GridProjectMobile = props => {
+  const { project } = props;
+  const mobileVideoOptions = {
+    playButton: true,
+  };
 
   return (
-    <div>
-      {component}
+    <>
+      <GridProjectCommon {...props} videoOptions={mobileVideoOptions} />
       <GridProjectSnippet
-        isvisible={videoState !== videoStates.PLAYING}
+        isvisible
+        /* {
+          videoState !== videoStates.PLAYING &&
+          videoState !== videoStates.LOADING
+        } */
         project={project}
       />
-    </div>
+    </>
   );
 };
 
 GridProjectMobile.propTypes = {
   project: PropTypes.object,
-  className: PropTypes.string,
 };
 
 export default GridProjectMobile;
