@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ProjectImage from './ProjectImage';
 import ProjectVideo from './ProjectVideo';
+import VideoTag from './VideoTag';
 
 // Decides whether we're rendering a ProjectImage or ProjectVideo
 const GridProjectCommon = props => {
@@ -12,12 +13,15 @@ const GridProjectCommon = props => {
 
   if (isVideo) {
     component = (
-      <ProjectVideo
-        {...props}
-        videoURL={media.video}
-        thumbnail={media.thumbnail}
-        options={videoOptions}
-      />
+      <>
+        <ProjectVideo
+          {...props}
+          videoURL={media.video}
+          thumbnail={media.thumbnail}
+          options={videoOptions}
+        />
+        <VideoTag isVisible={props.isVideoTagVisible} />
+      </>
     );
   } else {
     component = (

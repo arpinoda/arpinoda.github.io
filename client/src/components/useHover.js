@@ -6,27 +6,29 @@ import { useState, useEffect, useRef } from 'react';
 // - hovered: A boolean, true if hovered and false otherwise
 
 const useHover = () => {
-  // Reference to the element we're listen for events from
-  const ref = useRef();
+  const [value, setValue] = useState(false);
 
-  // Hover state management
-  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
 
-  // Event handlers
-  const enter = () => setHovered(true);
-  const leave = () => setHovered(false);
+  const handleMouseOver = () => setValue(true);
+  const handleMouseOut = () => setValue(false);
 
-  // Simple effect, just bind and unbind the event handlers
   useEffect(() => {
-    ref.current.addEventListener('mouseenter', enter);
-    ref.current.addEventListener('mouseleave', leave);
-    return () => {
-      ref.current.removeEventListener('mouseenter', enter);
-      ref.current.removeEventListener('mouseleave', leave);
-    };
-  }, [ref]);
+    const node = ref.current;
+    if (node) {
+      node.addEventListener('mouseenter', handleMouseOver);
+      node.addEventListener('mouseleave', handleMouseOut);
 
-  return [ref, hovered];
+      return () => {
+        node.removeEventListener('mouseenter', handleMouseOver);
+        node.removeEventListener('mouseleave', handleMouseOut);
+      };
+    }
+
+    return () => {};
+  }, [ref.current]); // Recall only if ref changes
+
+  return [ref, value];
 };
 
 export default useHover;

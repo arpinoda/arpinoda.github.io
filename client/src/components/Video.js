@@ -16,7 +16,7 @@ export const videoStates = {
   READY: 'ready',
   LOADING: 'loading',
   PLAYING: 'playing',
-  ERROR: 'error',
+  ERROR: 'error', // unsure if needed
 };
 
 const Video = React.forwardRef((props, ref) => {

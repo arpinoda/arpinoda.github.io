@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { NavLink } from 'react-router-dom';
 import GridProjectCommon from './GridProjectCommon';
 import GridProjectSnippet from './GridProjectSnippet';
+import VideoPlayButton from './VideoPlayButton';
 import { videoStates } from './Video';
 
 const GridProjectMobile = props => {
@@ -17,9 +18,16 @@ const GridProjectMobile = props => {
     setSnippetVisible(!result);
   }
 
+  const fillParentClassName = 'absolute top-0 left-0 bottom-0 right-0 z1';
+  const navLinkURL = `/project/${project.projectID}`;
+
   const mobileVideoOptions = {
     onVideoStateChange,
-    playButton: true,
+    playButton: [VideoPlayButton, {}],
+    duringReadyComponent: [
+      NavLink,
+      { to: navLinkURL, className: fillParentClassName },
+    ],
   };
 
   return (

@@ -1,27 +1,42 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import debounce from 'debounce';
 import Video, { videoStates } from './Video';
-import VideoPlayButton from './VideoPlayButton';
 import VideoLoading from './VideoLoading';
-import VideoInputHandler from './VideoInputHandler';
+import VideoControlsWrapper from './VideoControlsWrapper';
+import VideoTransparentTarget from './VideoTransparentTarget';
+import useHover from './useHover';
 
 // Wrapper function that displays a custom video player.
-// Responsilbility is to read the option object
-// and render approriate video component(s)
+// Responsilble for reading the option object and rendering approriate video component(s)
 const ProjectVideo = props => {
   const [videoState, setVideoState] = useState(videoStates.READY);
+  const [hoverRef, hovered] = useHover();
   const videoRef = useRef();
-  const { options, project } = props;
-  const fullScreenClass = 'absolute top-0 left-0 bottom-0 right-0 z1';
+  let { options } = props;
+  const DELAY_HOVER_PLAY_MS = 800;
 
-  // Parent component's callback function triggered
+  const defaults = {
+    playOnHover: false,
+    playButton: null,
+    onVideoStateChange: null,
+    duringReadyComponent: null,
+    duringPlayComponent: null,
+    duringLoadComponent: null,
+    duringErrorComponent: null,
+  };
+
+  options = Object.assign({}, defaults, options);
+
+  // Trigger the parent component callback function
   useEffect(() => {
     if (options.onVideoStateChange) {
       options.onVideoStateChange(videoState);
     }
   }, [videoState]);
 
+  // Has to be called in same scope as our play button's onclick handler
+  // to resolve NotAllowedError seen in low-power mode on mobile Safari.
   function playVideo() {
     const promise = videoRef.current.play();
     if (promise !== undefined) {
@@ -36,6 +51,23 @@ const ProjectVideo = props => {
     }
   }
 
+  const playVideoWithDelay = debounce(playVideo, DELAY_HOVER_PLAY_MS);
+
+  // Play on hover
+  useEffect(() => {
+    if (options.playOnHover) {
+      if (videoState === videoStates.READY && hovered) {
+        playVideoWithDelay();
+      } else if (!hovered && videoState === videoStates.PLAYING) {
+        setVideoState(videoStates.READY);
+      }
+    }
+
+    return () => {
+      playVideoWithDelay.clear();
+    };
+  }, [hovered]);
+
   return (
     <>
       {/* Main Video Element */}
@@ -46,69 +78,45 @@ const ProjectVideo = props => {
         currentState={videoState}
       />
 
-      {/* Transparent "Target" for capturing touches and clicks */}
-      <VideoInputHandler
+      {/* Components displayed above video for each state. A default transparent target is
+      rendered for capturing gesture and mouse events if an overriding option is not provided */}
+      <VideoControlsWrapper
+        options={options}
+        ref={options.playOnHover ? hoverRef : null}
         videoState={videoState}
-        onDuringPlaying={() => (
-          // Stop video from playing
-          <div
-            onMouseLeave={() => {
-              if (options.playOnHover) {
-                setVideoState(videoStates.READY);
-              }
-            }}
-            className={fullScreenClass}
-            role="button"
-            tabIndex="0"
-            onMouseUp={() => {
-              setVideoState(videoStates.READY);
-            }}
-          />
-        )}
-        onDuringError={() => (
-          <div
-            className={fullScreenClass}
-            role="button"
-            tabIndex="0"
-            onMouseUp={() => {
-              setVideoState(videoStates.READY);
-            }}
-          />
-        )}
-        onDuringLoading={() => (
-          <div
-            onMouseLeave={() => {
-              setVideoState(videoStates.READY);
-            }}
-            className={fullScreenClass}
-            role="button"
-            tabIndex="0"
-            onMouseUp={() => {
-              setVideoState(videoStates.READY);
-            }}
-          />
-        )}
-        onDuringReady={() => (
-          <NavLink
-            to={`/project/${project.projectID}`}
-            className={fullScreenClass}
-            onMouseEnter={() => {
-              if (options.playOnHover) {
-                playVideo();
-              }
-            }}
-            onFocus={() => {}}
-          />
-        )}
+        playVideo={playVideo}
+        onDuringPlaying={
+          // Essentially stop/reset button
+          options.duringPlayComponent || [
+            VideoTransparentTarget,
+            { onClick: () => setVideoState(videoStates.READY) },
+          ]
+        }
+        onDuringReady={
+          // Play button or event triggering play
+          options.duringReadyComponent || [
+            VideoTransparentTarget,
+            { onClick: () => playVideo() },
+          ]
+        }
+        onDuringLoading={
+          // If user interacts with loading screen
+          options.duringLoadComponent || [
+            VideoTransparentTarget,
+            { onClick: () => setVideoState(videoStates.READY) },
+          ]
+        }
+        onDuringError={
+          // Displayed when video has errored
+          options.duringErrorComponent || [
+            VideoTransparentTarget,
+            { onClick: () => setVideoState(videoStates.READY) },
+          ]
+        }
       />
 
       {/* Loading Indicator Element */}
       {videoState === videoStates.LOADING && <VideoLoading />}
-
-      {/* Play Button */}
-      {options.playButton && videoState === videoStates.READY && (
-        <VideoPlayButton onClick={playVideo} />
-      )}
     </>
   );
 };
@@ -120,7 +128,6 @@ ProjectVideo.defaultProps = {
 ProjectVideo.propTypes = {
   currentState: PropTypes.string,
   options: PropTypes.object,
-  project: PropTypes.object,
   onStateChange: PropTypes.func,
 };
 
