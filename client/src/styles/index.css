@@ -71,8 +71,13 @@ nav a:not(.active) {
 nav ul:hover a{
   opacity: 1;
 }
-nav ul {
+nav ul:hover {
   overflow:auto!important;
+}
+@media(any-pointer: coarse) {
+  nav ul {
+    overflow:auto!important;
+  }
 }
 nav ul:nth-child(1) > li:not(.featured) > a {
   font-weight:bold;
