@@ -26,6 +26,8 @@
   outline:none;
 }
 
+html { -webkit-text-size-adjust: 100%; }
+
 /* General */
 .h1 { font-size: var(--h1) }
 .h3 { 
@@ -69,7 +71,7 @@ nav a:not(.active) {
 nav ul:hover a{
   opacity: 1;
 }
-nav ul:hover {
+nav ul {
   overflow:auto!important;
 }
 nav ul:nth-child(1) > li:not(.featured) > a {
@@ -105,5 +107,9 @@ nav li > a {
   color: var(--black) !important;
 }
 .sticky + .projects {
-  margin-top: 49px;
+  margin-top: 36px;
+}
+
+.featured .category-header {
+  visibility: hidden;
 }

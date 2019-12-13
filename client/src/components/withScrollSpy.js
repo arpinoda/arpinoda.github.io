@@ -21,7 +21,7 @@ const withScrollSpy = OriginalComponent => {
       this.ACTIVE_CLASS_NAME = 'active';
 
       // Padding added to recognize a section as active when scrolling
-      this.ACTIVE_SCROLL_OFFSET = 1;
+      this.ACTIVE_SCROLL_OFFSET = 1.5;
 
       if (!('scrollBehavior' in document.documentElement.style)) {
         import('scroll-behavior-polyfill');
@@ -195,7 +195,10 @@ const withScrollSpy = OriginalComponent => {
       }
 
       const $target = document.querySelector(`a[href='${href}']`);
-      $list.scrollTo(0, $target.offsetTop - 50);
+
+      setTimeout(() => {
+        $list.scrollTo(0, $target.offsetTop - 50);
+      }, 100);
     };
 
     onWindowUpdate = () => {

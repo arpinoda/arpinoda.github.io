@@ -20,8 +20,62 @@ export const BROKEN_IMAGE =
 // The hash string used within URLs
 export const HASH_PREFIX = '#';
 
+// The pixel width at which we switch to Tablet layout
+export const TABLET_BREAKPOINT = 767;
+
+// The pixel width at which we switch to Desktop layout
+export const DESKTOP_BREAKPOINT = 1025;
+
+// Determines if user's device contains a touch screen
+export const deviceHasTouchScreen = (() => {
+  let hasTouchScreen = false;
+  if ('maxTouchPoints' in navigator) {
+    hasTouchScreen = navigator.maxTouchPoints > 0;
+  } else if ('msMaxTouchPoints' in navigator) {
+    hasTouchScreen = navigator.msMaxTouchPoints > 0;
+  } else {
+    const mQ = window.matchMedia && matchMedia('(pointer:coarse)');
+    if (mQ && mQ.media === '(pointer:coarse)') {
+      hasTouchScreen = !!mQ.matches;
+    } else if ('orientation' in window) {
+      hasTouchScreen = true; // deprecated, but good fallback
+    } else {
+      // Only as a last resort, fall back to user agent sniffing
+      const UA = navigator.userAgent;
+      hasTouchScreen =
+        /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+        /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+    }
+  }
+  return hasTouchScreen;
+})();
+
+// Broadly categorizes device type by browser width
+// Does not take into account .devicePixelValue (retina displays)
+export const getGenericLayoutType = screenWidth => {
+  let layoutType;
+
+  switch (screenWidth) {
+    case screenWidth < TABLET_BREAKPOINT: {
+      // Mobile layout
+      layoutType = 'MOBILE';
+      break;
+    }
+    case screenWidth < DESKTOP_BREAKPOINT: {
+      // Tablet layout
+      layoutType = 'TABLET';
+      break;
+    }
+    default:
+      layoutType = 'DESKTOP';
+    // Desktop layout
+  }
+
+  return layoutType;
+};
+
 /**
- * Sets a container's scrollY to a specific value, then "disables" scrolling for the container.
+ * Sets a container's scrollY to a specific value, then 'disables' scrolling for the container.
  * Body element may still scroll if child elements overflow.
  * @param {number} value The scrollY value for which the container should lock scrolling at.
  */
@@ -82,7 +136,7 @@ export const getFileExtension = filename => filename.split('.').pop();
 export const camelize = string =>
   string.replace(/-([a-z])/gi, (s, group) => group.toUpperCase());
 
-// Converts "react css syntax" string to "valid css syntax" object
+// Converts 'react css syntax' string to 'valid css syntax' object
 export const styleToObject = style =>
   style
     .split(';')

@@ -26,6 +26,7 @@ const VideoControlsWrapper = React.forwardRef((props, ref) => {
 
       if (playButton) {
         const [PlayComponent, playProps] = playButton;
+        componentProps.ref = options.playOnHover ? ref : null;
 
         return (
           <>

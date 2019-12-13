@@ -22,7 +22,7 @@ class Grid extends React.Component {
     const { categories } = this.props;
     return (
       <main>
-        <ul className="pl3">
+        <ul>
           {categories &&
             categories.map(category => (
               <TreeItem

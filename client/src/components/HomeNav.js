@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ResponsiveLayout from './ResponsiveLayout';
 import HomeNavDesktop from './HomeNavDesktop';
 import HomeNavMobile from './HomeNavMobile';
+import { TABLET_BREAKPOINT } from '../util/UI';
 
 /**
  * The site's responsive navigation. Visible (by default) on left for tablet & desktop form factors.
@@ -11,7 +12,7 @@ import HomeNavMobile from './HomeNavMobile';
  */
 const HomeNav = ({ categories, scrollIDs }) => (
   <ResponsiveLayout
-    breakpoint={767}
+    breakpoint={TABLET_BREAKPOINT}
     renderDesktop={() => (
       <HomeNavDesktop categories={categories} scrollIDs={scrollIDs} />
     )}

@@ -14,7 +14,7 @@ const ProjectVideo = props => {
   const [hoverRef, hovered] = useHover();
   const videoRef = useRef();
   let { options } = props;
-  const DELAY_HOVER_PLAY_MS = 800;
+  const DELAY_HOVER_PLAY_MS = 600;
 
   const defaults = {
     playOnHover: false,

@@ -7,17 +7,20 @@ import GridProject from './GridProject';
  * @param {Object} category A category model to render
  */
 const GridCategory = ({ category }) => {
-  const divClassName = `col-12 bg-white ${
-    category.className ? category.className : ''
-  }`;
+  const divClassName = `col-12 bg-white category-header ${category.className ||
+    ''}`;
   const headings = category.breadcrumbs.split('>');
+
+  // Category breadcrumb: The objective is to display only the deepest child within a set.
+  // e.g. "grandchild" within the following breadcrumb "parent > child > grandchild"
+  // We split the breadcrumb set by '>', and apply white font color to all parent elements
   const hidden = headings.slice(0, headings.length - 1);
 
   return (
-    <article id={category.elementID}>
+    <article className="ml2" id={category.elementID}>
       {/* Category Breadcrumbs */}
       <div className={divClassName}>
-        <h3 className="pt2 pb2 h3">
+        <h3 className="pt1 pb1 h3">
           {hidden.map(title => (
             <span className="white" key={title}>{`${title} > `}</span>
           ))}
