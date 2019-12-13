@@ -78,6 +78,18 @@ nav ul:hover {
   nav ul {
     overflow:auto!important;
   }
+  .category-header, .category-header span {
+    font-size: 13px!important;
+    text-transform: uppercase;
+  }
+  .featured .category-header {
+    visibility: visible!important;
+  }
+  .sticky {
+    background-color: rgba(255, 255, 255, 0.75)!important;
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px); 
+  }
 }
 nav ul:nth-child(1) > li:not(.featured) > a {
   font-weight:bold;
@@ -105,8 +117,8 @@ nav li > a {
 .sticky {
   position: fixed;
   top: 0px;
-  z-index: 4;
-  background-color: rgba(255,255,255, 0.8);
+  z-index: 4; 
+  background-color: rgba(255,255,255,0.85);
 }
 .sticky span {
   color: var(--black) !important;

@@ -7,8 +7,8 @@ import GridProject from './GridProject';
  * @param {Object} category A category model to render
  */
 const GridCategory = ({ category }) => {
-  const divClassName = `col-12 bg-white category-header ${category.className ||
-    ''}`;
+  const divClassName = `col-12  category-header ${category.className || ''}`;
+
   const headings = category.breadcrumbs.split('>');
 
   // Category breadcrumb: The objective is to display only the deepest child within a set.
@@ -17,10 +17,10 @@ const GridCategory = ({ category }) => {
   const hidden = headings.slice(0, headings.length - 1);
 
   return (
-    <article className="ml2" id={category.elementID}>
+    <article id={category.elementID}>
       {/* Category Breadcrumbs */}
       <div className={divClassName}>
-        <h3 className="pt1 pb1 h3">
+        <h3 className="pl2 pt1 pb1 h3">
           {hidden.map(title => (
             <span className="white" key={title}>{`${title} > `}</span>
           ))}
@@ -29,7 +29,7 @@ const GridCategory = ({ category }) => {
       </div>
 
       {/* Category Projects */}
-      <div className="projects flex flex-wrap">
+      <div className="projects pl2 flex flex-wrap">
         {category.projects &&
           category.projects.map(project => (
             <GridProject key={project.projectID} project={project} />
