@@ -16,7 +16,7 @@ const GridProjectSnippet = ({ isvisible, forceHide, project }) => {
     transformStyle: 'preserve-3d',
     transformOrigin: 'bottom',
     background:
-      'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))',
+      'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7))',
     transform: isvisible ? 'rotateX(0deg)' : 'rotateX(30deg)',
     opacity: isvisible ? '1' : '0',
   };

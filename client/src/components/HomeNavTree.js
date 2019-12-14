@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import TreeItem from './TreeItem';
 import HomeNavLink from './HomeNavLink';
 
-const HomeNavTree = ({ categories, ...props }) => (
-  <nav className="relative" style={{ minWidth: '215px' }}>
+const HomeNavTree = ({ categories, style, ...props }) => (
+  <nav className="relative" style={{ ...style, minWidth: '215px' }}>
     <ul
-      className="overflow-hidden list-reset pl3 pt4 pb3 fixed top-0 bottom-0"
+      className="overflow-hidden list-reset pr2 pl3 pt4 pb3 fixed top-0 bottom-0"
       style={{ scrollBehavior: 'smooth', maxWidth: '205px' }}
     >
       {categories &&
@@ -30,6 +30,7 @@ const HomeNavTree = ({ categories, ...props }) => (
 
 HomeNavTree.propTypes = {
   categories: PropTypes.array,
+  style: PropTypes.object,
 };
 
 export default HomeNavTree;

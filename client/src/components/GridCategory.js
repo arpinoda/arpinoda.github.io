@@ -20,7 +20,7 @@ const GridCategory = ({ category }) => {
     <article id={category.elementID}>
       {/* Category Breadcrumbs */}
       <div className={divClassName}>
-        <h3 className="pl2 pt1 pb1 h3">
+        <h3 className="pl2 pt2 pb2 h3">
           {hidden.map(title => (
             <span className="white" key={title}>{`${title} > `}</span>
           ))}
