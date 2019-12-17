@@ -17,6 +17,7 @@ const ProjectVideo = props => {
   const DELAY_HOVER_PLAY_MS = 600;
 
   const defaults = {
+    muted: true,
     playOnHover: false,
     playButton: null,
     onVideoStateChange: null,

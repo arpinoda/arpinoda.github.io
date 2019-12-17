@@ -13,6 +13,7 @@ const ProjectDetailSection = props => {
     getFileExtension(media.item) === 'mp4';
 
   const videoOptions = {
+    muted: false,
     playButton: [VideoPlayButton, {}],
   };
 

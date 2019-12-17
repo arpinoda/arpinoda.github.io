@@ -21,7 +21,15 @@ export const videoStates = {
 
 const Video = React.forwardRef((props, ref) => {
   const [posterURL, setPosterURL] = useState();
-  const { className, thumbnail, onStateChange, videoURL, currentState } = props;
+  const {
+    className,
+    thumbnail,
+    onStateChange,
+    videoURL,
+    currentState,
+    options,
+  } = props;
+  const { muted } = options;
 
   useEffect(() => {
     ImageCache(thumbnail)
@@ -36,8 +44,6 @@ const Video = React.forwardRef((props, ref) => {
   }, [thumbnail]);
 
   useEffect(() => {
-    console.log(`${thumbnail} state: ${currentState}`);
-
     switch (currentState) {
       case videoStates.ERROR:
         break;
@@ -70,10 +76,10 @@ const Video = React.forwardRef((props, ref) => {
       onWaiting={() => {
         onStateChange(videoStates.LOADING);
       }}
-      poster={posterURL}
+      poster={posterURL || ''}
       preload="metadata"
       playsInline
-      muted
+      muted={muted || true}
       style={{ height: '100%' }}
     >
       <source
@@ -81,12 +87,14 @@ const Video = React.forwardRef((props, ref) => {
         type="video/mp4"
       />
       Your browser does not support the video tag.
+      <track default kind="captions" srcLang="en" />
     </video>
   );
 });
 
 Video.propTypes = {
   className: PropTypes.string,
+  options: PropTypes.object,
   thumbnail: PropTypes.string,
   videoURL: PropTypes.string,
   currentState: PropTypes.string,
