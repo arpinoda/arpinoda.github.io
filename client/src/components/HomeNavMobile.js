@@ -24,6 +24,7 @@ const HomeNavMobile = ({ categories }) => {
     background: 'transparent',
     zIndex: 7,
     textAlign: 'right',
+    width: '100%',
   };
 
   const hamburgerStyle = {
@@ -92,6 +93,7 @@ const HomeNavMobile = ({ categories }) => {
           height: '100%',
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: 5,
+          width: 'calc(100% - 215px)',
         }}
       />
     </div>

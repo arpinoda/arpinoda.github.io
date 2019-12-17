@@ -1,17 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getFileExtension } from '../util/UI';
-import ProjectDetailImage from './ProjectDetailImage';
-import ProjectDetailVideo from './ProjectDetailVideo';
+import { getFileExtension, styleToObject } from '../util/UI';
+// import ProjectDetailImage from './ProjectDetailImage';
+import ProjectImage from './ProjectImage';
+import ProjectVideo from './ProjectVideo';
+import VideoPlayButton from './VideoPlayButton';
 
 const ProjectDetailSection = props => {
-  const { media, setEventError } = props;
-  const isVideo = getFileExtension(media.item) === 'mp4';
+  const { media } = props;
+  const isVideo =
+    getFileExtension(media.item) === 'mp4' ||
+    getFileExtension(media.item) === 'mp4';
+
+  const videoOptions = {
+    playButton: [VideoPlayButton, {}],
+  };
 
   const body = isVideo ? (
-    <ProjectDetailVideo setEventError={setEventError} video={media} />
+    <ProjectVideo
+      {...props}
+      videoURL={media.item}
+      thumbnail={media.thumbnail}
+      options={videoOptions}
+      className="col-12"
+    />
   ) : (
-    <ProjectDetailImage setEventError={setEventError} image={media} />
+    <ProjectImage
+      {...props}
+      alt={media.alt}
+      src={media.item}
+      style={{ pointerEvents: 'none' }}
+      className="relative z2"
+    >
+      {media.video && (
+        <div style={styleToObject(media.video.css)} className="absolute">
+          <div className="relative">
+            <ProjectVideo
+              {...props}
+              className="col-12"
+              videoURL={media.video.item}
+              /* thumbnail={media.thumbnail} */
+              options={videoOptions}
+            />
+          </div>
+        </div>
+      )}
+    </ProjectImage>
   );
 
   return <section className="relative">{body}</section>;

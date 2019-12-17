@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import imageCache from './ImageCache';
+import { ImageCache } from './Cache';
 import { BROKEN_IMAGE } from '../util/UI';
 
 /**
@@ -24,7 +24,7 @@ const Video = React.forwardRef((props, ref) => {
   const { className, thumbnail, onStateChange, videoURL, currentState } = props;
 
   useEffect(() => {
-    imageCache(thumbnail)
+    ImageCache(thumbnail)
       .then(blobURL => {
         setPosterURL(blobURL);
       })

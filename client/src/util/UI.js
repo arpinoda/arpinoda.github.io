@@ -94,7 +94,7 @@ export const disableScrollAt = value => {
   $container.style.position = 'fixed';
   $container.style.left = '0px';
   $container.style.right = '0px';
-  $container.style.overflow = 'scroll';
+  // $container.style.overflow = 'scroll';
 
   return scrollY;
 };
@@ -136,7 +136,7 @@ export const getFileExtension = filename => filename.split('.').pop();
 export const camelize = string =>
   string.replace(/-([a-z])/gi, (s, group) => group.toUpperCase());
 
-// Converts 'react css syntax' string to 'valid css syntax' object
+// Converts tranditional css string to react style javascript object
 export const styleToObject = style =>
   style
     .split(';')
