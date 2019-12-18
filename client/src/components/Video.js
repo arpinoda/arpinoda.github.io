@@ -63,7 +63,7 @@ const Video = React.forwardRef((props, ref) => {
   return (
     <video
       ref={ref}
-      className={className}
+      className={`${className} block`}
       onEnded={() => {
         onStateChange(videoStates.READY);
       }}
@@ -79,7 +79,7 @@ const Video = React.forwardRef((props, ref) => {
       poster={posterURL || ''}
       preload="metadata"
       playsInline
-      muted={muted || true}
+      muted={muted}
       style={{ height: '100%' }}
     >
       <source

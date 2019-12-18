@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import API from '../util/API';
 import Category from '../models/Category';
 import { ClientError } from '../../../server/errors';
-import Loading from './Loading';
+import { HourglassSpinner } from './Loading';
 
 const withDataLoader = OriginalComponent => {
   class Wrapped extends React.Component {
@@ -93,7 +93,7 @@ const withDataLoader = OriginalComponent => {
       const { categories, scrollIDs, isLoading } = this.state;
 
       if (isLoading) {
-        return <Loading />;
+        return <HourglassSpinner />;
       }
 
       return (

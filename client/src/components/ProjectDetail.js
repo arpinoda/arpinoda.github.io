@@ -5,6 +5,7 @@ import { disableScrollAt, enableScroll } from '../util/UI';
 import API from '../util/API';
 import ProjectDetailSection from './ProjectDetailSection';
 import NotFoundImage from '../static/images/public/not-found.jpg';
+import { CircularSpinner } from './Loading';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -97,9 +98,13 @@ class ProjectDetail extends React.Component {
             bottom: 0,
             right: 0,
             zIndex: 1,
-            background: 'rgba(0, 0, 0, 0.5)',
+            background: 'rgba(0, 0, 0, 0.7)',
+            WebkitAnimation: 'fadeIn .2s',
+            animation: 'fadeIn .2s',
+            MozAnimation: 'fadeIn .2s',
           }}
         />
+        <CircularSpinner />
         <div
           className="modal"
           style={{
@@ -107,9 +112,8 @@ class ProjectDetail extends React.Component {
             position: 'absolute',
             background: '#fff',
             top: 25,
-            maxWidth: 750,
+            maxWidth: '885px',
             zIndex: 2,
-            border: '2px solid #444',
             left: 0,
             right: 0,
             width: '100%',

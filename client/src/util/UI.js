@@ -91,9 +91,9 @@ export const disableScrollAt = value => {
   }
 
   $container.style.top = `-${scrollY}px`;
-  $container.style.position = 'fixed';
   $container.style.left = '0px';
   $container.style.right = '0px';
+  $container.style.position = 'fixed';
   // $container.style.overflow = 'scroll';
 
   return scrollY;

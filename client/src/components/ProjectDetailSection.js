@@ -18,20 +18,22 @@ const ProjectDetailSection = props => {
   };
 
   const body = isVideo ? (
-    <ProjectVideo
-      {...props}
-      videoURL={media.item}
-      thumbnail={media.thumbnail}
-      options={videoOptions}
-      className="col-12"
-    />
+    <div style={styleToObject(media.css)}>
+      <ProjectVideo
+        {...props}
+        videoURL={media.item}
+        thumbnail={media.thumbnail}
+        options={videoOptions}
+        className="col-12"
+      />
+    </div>
   ) : (
     <ProjectImage
       {...props}
       alt={media.alt}
       src={media.item}
       style={{ pointerEvents: 'none' }}
-      className="relative z2"
+      className="relative z2 block"
     >
       {media.video && (
         <div style={styleToObject(media.video.css)} className="absolute">
@@ -40,7 +42,7 @@ const ProjectDetailSection = props => {
               {...props}
               className="col-12"
               videoURL={media.video.item}
-              /* thumbnail={media.thumbnail} */
+              thumbnail={media.video.thumbnail}
               options={videoOptions}
             />
           </div>

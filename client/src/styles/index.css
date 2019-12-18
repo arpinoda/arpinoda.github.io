@@ -26,7 +26,10 @@
   outline:none;
 }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-y:scroll; /* prevents layout from shifting when displaying project detail */
+}
 
 /* General */
 .h1 { font-size: var(--h1) }
@@ -74,37 +77,6 @@ nav ul:hover a{
 nav ul:hover {
   overflow:auto!important;
 }
-@media(any-pointer: coarse) {
-  nav ul {
-    overflow:auto!important;
-    -webkit-overflow-scrolling: touch;
-  }
-  nav ul a{
-    opacity: 1!important;
-  }
-  .category-header, .category-header span {
-    font-size: 14px!important;
-    text-transform: uppercase;
-  }
-  .sticky h3 {
-    font-weight:bold!important;
-    width: calc(100% - 50px);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .sticky:not(.featured) h3 {
-    color: var(--blue);
-  }
-  .featured .category-header {
-    visibility: visible!important;
-  }
-  .sticky, nav {
-    background-color: rgba(255, 255, 255, 0.75)!important;
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(25px);
-  }
-}
 nav ul:nth-child(1) > li:not(.featured) > a {
   font-weight:bold;
 }
@@ -123,7 +95,11 @@ nav li {
 nav li > a {
   transition: 200ms all cubic-bezier(0.4, 0, 1, 1);
 }
-
+.sticky, nav {
+  background-color: rgba(255, 255, 255, 0.75)!important;
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+}
 /* Home Grid*/
 .container {
   max-width: var(--container-width);

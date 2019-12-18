@@ -195,10 +195,15 @@ const withScrollSpy = OriginalComponent => {
       }
 
       const $target = document.querySelector(`a[href='${href}']`);
+      const rect = $target.getBoundingClientRect();
 
-      setTimeout(() => {
-        $list.scrollTo(0, $target.offsetTop - 50);
-      }, 100);
+      if (rect.top >= 0 && rect.left >= 0) {
+        // target is already within viewport
+      } else {
+        setTimeout(() => {
+          $list.scrollTo(0, $target.offsetTop - 50);
+        }, 100);
+      }
     };
 
     onWindowUpdate = () => {

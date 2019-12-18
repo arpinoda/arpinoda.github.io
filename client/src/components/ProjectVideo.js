@@ -74,6 +74,7 @@ const ProjectVideo = props => {
       {/* Main Video Element */}
       <Video
         {...props}
+        options={options}
         ref={videoRef}
         onStateChange={setVideoState}
         currentState={videoState}
