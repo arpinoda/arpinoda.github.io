@@ -95,7 +95,7 @@ nav li {
 nav li > a {
   transition: 200ms all cubic-bezier(0.4, 0, 1, 1);
 }
-.sticky, nav {
+.sticky {
   background-color: rgba(255, 255, 255, 0.75)!important;
   -webkit-backdrop-filter: blur(25px);
   backdrop-filter: blur(25px);
