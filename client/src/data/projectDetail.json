@@ -285,7 +285,7 @@
       {
         "item": "17-05.mp4",
         "thumbnail": "17-05.mp4.jpg",
-        "css": "margin: 0 auto; display:block;"
+        "css": "margin: 0 auto; display:block; max-width:355px; outline:none;"
       },
       {
         "item": "17-06.jpg",
