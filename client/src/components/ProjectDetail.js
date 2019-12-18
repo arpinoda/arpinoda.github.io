@@ -104,7 +104,7 @@ class ProjectDetail extends React.Component {
             MozAnimation: 'fadeIn .2s',
           }}
         />
-        <CircularSpinner />
+        {isLoading && <CircularSpinner />}
         <div
           className="modal"
           style={{
