@@ -7,7 +7,7 @@ const HomeNavTree = ({ categories, style, ...props }) => (
   <nav className="relative" style={{ ...style, minWidth: '215px' }}>
     <ul
       className="overflow-hidden list-reset pr2 pl3 pt4 pb3 fixed top-0 bottom-0"
-      style={{ scrollBehavior: 'smooth', maxWidth: '205px' }}
+      style={{ scrollBehavior: 'smooth', maxWidth: '175px' }}
     >
       {categories &&
         categories.map(category => (

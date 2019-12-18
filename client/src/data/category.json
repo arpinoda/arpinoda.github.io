@@ -121,7 +121,7 @@
   },
   {  
     "categoryID":18,
-    "name":"ASP.net, SSMS, EF",
+    "name":"ASP.net, SSMS, Entity Framework",
     "urlFragment":"sql-server&c#&entity-framework&web-api",
     "className":"",
     "parentIDs":[16],
