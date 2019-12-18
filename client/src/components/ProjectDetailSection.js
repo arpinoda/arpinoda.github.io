@@ -14,7 +14,18 @@ const ProjectDetailSection = props => {
 
   const videoOptions = {
     muted: false,
-    playButton: [VideoPlayButton, {}],
+    playButton: [
+      VideoPlayButton,
+      {
+        style: {
+          right: '',
+          width: '80px',
+          height: '80px',
+          left: 'calc(50% - 40px)',
+          top: 'calc(50% - 40px)',
+        },
+      },
+    ],
   };
 
   const body = isVideo ? (

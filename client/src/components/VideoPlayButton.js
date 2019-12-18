@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayButton = ({ onClick }) => {
+const VideoPlayButton = ({ onClick, style }) => {
   const svgStyle = {
-    height: '20%',
-    top: '2%',
-    right: '2%',
-    position: 'absolute',
-    cursor: 'pointer',
-    filter: 'drop-shadow(0px 3px 2px rgba(0,0,0,0.2))',
+    ...{
+      height: '20%',
+      top: '2%',
+      right: '2%',
+      cursor: 'pointer',
+      filter: 'drop-shadow(0px 3px 2px rgba(0,0,0,0.2))',
+    },
+    ...style,
   };
 
-  const iconStyle = {
-    fill: '#666',
-  };
+  const iconStyle = { fill: '#666' };
 
-  const circleStyle = {
-    fill: 'rgba(255, 255, 255, 0.8)',
-  };
+  const circleStyle = { fill: 'rgba(255, 255, 255, 0.8)' };
 
   return (
     <svg
@@ -25,7 +23,6 @@ const VideoPlayButton = ({ onClick }) => {
         e.preventDefault();
         onClick();
       }}
-      /* onTouchEndCapture={onClick} */
       style={svgStyle}
       className="absolute z3"
       viewBox="0 0 140 140"
@@ -42,6 +39,7 @@ const VideoPlayButton = ({ onClick }) => {
 
 VideoPlayButton.propTypes = {
   onClick: PropTypes.func,
+  style: PropTypes.object,
 };
 
 export default VideoPlayButton;
