@@ -12,7 +12,7 @@ import useHover from './useHover';
 // Responsilble for reading the option object and rendering approriate video component(s)
 const ProjectVideo = props => {
   const [videoState, setVideoState] = useState(videoStates.READY);
-  const [percentComplete, setPercentComplete] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
   const [hoverRef, hovered] = useHover();
   const videoRef = useRef();
   let { options } = props;
@@ -57,6 +57,10 @@ const ProjectVideo = props => {
 
   const playVideoWithDelay = debounce(playVideo, DELAY_HOVER_PLAY_MS);
 
+  function seekVideoTo(time) {
+    videoRef.current.currentTime = time;
+  }
+
   // Play on hover
   useEffect(() => {
     if (options.playOnHover) {
@@ -81,7 +85,9 @@ const ProjectVideo = props => {
         ref={videoRef}
         onStateChange={setVideoState}
         currentState={videoState}
-        onTimeUpdate={setPercentComplete}
+        onTimeUpdate={time => {
+          setCurrentTime(time);
+        }}
       />
 
       {/* Components displayed above video for each state. A default transparent target is
@@ -126,7 +132,11 @@ const ProjectVideo = props => {
 
       {/* Video progress bar, if enabled */}
       {options.showProgressBar && (
-        <VideoProgressBar percentComplete={percentComplete} />
+        <VideoProgressBar
+          totalDuration={videoRef.current && videoRef.current.duration}
+          currentTime={currentTime}
+          seekVideoTo={seekVideoTo}
+        />
       )}
     </>
   );

@@ -67,10 +67,7 @@ const Video = React.forwardRef((props, ref) => {
       className={`${className} block`}
       onTimeUpdate={e => {
         if (onTimeUpdate) {
-          const percentage = Math.floor(
-            (100 / e.target.duration) * e.target.currentTime,
-          );
-          onTimeUpdate(percentage);
+          onTimeUpdate(e.target.currentTime);
         }
       }}
       onEnded={() => {
