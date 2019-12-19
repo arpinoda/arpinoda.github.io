@@ -6,43 +6,31 @@ import GridCategory from './GridCategory';
 /**
  * Grid displaying all categories and projects within Home component
  */
-class Grid extends React.Component {
-  shouldComponentUpdate(prevProps) {
-    const { categories } = this.props;
-    let result = true;
+const Grid = props => {
+  const { categories } = props;
 
-    if (categories) {
-      result = categories.length !== prevProps.categories.length;
-    }
-
-    return result;
-  }
-
-  render = () => {
-    const { categories } = this.props;
-    return (
-      <main>
-        <ul>
-          {categories &&
-            categories.map(category => (
-              <TreeItem
-                item={category}
-                key={`GridCategory-${category.categoryID}`}
-                render={item => (
-                  <GridCategory
-                    {...this.props}
-                    id={item.elementID}
-                    key={`GridCategory-${item.categoryID}`}
-                    category={item}
-                  />
-                )}
-              />
-            ))}
-        </ul>
-      </main>
-    );
-  };
-}
+  return (
+    <main>
+      <ul>
+        {categories &&
+          categories.map(category => (
+            <TreeItem
+              item={category}
+              key={`GridCategory-${category.categoryID}`}
+              render={item => (
+                <GridCategory
+                  {...props}
+                  id={item.elementID}
+                  key={`GridCategory-${item.categoryID}`}
+                  category={item}
+                />
+              )}
+            />
+          ))}
+      </ul>
+    </main>
+  );
+};
 
 Grid.propTypes = {
   categories: PropTypes.arrayOf(
