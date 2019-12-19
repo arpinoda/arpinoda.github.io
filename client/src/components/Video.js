@@ -27,6 +27,7 @@ const Video = React.forwardRef((props, ref) => {
     onStateChange,
     videoURL,
     currentState,
+    onTimeUpdate,
     options,
   } = props;
   const { muted } = options;
@@ -64,6 +65,14 @@ const Video = React.forwardRef((props, ref) => {
     <video
       ref={ref}
       className={`${className} block`}
+      onTimeUpdate={e => {
+        if (onTimeUpdate) {
+          const percentage = Math.floor(
+            (100 / e.target.duration) * e.target.currentTime,
+          );
+          onTimeUpdate(percentage);
+        }
+      }}
       onEnded={() => {
         onStateChange(videoStates.READY);
       }}
@@ -99,6 +108,7 @@ Video.propTypes = {
   videoURL: PropTypes.string,
   currentState: PropTypes.string,
   onStateChange: PropTypes.func,
+  onTimeUpdate: PropTypes.func,
 };
 
 export default Video;

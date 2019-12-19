@@ -58,7 +58,7 @@
         "video": {
           "item": "02-10.mp4",
           "thumbnail": "02-10.mp4.jpg",
-          "css": "top: 27.4%; width: 61%;left: 19.5%;"
+          "css": "top: 27.4%; width: 61.3%;left: 19.5%;"
         }
       },
       {
@@ -285,7 +285,7 @@
       {
         "item": "17-05.mp4",
         "thumbnail": "17-05.mp4.jpg",
-        "css": "margin: 0 auto; display:block; max-width:355px; outline:none;"
+        "css": "margin: 0 auto; display:block; max-width:355px; position:relative; outline:none;"
       },
       {
         "item": "17-06.jpg",
@@ -474,7 +474,7 @@
       {
         "item": "12-05.mp4",
         "thumbnail": "12-05.mp4.jpg",
-        "css": "margin: 0 auto; display:block; max-width:355px; outline:none;"
+        "css": "margin: 0 auto; display:block; max-width:355px; outline:none; position:relative;"
       }
     ]
   },

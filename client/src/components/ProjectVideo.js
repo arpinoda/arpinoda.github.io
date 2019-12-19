@@ -5,12 +5,14 @@ import Video, { videoStates } from './Video';
 import VideoLoading from './VideoLoading';
 import VideoControlsWrapper from './VideoControlsWrapper';
 import VideoTransparentTarget from './VideoTransparentTarget';
+import VideoProgressBar from './VideoProgressBar';
 import useHover from './useHover';
 
 // Wrapper function that displays a custom video player.
 // Responsilble for reading the option object and rendering approriate video component(s)
 const ProjectVideo = props => {
   const [videoState, setVideoState] = useState(videoStates.READY);
+  const [percentComplete, setPercentComplete] = useState(0);
   const [hoverRef, hovered] = useHover();
   const videoRef = useRef();
   let { options } = props;
@@ -20,6 +22,7 @@ const ProjectVideo = props => {
     muted: true,
     playOnHover: false,
     playButton: null,
+    showProgressBar: false,
     onVideoStateChange: null,
     duringReadyComponent: null,
     duringPlayComponent: null,
@@ -78,6 +81,7 @@ const ProjectVideo = props => {
         ref={videoRef}
         onStateChange={setVideoState}
         currentState={videoState}
+        onTimeUpdate={setPercentComplete}
       />
 
       {/* Components displayed above video for each state. A default transparent target is
@@ -119,6 +123,11 @@ const ProjectVideo = props => {
 
       {/* Loading Indicator Element */}
       {videoState === videoStates.LOADING && <VideoLoading />}
+
+      {/* Video progress bar, if enabled */}
+      {options.showProgressBar && (
+        <VideoProgressBar percentComplete={percentComplete} />
+      )}
     </>
   );
 };

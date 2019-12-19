@@ -14,6 +14,7 @@ const ProjectDetailSection = props => {
 
   const videoOptions = {
     muted: false,
+    showProgressBar: true,
     playButton: [
       VideoPlayButton,
       {

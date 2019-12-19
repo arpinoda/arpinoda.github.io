@@ -81,7 +81,6 @@ class ProjectDetail extends React.Component {
 
   render = () => {
     this.scrollY = disableScrollAt(this.scrollY);
-    const { setEventError } = this.props;
     const { isLoading, media, errorMessage } = this.state;
 
     return (
@@ -122,13 +121,7 @@ class ProjectDetail extends React.Component {
         >
           {media &&
             !errorMessage &&
-            media.map(m => (
-              <ProjectDetailSection
-                setEventError={setEventError}
-                key={m.item}
-                media={m}
-              />
-            ))}
+            media.map(m => <ProjectDetailSection key={m.item} media={m} />)}
           {errorMessage && <img src={NotFoundImage} alt={errorMessage} />}
         </div>
       </>
@@ -138,7 +131,6 @@ class ProjectDetail extends React.Component {
 
 ProjectDetail.propTypes = {
   match: PropTypes.object,
-  setEventError: PropTypes.func,
 };
 
 export default ProjectDetail;
