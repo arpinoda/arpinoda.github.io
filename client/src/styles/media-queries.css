@@ -30,7 +30,7 @@
 /*
   "Tablet Landscape & Mobile Landscape" : 2 columns for all projects
 */
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 767px) {
   .projects > figure {
     width: calc(100% / 2 - 15px) !important;
   }
