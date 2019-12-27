@@ -84,6 +84,10 @@ export default class AUTH {
           const message = `${res.status} ${res.statusText} - ${url}`;
           const error = new ClientError(message);
           error.send();
+          if (res.statusText === 'Unauthorized') {
+            this.logout();
+            return window.location.reload();
+          }
           throw error;
         }
         return res;

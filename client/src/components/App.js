@@ -4,6 +4,7 @@ import withErrorHandler from './withErrorHandler';
 import Home from './Home';
 import Login from './Login';
 import WindowDimensionsProvider from './WindowDimensionsProvider';
+import '../util/Polyfills';
 
 /**
  * The entry point for our React.js application, called by Index.js

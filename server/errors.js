@@ -1,12 +1,14 @@
 /**
  * Thrown by the React.js app, which then is logged by ErrorBoundary and POSTed to the API
  */
-class ClientError extends Error {
+const ErrorClass = Error; // <-- https://github.com/babel/babel/issues/8061
+
+class ClientError extends ErrorClass {
   constructor(
-    ...params
+    error
   ) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
-    super(...params);
+    super(error);
 
     // Maintains proper stack trace for where our error was thrown (only available on V8)
     if (Error.captureStackTrace) {

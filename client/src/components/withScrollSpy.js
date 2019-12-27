@@ -265,9 +265,12 @@ const withScrollSpy = OriginalComponent => {
 
     // TODO : Extract this and implement via callback
     resetSticky = () => {
-      document.querySelectorAll('.sticky').forEach(item => {
-        item.classList.remove('sticky');
-      });
+      const sticky = document.querySelectorAll('.sticky');
+      if (sticky.length > 0) {
+        [...sticky].forEach(item => {
+          item.classList.remove('sticky');
+        });
+      }
     };
 
     setSticky = item => {
@@ -282,9 +285,12 @@ const withScrollSpy = OriginalComponent => {
     };
 
     resetParentActiveNavItem = () => {
-      this.$nav.querySelectorAll('.has-active').forEach(item => {
-        item.classList.remove('has-active');
-      });
+      const active = this.$nav.querySelectorAll('.has-active');
+      if (active.length > 0) {
+        [...active].forEach(item => {
+          item.classList.remove('has-active');
+        });
+      }
     };
 
     changeActiveParentItem = item => {

@@ -31,14 +31,7 @@ class API {
     return endpoints;
   }
 
-  authenticatedFetch = (url, options) =>
-    this.auth.fetch(url, options).catch(err => {
-      if (err.message === 'Unauthorized') {
-        this.auth.logout();
-        return window.location.reload();
-      }
-      throw err;
-    });
+  authenticatedFetch = (url, options) => this.auth.fetch(url, options);
 }
 
 export default API;

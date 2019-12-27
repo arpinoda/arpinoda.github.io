@@ -54,6 +54,11 @@ const withDataLoader = OriginalComponent => {
 
     getCategories = () => this.api.endpoints.category.getAll();
 
+    flatten = arr => {
+      const flat = [].concat(...arr);
+      return flat.some(Array.isArray) ? this.flatten(flat) : flat;
+    };
+
     bootstrapSuccess = projectsJSON => categoriesJSON => {
       /** Utilizes currying for processing API results of getProjects & getCategories */
 
@@ -83,7 +88,8 @@ const withDataLoader = OriginalComponent => {
       categories.forEach(category => {
         scrollIDs.push(category.getElementIDs());
       });
-      scrollIDs = scrollIDs.flat(Infinity);
+      const flattened = this.flatten(scrollIDs);
+      scrollIDs = flattened;
 
       this.setState({ categories, scrollIDs, isLoading: false });
     };
