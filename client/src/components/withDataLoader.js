@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import API from '../util/API';
 import Category from '../models/Category';
-import { ClientError } from '../../../server/errors';
 import { HourglassSpinner } from './Loading';
+import { ClientError } from '../../../server/errors';
 
 const withDataLoader = OriginalComponent => {
   class Wrapped extends React.Component {
@@ -13,6 +12,7 @@ const withDataLoader = OriginalComponent => {
         categories: [],
         scrollIDs: [],
         isLoading: true,
+        error: null,
       };
 
       this.api = new API({
@@ -34,7 +34,6 @@ const withDataLoader = OriginalComponent => {
     bootstrapJSON = () => {
       /** Makes API requests for project and category resources */
       this.setState({ isLoading: true });
-      const { setEventError } = this.props;
 
       this.getProjects()
         .then(res => res.json())
@@ -45,9 +44,9 @@ const withDataLoader = OriginalComponent => {
         .then(res => res.json())
         .then(categories => this.bootstrapSuccess(categories))
         .catch(error => {
-          this.setState({ isLoading: false });
-          error = new ClientError(true, error);
-          setEventError(error);
+          error = new ClientError(error);
+          error.send();
+          this.setState({ isLoading: false, error });
         });
     };
 
@@ -90,7 +89,11 @@ const withDataLoader = OriginalComponent => {
     };
 
     render() {
-      const { categories, scrollIDs, isLoading } = this.state;
+      const { categories, scrollIDs, isLoading, error } = this.state;
+
+      if (error) {
+        throw error;
+      }
 
       if (isLoading) {
         return <HourglassSpinner />;
@@ -106,10 +109,6 @@ const withDataLoader = OriginalComponent => {
       );
     }
   }
-
-  Wrapped.propTypes = {
-    setEventError: PropTypes.func,
-  };
 
   return Wrapped;
 };

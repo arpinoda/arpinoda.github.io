@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { BROKEN_IMAGE, LOADING_IMAGE } from '../util/UI';
 import { ImageCache } from './Cache';
+import { ClientError } from '../../../server/errors';
 
 /**
  * Displays a project's image retrieved via API endpoint or cache
@@ -18,14 +19,25 @@ const ProjectImage = ({ children, alt, className, src, style }) => {
       .then(blobURL => {
         setURL(blobURL);
       })
-      .catch(err => setError(err));
+      .catch(err => {
+        err = new ClientError(err);
+        err.send();
+        setError(err);
+      });
   }, [src]);
+
+  const imgStyle = {
+    WebkitAnimation: 'fadeIn .7s',
+    animation: 'fadeIn .7s',
+    MozAnimation: 'fadeIn .7s',
+    height: '100%',
+  };
 
   return (
     <>
       <img
         src={error ? BROKEN_IMAGE : url ? url : LOADING_IMAGE} //eslint-disable-line
-        style={{ ...style, ...{ height: '100%' } }}
+        style={url ? { ...style, ...imgStyle } : { ...style }} // fade-in images once 'url' is set
         alt={alt}
         onError={() => setError(true)}
         className={`col-12 ${className}`}

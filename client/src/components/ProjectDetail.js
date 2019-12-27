@@ -6,6 +6,7 @@ import API from '../util/API';
 import ProjectDetailSection from './ProjectDetailSection';
 import NotFoundImage from '../static/images/public/not-found.jpg';
 import { CircularSpinner } from './Loading';
+import { ClientError } from '../../../server/errors';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -62,6 +63,8 @@ class ProjectDetail extends React.Component {
       })
       .catch(error => {
         this.setState({ isLoading: false, errorMessage: error.message });
+        error = new ClientError(error);
+        error.send();
       });
   };
 

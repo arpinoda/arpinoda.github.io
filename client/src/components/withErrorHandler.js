@@ -1,59 +1,18 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 
-const ErrorHandlerCtx = createContext(null);
-
 /**
- * Wraps a component within an ErrorBoundary and exposes a function for catching & logging
- * event-based errors.
- * Adapted via https://github.com/anacicconi/universal-react-logger
+ * Wraps a component within an ErrorBoundary
  * @param {Object} WrappedComponent A React component to inherit render and event error handling
  */
 const withErrorHandler = WrappedComponent => {
-  class ErrorOuter extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        eventError: null,
-      };
-      this.setEventError = this.setEventError.bind(this);
-    }
-
-    setEventError(eventError) {
-      this.setState({
-        eventError,
-      });
-    }
-
-    render() {
-      const { eventError } = this.state;
-
-      if (eventError) {
-        return (
-          <ErrorBoundary eventError={eventError}>
-            <WrappedComponent
-              {...this.props}
-              setEventError={this.setEventError}
-            />
-          </ErrorBoundary>
-        );
-      }
-
-      return (
-        <ErrorHandlerCtx.Provider value={this.setEventError}>
-          <ErrorBoundary>
-            <WrappedComponent
-              {...this.props}
-              setEventError={this.setEventError}
-            />
-          </ErrorBoundary>
-        </ErrorHandlerCtx.Provider>
-      );
-    }
-  }
+  const ErrorOuter = props => (
+    <ErrorBoundary>
+      <WrappedComponent {...props} />
+    </ErrorBoundary>
+  );
 
   return ErrorOuter;
 };
 
 export default withErrorHandler;
-export const useEventError = () => useContext(ErrorHandlerCtx);

@@ -3,8 +3,6 @@
  */
 class ClientError extends Error {
   constructor(
-    showErrorPage = false,
-    statusCode = 0,
     ...params
   ) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
@@ -17,9 +15,24 @@ class ClientError extends Error {
 
     this.name = this.constructor.name;
 
-    // Custom debugging information
-    this.showErrorPage = showErrorPage;
-    this.statusCode = statusCode;
+    this.send = function() {
+      const body = {
+        error: {
+          message: this.message,
+          stack: this.stack,
+        },
+      };
+
+      fetch('/log-client-errors', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
+        .catch(err => console.error(err));
+    };
   }
 }
 

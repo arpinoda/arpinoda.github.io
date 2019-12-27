@@ -40,6 +40,8 @@ export default class AUTH {
       const isExpired = decoded.exp < Date.now() / 1000;
       return isExpired;
     } catch (err) {
+      const error = new ClientError(err);
+      error.send();
       return true;
     }
   };
@@ -79,10 +81,14 @@ export default class AUTH {
     })
       .then(res => {
         if (!res.ok) {
-          throw new ClientError(false, res.status, res.statusText);
+          const message = `${res.status} ${res.statusText} - ${url}`;
+          const error = new ClientError(message);
+          error.send();
+          throw error;
         }
         return res;
       })
-      .then(res => res);
+      .then(res => res)
+      .catch(error => error);
   };
 }

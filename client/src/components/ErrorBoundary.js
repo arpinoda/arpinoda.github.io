@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ClientError } from '../../../server/errors';
 
 /**
- * Catches render & event errors for child components and logs accordingly.
+ * Catches render errors for child components and logs accordingly.
  * If error is crticial, error screen is displayed preventing usage of app.
  * Adapted from https://github.com/anacicconi/universal-react-logger
  */
@@ -15,43 +16,6 @@ class ErrorBoundary extends React.Component {
     };
   }
 
-  componentDidUpdate() {
-    const { eventError } = this.props;
-    const { renderError, renderErrorInfo } = this.state;
-
-    if (eventError || renderError) {
-      let body = {};
-
-      if (renderError) {
-        body = {
-          error: {
-            message: renderError.toString(),
-            stack: renderErrorInfo.componentStack,
-          },
-        };
-      }
-
-      if (eventError) {
-        body = {
-          error: {
-            message: eventError.message,
-            stack: eventError.stack,
-          },
-        };
-      }
-
-      // Send the errors to the server
-      fetch('/log-client-errors', {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
-    }
-  }
-
   resetRenderError = () => {
     this.setState({
       renderError: null,
@@ -59,23 +23,23 @@ class ErrorBoundary extends React.Component {
     });
   };
 
-  resetEventError = () => {
-    this.props.eventError = null;
-  };
-
   componentDidCatch(renderError, renderErrorInfo) {
     this.setState({
       renderError,
       renderErrorInfo,
     });
+
+    const message = `Render error - ${renderError} \n ${renderErrorInfo.componentStack}`;
+
+    const error = new ClientError(message);
+    error.send();
   }
 
   render() {
-    const { eventError, children } = this.props;
-    const { renderError } = this.state;
+    const { children } = this.props;
+    const { renderError, renderErrorInfo } = this.state;
 
-    // If the error is critical, show error page
-    if (renderError || (eventError && eventError.showErrorPage)) {
+    if (renderError || renderErrorInfo) {
       return (
         <div className="center pt4">
           <h4>
@@ -103,13 +67,11 @@ class ErrorBoundary extends React.Component {
       );
     }
 
-    // If the error is NOT critical, display children
     return children;
   }
 }
 
 ErrorBoundary.propTypes = {
-  eventError: PropTypes.object,
   children: PropTypes.node,
 };
 

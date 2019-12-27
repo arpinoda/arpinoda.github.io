@@ -55,6 +55,9 @@ select {
 }
 
 /* Navigation */
+nav {
+  background-color: white;
+}
 nav .featured {
   line-height: initial;
 }

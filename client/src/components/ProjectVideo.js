@@ -7,6 +7,7 @@ import VideoControlsWrapper from './VideoControlsWrapper';
 import VideoTransparentTarget from './VideoTransparentTarget';
 import VideoProgressBar from './VideoProgressBar';
 import useHover from './useHover';
+import { ClientError } from '../../../server/errors';
 
 // Wrapper function that displays a custom video player.
 // Responsilble for reading the option object and rendering approriate video component(s)
@@ -49,7 +50,9 @@ const ProjectVideo = props => {
           // Play started
         })
         .catch(err => {
-          alert(err);
+          alert(err); //eslint-disable-line
+          err = new ClientError(err);
+          err.send();
           setVideoState(videoStates.ERROR);
         });
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ImageCache } from './Cache';
 import { BROKEN_IMAGE } from '../util/UI';
-
+import { ClientError } from '../../../server/errors';
 /**
  * Displays an HTML5 video element
  * @param {String} className Class names applied to the image
@@ -40,7 +40,8 @@ const Video = React.forwardRef((props, ref) => {
       .catch(err => {
         onStateChange(videoStates.ERROR);
         setPosterURL(BROKEN_IMAGE);
-        console.log(err);
+        err = new ClientError(err);
+        err.send();
       });
   }, [thumbnail]);
 
