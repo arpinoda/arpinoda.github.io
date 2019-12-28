@@ -63,8 +63,12 @@ class ProjectDetail extends React.Component {
       })
       .catch(error => {
         this.setState({ isLoading: false, errorMessage: error.message });
-        error = new ClientError(error);
-        error.send();
+        const clientError = new ClientError(error);
+        clientError.send();
+
+        if (error.statusCode && error.statusCode === 401) {
+          window.location.reload();
+        }
       });
   };
 
