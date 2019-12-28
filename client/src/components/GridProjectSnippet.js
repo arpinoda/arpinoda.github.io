@@ -23,7 +23,6 @@ const GridProjectSnippet = ({ isvisible, forceHide, project }) => {
 
   const paragaphStyle = {
     textShadow: '1px 1px 2px rgba(0,0,0,.5)',
-    fontFamily: 'system-ui',
     letterSpacing: '0.3px',
   };
 

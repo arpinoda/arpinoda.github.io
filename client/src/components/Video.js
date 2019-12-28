@@ -88,13 +88,10 @@ const Video = React.forwardRef((props, ref) => {
       playsInline
       muted={muted}
       style={{ height: '100%' }}
+      src={`${process.env.API_PATH}/video/${videoURL}`}
+      type="video/mp4"
     >
-      <source
-        src={`${process.env.API_PATH}/video/${videoURL}`}
-        type="video/mp4"
-      />
       Your browser does not support the video tag.
-      <track default kind="captions" srcLang="en" />
     </video>
   );
 });

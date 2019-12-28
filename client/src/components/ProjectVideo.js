@@ -44,13 +44,14 @@ const ProjectVideo = props => {
   // to resolve NotAllowedError seen in low-power mode on mobile Safari.
   function playVideo() {
     const promise = videoRef.current.play();
+
     if (promise !== undefined) {
       promise
         .then(() => {
           // Play started
         })
         .catch(err => {
-          alert(err); //eslint-disable-line
+          alert(err.message); //eslint-disable-line
           err = new ClientError(err);
           err.send();
           setVideoState(videoStates.ERROR);
