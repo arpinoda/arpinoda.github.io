@@ -7,6 +7,7 @@ import ProjectDetailSection from './ProjectDetailSection';
 import NotFoundImage from '../static/images/public/not-found.jpg';
 import { CircularSpinner } from './Loading';
 import { ClientError } from '../../../server/errors';
+import ModalWindow from './ModalWindow';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -91,47 +92,16 @@ class ProjectDetail extends React.Component {
     const { isLoading, media, errorMessage } = this.state;
 
     return (
-      <>
-        <div
-          onClick={e => {
-            this.back(e);
-          }}
-          role="presentation"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            zIndex: 1,
-            background: 'rgba(0, 0, 0, 0.7)',
-            WebkitAnimation: 'fadeIn .2s',
-            animation: 'fadeIn .2s',
-            MozAnimation: 'fadeIn .2s',
-          }}
-        />
+      <ModalWindow
+        onCloseCallback={this.back}
+        onlyShowBackground={this.loading}
+      >
         {isLoading && <CircularSpinner />}
-        <div
-          className="modal"
-          style={{
-            display: isLoading ? 'none' : 'block',
-            position: 'absolute',
-            background: '#fff',
-            top: 25,
-            maxWidth: '885px',
-            zIndex: 2,
-            left: 0,
-            right: 0,
-            width: '100%',
-            margin: '0 auto',
-          }}
-        >
-          {media &&
-            !errorMessage &&
-            media.map(m => <ProjectDetailSection key={m.item} media={m} />)}
-          {errorMessage && <img src={NotFoundImage} alt={errorMessage} />}
-        </div>
-      </>
+        {media &&
+          !errorMessage &&
+          media.map(m => <ProjectDetailSection key={m.item} media={m} />)}
+        {errorMessage && <img src={NotFoundImage} alt={errorMessage} />}
+      </ModalWindow>
     );
   };
 }
