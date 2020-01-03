@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history, { previousFragment } from './History';
-import { disableScrollAt, enableScroll } from '../util/UI';
+import { disableScrollAt, enableScroll, DESKTOP_BREAKPOINT } from '../util/UI';
 import API from '../util/API';
 import ProjectDetailSection from './ProjectDetailSection';
 import NotFoundImage from '../static/images/public/not-found.jpg';
-import { CircularSpinner } from './Loading';
 import { ClientError } from '../../../server/errors';
 import ModalWindow from './ModalWindow';
+import ResponsiveLayout from './ResponsiveLayout';
 
 class ProjectDetail extends React.Component {
   constructor(props) {
@@ -90,18 +90,33 @@ class ProjectDetail extends React.Component {
   render = () => {
     this.scrollY = disableScrollAt(this.scrollY);
     const { isLoading, media, errorMessage } = this.state;
+    const desktopStyle = { top: '25px' };
+    let content = null;
+
+    if (media && !errorMessage) {
+      content = media.map(m => <ProjectDetailSection key={m.item} media={m} />);
+    } else if (errorMessage) {
+      content = <img src={NotFoundImage} alt={errorMessage} />;
+    }
 
     return (
-      <ModalWindow
-        onCloseCallback={this.back}
-        onlyShowBackground={this.loading}
-      >
-        {isLoading && <CircularSpinner />}
-        {media &&
-          !errorMessage &&
-          media.map(m => <ProjectDetailSection key={m.item} media={m} />)}
-        {errorMessage && <img src={NotFoundImage} alt={errorMessage} />}
-      </ModalWindow>
+      <ResponsiveLayout
+        breakpoint={DESKTOP_BREAKPOINT}
+        renderDesktop={() => (
+          <ModalWindow
+            style={desktopStyle}
+            onCloseCallback={this.back}
+            isLoading={isLoading}
+          >
+            {content}
+          </ModalWindow>
+        )}
+        renderMobile={() => (
+          <ModalWindow onCloseCallback={this.back} isLoading={isLoading}>
+            {content}
+          </ModalWindow>
+        )}
+      />
     );
   };
 }

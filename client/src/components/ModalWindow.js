@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CircularSpinner } from './Loading';
 
 const ModalWindow = props => {
-  const { onCloseCallback, children, onlyShowBackground } = props;
+  const { onCloseCallback, children, isLoading, style } = props;
 
   const backgroundStyle = {
     position: 'fixed',
@@ -15,13 +16,14 @@ const ModalWindow = props => {
     WebkitAnimation: 'fadeIn .2s',
     animation: 'fadeIn .2s',
     MozAnimation: 'fadeIn .2s',
+    scrollBehavior: 'smooth',
+    WebkitOverflowScrolling: 'touch',
   };
 
-  const windowStyle = {
-    display: onlyShowBackground ? 'none' : 'block',
+  const modalStyle = {
+    display: isLoading ? 'none' : 'block',
     position: 'absolute',
     background: '#fff',
-    top: 25,
     maxWidth: '885px',
     zIndex: 2,
     left: 0,
@@ -31,24 +33,27 @@ const ModalWindow = props => {
   };
 
   return (
-    <div
-      onClick={e => {
-        onCloseCallback(e);
-      }}
-      role="presentation"
-      style={backgroundStyle}
-    >
-      <div className="modal" style={windowStyle}>
+    <>
+      <div
+        onClick={e => {
+          onCloseCallback(e);
+        }}
+        role="presentation"
+        style={backgroundStyle}
+      />
+      {isLoading && <CircularSpinner />}
+      <div className="modal" style={{ ...modalStyle, ...style }}>
         {children}
       </div>
-    </div>
+    </>
   );
 };
 
 ModalWindow.propTypes = {
   onCloseCallback: PropTypes.func,
   children: PropTypes.node,
-  onlyShowBackground: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  style: PropTypes.object,
 };
 
 export default ModalWindow;
