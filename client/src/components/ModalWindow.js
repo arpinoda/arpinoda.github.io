@@ -13,7 +13,7 @@ const ModalWindow = props => {
     bottom: 0,
     right: 0,
     zIndex: 1,
-    background: 'rgba(0, 0, 0, 0.7)',
+    background: 'rgba(0, 0, 0, 0.8)',
     WebkitAnimation: 'fadeIn .2s',
     animation: 'fadeIn .2s',
     MozAnimation: 'fadeIn .2s',

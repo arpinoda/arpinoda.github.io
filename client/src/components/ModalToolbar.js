@@ -7,7 +7,7 @@ const ModalToolbar = props => {
     top: '25px',
     right: '25px',
     width: '15px',
-    fill: '#aeaeae',
+    fill: '#ccc',
   };
 
   return (
