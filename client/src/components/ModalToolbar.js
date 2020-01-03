@@ -6,8 +6,8 @@ const ModalToolbar = props => {
   const closeStyle = {
     top: '25px',
     right: '25px',
-    width: '25px',
-    fill: '#cccccc',
+    width: '15px',
+    fill: '#aeaeae',
   };
 
   return (
