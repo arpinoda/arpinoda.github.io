@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CircularSpinner } from './Loading';
+import ModalToolbar from './ModalToolbar';
 
 const ModalWindow = props => {
   const { onCloseCallback, children, isLoading, style } = props;
@@ -45,6 +46,7 @@ const ModalWindow = props => {
       <div className="modal" style={{ ...modalStyle, ...style }}>
         {children}
       </div>
+      <ModalToolbar onCloseClick={onCloseCallback} />
     </>
   );
 };
