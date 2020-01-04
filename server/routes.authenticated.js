@@ -4,6 +4,7 @@ const exjwt = require('express-jwt');
 const util = require('./util');
 const stream = require('stream');
 const { StreamImageError, BadRequestError, ResourceNotFoundError } = require('./errors');
+const dataPath = '../data';
 
 /**
  * Authenticated routes used within development and production
@@ -23,7 +24,7 @@ module.exports = (app, express, logger) => {
   var projectDetails = '';
   try {
     const detailsRaw = fs.readFileSync(
-      path.join(__dirname, '/../client/src/data/projectDetail.json')
+      path.join(__dirname, dataPath, 'projectDetail.json')
     );
 
     projectDetails = JSON.parse(detailsRaw);
@@ -38,7 +39,7 @@ module.exports = (app, express, logger) => {
   */
   app.use(
     `${API_PATH}/project`,
-    express.static(path.join(__dirname, '/../client/src/data', 'project.json')),
+    express.static(path.join(__dirname, dataPath, 'project.json')),
   );
 
   /**
@@ -47,7 +48,7 @@ module.exports = (app, express, logger) => {
   */
   app.use(
     `${API_PATH}/category`,
-    express.static(path.join(__dirname, '/../client/src/data', 'category.json')),
+    express.static(path.join(__dirname, dataPath, 'category.json')),
   );
 
   /**
