@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AUTH from '../util/AUTH';
 import LoginInput from './LoginInput';
+import LoginWelcome from './LoginWelcome';
 import { LOADING_IMAGE, nextPathFromHref } from '../util/UI';
 
 /**
@@ -89,8 +90,8 @@ class Login extends React.Component {
 
     return (
       <div
-        className="absolute flex login"
-        style={{ top: '-40%', left: '0', right: '0', bottom: '0' }}
+        className="fixed left-0 right-0 bottom-0 flex login"
+        style={{ top: 'calc(50% - 450px)', height: 'auto' }}
       >
         <img
           className="display-none"
@@ -98,6 +99,7 @@ class Login extends React.Component {
           alt="preloading asset"
         />
         <div className="m-auto">
+          <LoginWelcome />
           <LoginInput
             onChange={this.onChange}
             onSubmit={this.onSubmit}

@@ -51,9 +51,10 @@ const LoginInput = ({
       <button
         disabled={isSubmitting}
         type="button"
+        style={{ backgroundColor: 'transparent' }}
         id="login-submit"
         onClick={onSubmit}
-        className={`pl2 pb2 pt1 mt2 absolute right-0 border-none bg-white ${
+        className={`pl2 pb2 pt1 mt2 absolute right-0 border-none ${
           isSubmitVisible ? 'display-block' : 'display-none'
         } ${isSubmitting ? 'active' : ''}`}
       >
