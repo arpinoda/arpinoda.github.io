@@ -107,12 +107,17 @@ class ProjectDetail extends React.Component {
             style={desktopStyle}
             onCloseCallback={this.back}
             isLoading={isLoading}
+            buttonStateColors={['#666', '#ccc']}
           >
             {content}
           </ModalWindow>
         )}
         renderMobile={() => (
-          <ModalWindow onCloseCallback={this.back} isLoading={isLoading}>
+          <ModalWindow
+            onCloseCallback={this.back}
+            isLoading={isLoading}
+            buttonStateColors={['#ccc', '#666']}
+          >
             {content}
           </ModalWindow>
         )}

@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useHover from './useHover';
 
 const ModalToolbar = props => {
-  const { onCloseClick } = props;
+  const [closeHoverRef, closeHovered] = useHover();
+  const { onCloseClick, buttonStateColors } = props;
   const closeStyle = {
     top: '25px',
     right: '25px',
     width: '15px',
-    fill: '#ccc',
+    fill: closeHovered ? buttonStateColors[1] : buttonStateColors[0],
   };
 
   return (
     <svg
+      ref={closeHoverRef}
       style={closeStyle}
       onClick={onCloseClick}
       className="fixed z4"
@@ -25,6 +28,7 @@ const ModalToolbar = props => {
 
 ModalToolbar.propTypes = {
   onCloseClick: PropTypes.func,
+  buttonStateColors: PropTypes.array,
 };
 
 export default ModalToolbar;

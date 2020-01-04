@@ -4,7 +4,13 @@ import { CircularSpinner } from './Loading';
 import ModalToolbar from './ModalToolbar';
 
 const ModalWindow = props => {
-  const { onCloseCallback, children, isLoading, style } = props;
+  const {
+    onCloseCallback,
+    children,
+    isLoading,
+    style,
+    buttonStateColors,
+  } = props;
 
   const backgroundStyle = {
     position: 'fixed',
@@ -46,7 +52,10 @@ const ModalWindow = props => {
       <div className="modal" style={{ ...modalStyle, ...style }}>
         {children}
       </div>
-      <ModalToolbar onCloseClick={onCloseCallback} />
+      <ModalToolbar
+        buttonStateColors={buttonStateColors}
+        onCloseClick={onCloseCallback}
+      />
     </>
   );
 };
@@ -56,6 +65,7 @@ ModalWindow.propTypes = {
   children: PropTypes.node,
   isLoading: PropTypes.bool,
   style: PropTypes.object,
+  buttonStateColors: PropTypes.array,
 };
 
 export default ModalWindow;
