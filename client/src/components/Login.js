@@ -89,16 +89,13 @@ class Login extends React.Component {
     const { passcode, isSubmitting } = this.state;
 
     return (
-      <div
-        className="fixed left-0 right-0 bottom-0 flex login"
-        style={{ top: 'calc(50% - 450px)', height: 'auto' }}
-      >
+      <div className="flex flex-center login">
         <img
           className="display-none"
           src={LOADING_IMAGE}
           alt="preloading asset"
         />
-        <div className="m-auto">
+        <div className="m-auto" style={{ maxWidth: '70%' }}>
           <LoginWelcome />
           <LoginInput
             onChange={this.onChange}
