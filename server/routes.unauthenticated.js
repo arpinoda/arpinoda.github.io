@@ -118,7 +118,7 @@ function production(app, express, logger) {
    * Returns specific static assets from dist directory
   */
   app.get(
-    ['/favicon*', '/static/favicon*', '/static/images/public*', '/bundle.js', '/'],
+    ['/favicon*', '/static/favicon*', '/static/images/public*', '/bundle.js', '/1.bundle.js', '/'],
     (req, res, next) => res.sendFile(path.join(__dirname, '/../client/dist/', req.path), {}, (err) => {
       if (err) {
         next(err);
