@@ -1,5 +1,5 @@
-const merge = require('../client/src/node_modules/webpack-merge');
-const TerserPlugin = require('../client/src/node_modules/terser-webpack-plugin');
+const merge = require('webpack-merge');
+const TerserPlugin = require('terser-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
