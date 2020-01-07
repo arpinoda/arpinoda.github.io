@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { HASH_PREFIX } from '../util/UI';
-import History from './History';
+import React from "react";
+import PropTypes from "prop-types";
+import { HASH_PREFIX } from "../util/UI";
+import History from "./History";
 
 // TODO: Refactor to use WindowDimensions context
 
@@ -18,17 +18,17 @@ const withScrollSpy = OriginalComponent => {
       super(props);
 
       // Class name applied to active anchor elements
-      this.ACTIVE_CLASS_NAME = 'active';
+      this.ACTIVE_CLASS_NAME = "active";
 
       // Padding added to recognize a section as active when scrolling
       this.ACTIVE_SCROLL_OFFSET = 1.5;
 
-      if (!('scrollBehavior' in document.documentElement.style)) {
-        import('scroll-behavior-polyfill');
+      if (!("scrollBehavior" in document.documentElement.style)) {
+        import("scroll-behavior-polyfill"); //eslint-disable-line
       }
 
       this.state = {
-        hasInitialized: false,
+        hasInitialized: false
       };
     }
 
@@ -49,7 +49,7 @@ const withScrollSpy = OriginalComponent => {
         if (scrollIDs.length !== 0) {
           this.domLoaded();
           this.setState({
-            hasInitialized: true,
+            hasInitialized: true
           });
         }
       }
@@ -70,7 +70,7 @@ const withScrollSpy = OriginalComponent => {
     initDefaultOptions = () => {
       this.options = {
         activeOffset: this.ACTIVE_SCROLL_OFFSET,
-        urlPathName: '/',
+        urlPathName: "/"
       };
     };
 
@@ -86,7 +86,7 @@ const withScrollSpy = OriginalComponent => {
 
     initNavItems = scrollIDs => {
       // Looks up element in DOM by selector and stores result in this.items array.
-      this.$nav = document.querySelector('nav');
+      this.$nav = document.querySelector("nav");
       this.items = [];
 
       if (Array.isArray(scrollIDs) === false) {
@@ -116,7 +116,7 @@ const withScrollSpy = OriginalComponent => {
 
     getTargetOffset = item => {
       // Looks element up in dom and returns its offset top property.
-      let selector = item.getAttribute('href');
+      let selector = item.getAttribute("href");
 
       if (selector.match(/^#?$/)) {
         return 0;
@@ -127,19 +127,19 @@ const withScrollSpy = OriginalComponent => {
     };
 
     bindWindowEvents = () => {
-      window.addEventListener('scroll', this.onWindowUpdate, false);
-      window.addEventListener('resize', this.onWindowUpdate, false);
+      window.addEventListener("scroll", this.onWindowUpdate, false);
+      window.addEventListener("resize", this.onWindowUpdate, false);
     };
 
     unbindWindowEvents = () => {
-      document.body.removeEventListener('scroll', this.onWindowUpdate);
-      window.removeEventListener('resize', this.onWindowUpdate);
+      document.body.removeEventListener("scroll", this.onWindowUpdate);
+      window.removeEventListener("resize", this.onWindowUpdate);
     };
 
     bindNavItems = () => {
       // Hooks into anchor onclick event
       this.items.forEach(item => {
-        item.addEventListener('click', this.onNavItemClick);
+        item.addEventListener("click", this.onNavItemClick);
       });
     };
 
@@ -150,9 +150,9 @@ const withScrollSpy = OriginalComponent => {
 
       this.items.forEach(item => {
         item.removeEventListener(
-          'click',
+          "click",
           this.onNavItemClick.bind(this),
-          false,
+          false
         );
       });
     };
@@ -166,7 +166,7 @@ const withScrollSpy = OriginalComponent => {
       if (!item) return;
 
       this.changeActiveNavItem(item);
-      const id = item.hash.replace(HASH_PREFIX, '');
+      const id = item.hash.replace(HASH_PREFIX, "");
       const $bodyTarget = document.getElementById(id);
       $bodyTarget.scrollIntoView();
     };
@@ -178,18 +178,18 @@ const withScrollSpy = OriginalComponent => {
 
     setNavScrollPosition = href => {
       // Scrolls side navigation as body is scrolled.
-      const $list = this.$nav.querySelector('ul');
-      const itemDepth = href.split('/').length - 1;
+      const $list = this.$nav.querySelector("ul");
+      const itemDepth = href.split("/").length - 1;
 
       switch (itemDepth) {
         case 1:
           // do nothing
           break;
         case 2:
-          href = href.substring(0, href.lastIndexOf('/'));
+          href = href.substring(0, href.lastIndexOf("/"));
           break;
         case 3:
-          href = href.substring(0, href.lastIndexOf('/'));
+          href = href.substring(0, href.lastIndexOf("/"));
           break;
         default:
       }
@@ -220,7 +220,7 @@ const withScrollSpy = OriginalComponent => {
 
     getSectionPositions = () => {
       this.positions = this.items.map(
-        item => this.getTargetOffset(item) - this.options.activeOffset,
+        item => this.getTargetOffset(item) - this.options.activeOffset
       );
     };
 
@@ -232,7 +232,7 @@ const withScrollSpy = OriginalComponent => {
         // this.changeActiveNavItem(this.items[this.items.length - 1]);
       } else {
         const filtered = this.items.filter(
-          (item, index) => this.positions[index] <= this.getScrollOffset(),
+          (item, index) => this.positions[index] <= this.getScrollOffset()
         );
 
         if (filtered.length > 0) {
@@ -258,48 +258,48 @@ const withScrollSpy = OriginalComponent => {
       if (!item.classList.contains(this.ACTIVE_CLASS_NAME)) {
         this.resetActiveNavItem();
         item.classList.add(this.ACTIVE_CLASS_NAME);
-        this.updateLocationHash(item.getAttribute('href'));
+        this.updateLocationHash(item.getAttribute("href"));
         this.setSticky(item);
       }
     };
 
     // TODO : Extract this and implement via callback
     resetSticky = () => {
-      const sticky = document.querySelectorAll('.sticky');
+      const sticky = document.querySelectorAll(".sticky");
       if (sticky.length > 0) {
         [...sticky].forEach(item => {
-          item.classList.remove('sticky');
+          item.classList.remove("sticky");
         });
       }
     };
 
     setSticky = item => {
       this.resetSticky();
-      const id = item.hash.replace(HASH_PREFIX, '');
+      const id = item.hash.replace(HASH_PREFIX, "");
       const $bodyTarget = document.getElementById(id);
 
-      const $header = $bodyTarget.querySelector('h3').parentNode;
+      const $header = $bodyTarget.querySelector("h3").parentNode;
       if ($header) {
-        $header.classList.add('sticky');
+        $header.classList.add("sticky");
       }
     };
 
     resetParentActiveNavItem = () => {
-      const active = this.$nav.querySelectorAll('.has-active');
+      const active = this.$nav.querySelectorAll(".has-active");
       if (active.length > 0) {
         [...active].forEach(item => {
-          item.classList.remove('has-active');
+          item.classList.remove("has-active");
         });
       }
     };
 
     changeActiveParentItem = item => {
-      const parentItem = item.closest('.root-section');
+      const parentItem = item.closest(".root-section");
 
       if (parentItem) {
-        if (!parentItem.classList.contains('.has-active')) {
+        if (!parentItem.classList.contains(".has-active")) {
           this.resetParentActiveNavItem();
-          parentItem.classList.add('has-active');
+          parentItem.classList.add("has-active");
         }
       } else {
         this.resetParentActiveNavItem();
@@ -315,14 +315,14 @@ const withScrollSpy = OriginalComponent => {
   ScrollSpy.propTypes = {
     options: PropTypes.object,
     scrollIDs: PropTypes.array,
-    children: PropTypes.node,
+    children: PropTypes.node
   };
 
   return ScrollSpy;
 };
 
 withScrollSpy.PropTypes = {
-  OriginalComponent: PropTypes.element,
+  OriginalComponent: PropTypes.element
 };
 
 export default withScrollSpy;
