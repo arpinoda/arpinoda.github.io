@@ -1,7 +1,8 @@
 module.exports = {
-  testPathIgnorePatterns: ['/dist/', '/node_modules/'],
-  testRegex: '.*?(Spec)\\.js$',
+  testPathIgnorePatterns: ['../../dist/', '/node_modules/'],
+  testRegex: '../.*?(Spec)\\.js$',
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/src/utils/fileMock.js',
+    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/util/FileMock.js',
   },
+  rootDir: '../',
 };

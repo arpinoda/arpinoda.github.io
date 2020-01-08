@@ -8,7 +8,7 @@ import History from "./History";
 /**
  * Scroll spy functionality for a React component. Applies an 'active' css class to a navigation
  * element whose corresponding body content is focused on screen. OriginalComponent must have
- * a "scrollIDs" property containing element ID's.
+ * a 'scrollIDs' property containing element ID's.
  * Adapted from https://github.com/denislins/scrollmenu
  * @param {Object} OriginalComponent A react component to apply ScrollSpy functionality
  */
@@ -109,7 +109,7 @@ const withScrollSpy = OriginalComponent => {
       if (item) {
         item.classList.remove(this.ACTIVE_CLASS_NAME);
         setTimeout(() => {
-          this.onNavItemClick({ target: item }); // "scroll" by calling click handler
+          this.onNavItemClick({ target: item }); // 'scroll' by calling click handler
         }, 200);
       }
     };

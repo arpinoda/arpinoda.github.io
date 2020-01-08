@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VideoTag /> Should NOT display tag 1`] = `
+<div
+  className="spinner z2"
+  style={
+    Object {
+      "color": "rgba(0,0,0,0)",
+      "display": "none",
+    }
+  }
+/>
+`;
+
+exports[`<VideoTag /> Should display tag 1`] = `
+<div
+  className="spinner z2"
+  style={
+    Object {
+      "color": "rgba(0,0,0,0)",
+      "display": "block",
+    }
+  }
+/>
+`;
+
+exports[`<VideoTag /> Should not break with empty props 1`] = `
+<div
+  className="spinner z2"
+  style={
+    Object {
+      "color": "rgba(0,0,0,0)",
+      "display": "block",
+    }
+  }
+/>
+`;
