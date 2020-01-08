@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Displays 'MOV' tag for Home Screen videos on non-touch devices.
@@ -8,19 +8,19 @@ import PropTypes from "prop-types";
 const VideoTag = props => {
   const { isVisible } = props;
   const style = {
-    color: "rgba(0,0,0,0)",
-    display: isVisible ? "block" : "none"
+    color: 'rgba(0,0,0,0)',
+    display: isVisible ? 'block' : 'none',
   };
 
   return <div style={style} className="spinner z2" />;
 };
 
 VideoTag.propTypes = {
-  isVisible: PropTypes.bool
+  isVisible: PropTypes.bool,
 };
 
 VideoTag.defaultProps = {
-  isVisible: true
+  isVisible: true,
 };
 
 export default VideoTag;
