@@ -5,4 +5,5 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/util/FileMock.js',
   },
   rootDir: '../',
+  setupFiles: ['<rootDir>/specs/index.js'],
 };
