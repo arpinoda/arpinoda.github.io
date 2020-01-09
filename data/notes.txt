@@ -1,4 +1,0 @@
-- ScrollSpy HOC
-- Authentication HOC
-- BassCSS
-- Webpack dev server

@@ -5,6 +5,7 @@ const util = require('./util');
 const { FailedLoginError, ClientError } = require('./errors');
 const { API_PATH } = process.env;
 const TOKEN_LIFETIME_STRING = (process.env.NODE_ENV === 'production') ? '6h' : '1h';
+const videoPath = path.join(__dirname, '../data/videos');
 
 /**
  * Retrieves pertinent unauthenticated routes
@@ -103,7 +104,7 @@ function common(app, express, logger) {
   */
   app.use(
     `${API_PATH}/video`,
-    express.static(path.join(__dirname, '/../client/src/static/videos')),
+    express.static(path.join(videoPath)),
   );
 };
 

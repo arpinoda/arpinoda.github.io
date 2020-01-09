@@ -4,7 +4,8 @@ const exjwt = require('express-jwt');
 const util = require('./util');
 const stream = require('stream');
 const { StreamImageError, BadRequestError, ResourceNotFoundError } = require('./errors');
-const dataPath = '../data';
+const dataPath = path.join(__dirname, '../data');
+const imagePath = path.join(dataPath, 'images');
 
 /**
  * Authenticated routes used within development and production
@@ -24,7 +25,7 @@ module.exports = (app, express, logger) => {
   var projectDetails = '';
   try {
     const detailsRaw = fs.readFileSync(
-      path.join(__dirname, dataPath, 'projectDetail.json')
+      path.join(dataPath, 'projectDetail.json')
     );
 
     projectDetails = JSON.parse(detailsRaw);
@@ -39,7 +40,7 @@ module.exports = (app, express, logger) => {
   */
   app.use(
     `${API_PATH}/project`,
-    express.static(path.join(__dirname, dataPath, 'project.json')),
+    express.static(path.join(dataPath, 'project.json')),
   );
 
   /**
@@ -48,7 +49,7 @@ module.exports = (app, express, logger) => {
   */
   app.use(
     `${API_PATH}/category`,
-    express.static(path.join(__dirname, dataPath, 'category.json')),
+    express.static(path.join(dataPath, 'category.json')),
   );
 
   /**
@@ -57,7 +58,7 @@ module.exports = (app, express, logger) => {
   */
   app.get(`${API_PATH}/image/:fileName`, (req, res, next) => {
     const { fileName } = req.params;
-    const filePath = path.join(__dirname, '/../client/src/static/images/protected', fileName);
+    const filePath = path.join(imagePath, fileName);
     const readStream = fs.createReadStream(filePath);
     const passThrough = new stream.PassThrough();
 
